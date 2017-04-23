@@ -9,9 +9,9 @@ export class AppComponent {
 
     private customers: string[] = [];
     constructor(private http: Http) {
-        http.get('/api/Customer').subscribe(x => { 
-            this.customers = x.json() as string[];
-        });
+        // http.get('/api/Customer').subscribe(x => { 
+        //     this.customers = x.json() as string[];
+        // });
     }
   title = 'app works!';
 }
