@@ -22,6 +22,7 @@ import { TeachPageComponent } from './pages/teach-page/teach-page.component';
 import { TutorialCardComponent } from './templates/tutorial-card/tutorial-card.component';
 import { TutorialCategoriesComponent } from './templates/tutorial-categories/tutorial-categories.component';
 import { CategorySearchComponent } from './templates/category-search/category-search.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CategorySearchComponent } from './templates/category-search/category-se
     TeachPageComponent,
     TutorialCardComponent,
     TutorialCategoriesComponent,
-    CategorySearchComponent
+    CategorySearchComponent,
+    AdminPageComponent
     
   ],
   imports: [

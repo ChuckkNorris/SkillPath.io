@@ -11,10 +11,13 @@
  
   <div class="category-list scrollbar" id="style-1">
     <md-list isRippleEnabled="true">
-      <md-list-item *ngFor="let cat of categories" [class.category-active]="selectedItem=='FrontEnd'" (click)="selectItem('FrontEnd')" title="Check out this neat title">
-        <md-icon md-list-icon>desktop_windows</md-icon>
-        <h4 md-line>Frontend</h4>
-        <p md-line> Client-side, websites, etc.</p>
+      <md-list-item *ngFor="let cat of categories" 
+        [class.category-active]="selectedCategory.id == cat.id" 
+        (click)="selectCategory(cat.id)" 
+        [title]="cat.description">
+        <md-icon md-list-icon>{{cat.icon}}</md-icon>
+        <h4 md-line>{{cat.title}}</h4>
+        <p md-line> {{cat.description}}</p>
       </md-list-item>
 
       <!--<h3 md-subheader>Folders</h3>-->
