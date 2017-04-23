@@ -1,0 +1,10 @@
+<h1>Tell me a bit about what you want to learn...</h1>
+
+<!--fxLayout.xs="column" -->
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutAlign="center">
+ 
+  <app-tutorial-card  *ngFor="let tutorial of tutorials" [tutorial]="tutorial"
+    fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25"></app-tutorial-card>
+
+ 
+</div>

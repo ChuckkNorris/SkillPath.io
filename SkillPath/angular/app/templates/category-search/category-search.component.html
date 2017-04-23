@@ -1,0 +1,47 @@
+<md-card>
+  <div fxLayoutAlign="center">
+    <h3>Context</h3>
+  </div>
+  <!--<ng2-completer [(ngModel)]="searchStr" [datasource]="captains" [minSearchLength]="0"></ng2-completer>-->
+  <div fxLayoutAlign="center">
+    <md-input-container>
+      <input mdInput type="text" placeholder="Search..." />
+    </md-input-container>
+  </div>
+  <div style="overflow:auto; height:400px;">
+    <md-list isRippleEnabled="true">
+      <!--<h3 md-subheader>Folders</h3>-->
+      <md-list-item [class.category-active]="selectedItem=='FrontEnd'" (click)="selectItem('FrontEnd')" title="Check out this neat title">
+        <md-icon md-list-icon>desktop_windows</md-icon>
+        <h4 md-line>Frontend</h4>
+        <p md-line> Client-side, websites, etc.</p>
+      </md-list-item>
+      <md-list-item [class.category-active]="selectedItem=='Backend'" (click)="selectItem('Backend')">
+        <md-icon md-list-icon>cloud</md-icon>
+        <h4 md-line>Backend</h4>
+        <p md-line> Server-side, database, etc. This is much longer than normal</p>
+      </md-list-item>
+      <md-list-item>
+        <md-icon md-list-icon>cloud</md-icon>
+        <h4 md-line>Backend</h4>
+        <p md-line> Server-side, database, etc.</p>
+      </md-list-item>
+      <md-list-item>
+        <md-icon md-list-icon>cloud</md-icon>
+        <h4 md-line>Backend</h4>
+        <p md-line> Server-side, database, etc.</p>
+      </md-list-item>
+      <md-list-item>
+        <md-icon md-list-icon>cloud</md-icon>
+        <h4 md-line>Backend</h4>
+        <p md-line> Server-side, database, etc.</p>
+      </md-list-item>
+      <md-list-item>
+        <md-icon md-list-icon>cloud</md-icon>
+        <h4 md-line>Backend</h4>
+        <p md-line> Server-side, database, etc.</p>
+      </md-list-item>
+
+    </md-list>
+  </div>
+</md-card>

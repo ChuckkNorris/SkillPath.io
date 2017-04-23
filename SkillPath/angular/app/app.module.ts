@@ -13,18 +13,27 @@ import { MaterialModule } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NavigationMenuComponent } from './templates/navigation-menu/navigation-menu.component';
 
-
+import { Ng2CompleterModule } from "ng2-completer";
 //import { AnimationModule } from "@angular/platform-browser/animations"
 import 'hammerjs';
-import { BrowseTutorialsPageComponent } from './pages/browse-tutorials-page/browse-tutorials-page.component';
-import { SubmitTutorialPageComponent } from './pages/submit-tutorial-page/submit-tutorial-page.component';
+import { SubmitTutorialFormComponent } from './templates/submit-tutorial-form/submit-tutorial-form.component';
+import { LearnPageComponent } from './pages/learn-page/learn-page.component';
+import { TeachPageComponent } from './pages/teach-page/teach-page.component';
+import { TutorialCardComponent } from './templates/tutorial-card/tutorial-card.component';
+import { TutorialCategoriesComponent } from './templates/tutorial-categories/tutorial-categories.component';
+import { CategorySearchComponent } from './templates/category-search/category-search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationMenuComponent,
-    BrowseTutorialsPageComponent,
-    SubmitTutorialPageComponent,
+    SubmitTutorialFormComponent,
+    LearnPageComponent,
+    TeachPageComponent,
+    TutorialCardComponent,
+    TutorialCategoriesComponent,
+    CategorySearchComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -33,7 +42,11 @@ import { SubmitTutorialPageComponent } from './pages/submit-tutorial-page/submit
     MaterialModule.forRoot(),
     FlexLayoutModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    Ng2CompleterModule
+  ],
+  entryComponents: [
+    SubmitTutorialFormComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

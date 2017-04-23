@@ -1,0 +1,18 @@
+
+<md-card class="tutorial-card">
+  <md-card-header>
+    <!--<div md-card-avatar class="example-header-image"></div>-->
+    <md-card-title>{{tutorial.title}}</md-card-title>
+    <md-card-subtitle>{{tutorial.description}}</md-card-subtitle>
+  </md-card-header>
+  <!--<img md-card-image src="assets/img/examples/shiba2.jpg">-->
+  <!--<md-card-content>
+    <p>
+     {{tutorial.description}}
+    </p>
+  </md-card-content>-->
+  <md-card-actions>
+    <button (click)="openTutorialInNewWindow()" md-button>START</button>
+    <button (click)="showDetailsModal()" md-button>DETAILS</button>
+  </md-card-actions>
+</md-card>
