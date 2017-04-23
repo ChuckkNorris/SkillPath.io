@@ -1,14 +1,13 @@
-import { SubmitTutorialPageComponent } from './pages/submit-tutorial-page/submit-tutorial-page.component';
-import { BrowseTutorialsPageComponent } from './pages/browse-tutorials-page/browse-tutorials-page.component';
-
+import { TeachPageComponent } from './pages/teach-page/teach-page.component';
+import { LearnPageComponent } from './pages/learn-page/learn-page.component';
 
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/browse', pathMatch: 'full' },
-  { path: 'browse',  component: BrowseTutorialsPageComponent },
-  { path: 'submit', component: SubmitTutorialPageComponent }
+  { path: '', redirectTo: '/learn', pathMatch: 'full' },
+  { path: 'learn',  component: LearnPageComponent },
+  { path: 'teach', component: TeachPageComponent }
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
