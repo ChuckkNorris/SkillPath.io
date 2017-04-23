@@ -1,3 +1,5 @@
+import { CategoryService } from './services/category.service';
+import { SkillpathApiService } from './skillpath-api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { AnimationModule } from '@angular/platform-browser/animations';
 import { browser } from 'protractor';
@@ -50,7 +52,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
   entryComponents: [
     SubmitTutorialFormComponent
   ],
-  providers: [],
+  providers: [SkillpathApiService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
