@@ -1,9 +1,32 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center"  fxLayoutWrap="wrap">
-  <app-category-search class="category-search" fxFlex.gt-sm="48" fxFlex.gt-md="24" ></app-category-search>
-  <app-category-search class="category-search" fxFlex.gt-sm="48" fxFlex.gt-md="24" ></app-category-search>
-  <app-category-search class="category-search" fxFlex.gt-sm="48" fxFlex.gt-md="24" ></app-category-search>
-  <app-category-search class="category-search" fxFlex.gt-sm="48" fxFlex.gt-md="24" ></app-category-search>
+
+  <app-category-search fxFlex="25" [fxFlex.sm]="getT1Flex()" tier="1" class="category-search"  
+    title="Stack"
+    [(selectedCategory)]="t1Category">
+  </app-category-search>
+
+  <app-category-search [fxFlex]="getFlex()" *ngIf="t1Category.id != undefined"
+    title="Context"
+    [(selectedCategory)]="t2Category"
+    tier="1" class="category-search">
+
+  </app-category-search>
+  <app-category-search [fxFlex]="getT3Flex()" *ngIf="t2Category.id != undefined"
+    title="Technology"
+    [(selectedCategory)]="t3Category"
+    tier="1" class="category-search" >
+
+  </app-category-search>
+  <app-category-search fxFlex *ngIf="t3Category.id != undefined"
+    title="Area"
+    [(selectedCategory)]="t4Category"
+    tier="1" class="category-search">
+
+  </app-category-search>
 
 </div>
- 
+ <!--fxFlex.gt-sm="48" fxFlex.gt-md="24"
+fxFlex.gt-sm="48" fxFlex.gt-md="24"
+fxFlex.gt-sm="48" fxFlex.gt-md="24"
+fxFlex.gt-sm="48" fxFlex.gt-md="24"-->
  <!--fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutGap="20px;"-->
