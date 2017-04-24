@@ -7,7 +7,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -25,6 +25,7 @@ import { TutorialCardComponent } from './templates/tutorial-card/tutorial-card.c
 import { TutorialCategoriesComponent } from './templates/tutorial-categories/tutorial-categories.component';
 import { CategorySearchComponent } from './templates/category-search/category-search.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-complete-test.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     TutorialCardComponent,
     TutorialCategoriesComponent,
     CategorySearchComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    AutoCompleteTestComponent
     
   ],
   imports: [
@@ -47,7 +49,9 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     FlexLayoutModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    Ng2CompleterModule
+    Ng2CompleterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
     SubmitTutorialFormComponent

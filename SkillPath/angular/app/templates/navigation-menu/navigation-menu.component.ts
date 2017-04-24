@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationMenuComponent implements OnInit {
 
   constructor() { }
-
+  navigationActiveStyle = "mat-accent mat-raised-button";
   ngOnInit() {
   }
 

@@ -5,13 +5,13 @@
   <!--<ng2-completer [(ngModel)]="searchStr" [datasource]="captains" [minSearchLength]="0"></ng2-completer>-->
   <div fxLayoutAlign="center">
     <md-input-container>
-      <input mdInput type="text" placeholder="Search..." />
+      <input mdInput type="text" (input)="filterCategories($event.target.value)" placeholder="Search..." />
     </md-input-container>
   </div>
  
   <div class="category-list scrollbar" id="style-1">
     <md-list isRippleEnabled="true">
-      <md-list-item *ngFor="let cat of categories" 
+      <md-list-item *ngFor="let cat of categories | async" 
         [class.category-active]="selectedCategory.id == cat.id" 
         (click)="selectCategory(cat.id)" 
         [title]="cat.description">

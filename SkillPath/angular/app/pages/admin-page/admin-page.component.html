@@ -1,3 +1,33 @@
-<p>
-  admin-page works!
-</p>
+<h1 fxLayoutAlign="center">
+  Categories</h1>
+<form (ngSubmit)="saveCategory()">
+{{categoryToSave | json}}
+
+  <div fxLayoutAlign="center center" fxLayoutGap="10px">
+     <md-select required placeholder="Tier" [(ngModel)]="categoryToSave.tier" name="tier">
+      <md-option value="1">1</md-option>
+      <md-option value="2">2</md-option>
+    </md-select>
+    <md-input-container>
+      <input required name="name" [(ngModel)]="categoryToSave.name" mdInput placeholder="Name">
+    </md-input-container>
+    <md-input-container>
+      <input required name="description" [(ngModel)]="categoryToSave.description" mdInput placeholder="Description">
+    </md-input-container>
+    <md-input-container>
+      <input required name="icon" [(ngModel)]="categoryToSave.icon" mdInput placeholder="Icon">
+    </md-input-container>
+    <!--<md-select placeholder="Favorite food" [(ngModel)]="selectedValue" name="food">
+      <md-option *ngFor="let food of filteredStates | async" [value]="food">
+        {{food}}
+      </md-option>
+    </md-select>-->
+    
+
+
+  </div>
+  <button md-raised-button color="primary">Save Category</button>
+</form>
+<md-list>
+  <md-list-item *ngFor="let cat of t1Categories | async;">{{cat.name}}</md-list-item>
+</md-list>
