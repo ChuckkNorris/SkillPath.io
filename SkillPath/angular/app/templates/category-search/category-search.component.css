@@ -16,3 +16,17 @@ md-list-item {
 md-card {
     padding: 10px;
 }
+
+.giveMeEllipsis {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   line-height: 1;        /* fallback */
+   max-height: X*N;       /* fallback */
+}
+
+md-card {
+    position: absolute;
+}

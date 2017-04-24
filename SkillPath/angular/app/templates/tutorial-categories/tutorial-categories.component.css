@@ -1,3 +1,5 @@
 .category-search {
     margin: 5px;
+    min-width: 292px;
+    max-width: 370px;
 }
