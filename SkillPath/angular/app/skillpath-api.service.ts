@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 
@@ -10,17 +10,26 @@ export class SkillpathApiService {
 
   public get(endpoint: string, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    return this._http.get(fullUrl).map(response => response.json());
+    return this._http.get(fullUrl).map(response => this.mapResponse(response));
   }
 
   public post(endpoint: string, body: any, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    return this._http.post(fullUrl, body).map(response => response.json());
+    return this._http.post(fullUrl, body).map(response => this.mapResponse(response));
   }
 
   public put(endpoint: string, body: any, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    return this._http.put(fullUrl, body).map(response => response.json());
+    return this._http.put(fullUrl, body).map(response => this.mapResponse(response));
+  }
+
+  private mapResponse(response: Response) : any {
+    if (response.headers.get("content-type").startsWith("application/json")) {
+      return response.json();
+    }
+    else {
+      return response;
+    }
   }
 
   private constructFullUrl(endpoint: string, queryStringParams?: { [key: string]: any }): string {

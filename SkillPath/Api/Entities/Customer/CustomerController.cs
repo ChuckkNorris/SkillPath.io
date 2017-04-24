@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SkillPath.Api.Entities.Customer
+namespace SkillPath.Api.Entities
 {
     [Route("api/[Controller]")]
     public class CustomerController : Controller {

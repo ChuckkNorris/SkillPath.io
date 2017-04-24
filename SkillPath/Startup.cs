@@ -9,6 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using SkillPath.Api.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Text;
+using SkillPath.Api.ErrorHandling;
 
 namespace SkillPath
 {
@@ -33,9 +38,12 @@ namespace SkillPath
 		public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            
+			
+			services.AddDbContext<SkillPathContext>(options => options.UseSqlServer(Configuration["connection_string"]));
 
-        }
+			services.AddScoped<CategoryService>();
+
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -50,6 +58,21 @@ namespace SkillPath
                 await next();
               }
             });
+			app.UseExceptionHandler(appError => {
+				appError.Run(async context => {
+					context.Response.StatusCode = 500;
+					context.Response.ContentType = "application/json";
+					var error = context.Features.Get<IExceptionHandlerFeature>();
+					if (error != null) {
+						var ex = error.Error;
+
+						await context.Response.WriteAsync(new SkillPathError() {
+							ErrorCode = 1,
+							ErrorMessage = ex.Message
+						}.ToString(), Encoding.UTF8);
+					}
+				});
+			});
             app.UseMvc();
             app.UseDefaultFiles();
             app.UseStaticFiles();

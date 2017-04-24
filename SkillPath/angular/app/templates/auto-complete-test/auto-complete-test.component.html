@@ -1,0 +1,10 @@
+{{myFirst}}
+<md-input-container>
+  <input (keydown.Tab)="logState('FromInput')" mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+</md-input-container>
+<md-autocomplete #auto="mdAutocomplete">
+  <md-option *ngFor="let state of filteredStates | async; let myFirst = first;" [value]="state" (keyup.Tab)="logState('hello')"
+    (onSelectionChange)="selectState(state)">
+    {{state}}
+  </md-option>
+</md-autocomplete>

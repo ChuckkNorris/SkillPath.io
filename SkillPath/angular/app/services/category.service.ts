@@ -16,8 +16,15 @@ export class CategoryService {
       'tier': tier
     };
    
-    return this._api.get('/categories', params)
-      .map(categories => categories as Category[]);
+    return this._api.get('/category/find', params)
+      .map(categories => {
+        console.log(categories);
+        return categories as Category[]
+      });
+  }
+
+  public saveCategory(category: Category) {
+    return this._api.post('/category/save', category);
   }
   
   
