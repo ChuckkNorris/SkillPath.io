@@ -11,11 +11,25 @@ md-list-item {
 .category-list {
     overflow:auto; 
     height:350px;
+    z-index: 1;
 }
 
 md-card {
     padding: 10px;
 }
+
+md-list md-list-item:hover {
+    background-color: rgba(158, 158, 158, 0.2);
+}
+.first-item {
+     background-color: rgba(158, 158, 158, 0.2);
+}
+
+.selected-item {
+    background-color: rgba(158, 158, 158, 0.4);
+}
+
+
 
 .giveMeEllipsis {
    overflow: hidden;
