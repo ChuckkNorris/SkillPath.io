@@ -1,56 +1,31 @@
+<div fxLayoutAlign="center">
+  <md-input-container fxFlex>
+    
+    <input (focus)="onFocused()" mdInput type="text"
+    (keyup.arrowup)="selectCategoryArrow('up')"
+    (keyup.arrowdown)="selectCategoryArrow('down')"
+    (keyup.enter)="selectCategory('', selectedCategoryIndex); onBlur()"
+    (keydown.tab)="selectCategory('', selectedCategoryIndex); onBlur()"
+    (blur)="waitForComplete()"
+    (input)
+    ="filterCategories($event.target.value)" [placeholder]="title" />
+  </md-input-container>
+</div>
 
-  <!--<div fxLayoutAlign="center">
-    <h3>{{title}}</h3>
-  </div>-->
-  <!--<ng2-completer [(ngModel)]="searchStr" [datasource]="captains" [minSearchLength]="0"></ng2-completer>-->
-  <div fxLayoutAlign="center">
-    <md-input-container fxFlex>
-      <input (blur)="onBlur()" (focus)="onFocused()" mdInput type="text" (input)="filterCategories($event.target.value)" [placeholder]="title" />
-    </md-input-container>
-  </div>
-<md-card *ngIf="isFocused">
-  <div class="category-list scrollbar" id="style-1">
-    <md-list isRippleEnabled="true">
-      <md-list-item *ngFor="let cat of categories" 
-        [class.category-active]="selectedCategory.id == cat.id" 
-        (click)="selectCategory(cat.id)" 
+<md-card class="category-list scrollbar" *ngIf="isFocused" (blur)="onBlur()" >
+  <div id="style-1">
+    <md-list>
+      <md-list-item *ngFor="let cat of categories; let index=index" 
+         [class.first-item]="selectedCategoryIndex == index"
+        [class.selected-item]="cat.id == selectedCategory.id"
+        
+        (click)="selectCategory(cat.id, index)" 
         [title]="cat.description">
+        {{isFirst | json}}
         <md-icon md-list-icon>{{cat.icon}}</md-icon>
         <h4 md-line>{{cat.name}}</h4>
         <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
       </md-list-item>
-
-      <!--<h3 md-subheader>Folders</h3>-->
-      <!--<md-list-item [class.category-active]="selectedItem=='FrontEnd'" (click)="selectItem('FrontEnd')" title="Check out this neat title">
-        <md-icon md-list-icon>desktop_windows</md-icon>
-        <h4 md-line>Frontend</h4>
-        <p md-line> Client-side, websites, etc.</p>
-      </md-list-item>
-      <md-list-item [class.category-active]="selectedItem=='Backend'" (click)="selectItem('Backend')">
-        <md-icon md-list-icon>cloud</md-icon>
-        <h4 md-line>Backend</h4>
-        <p md-line> Server-side, database, etc. This is much longer than normal</p>
-      </md-list-item>
-      <md-list-item>
-        <md-icon md-list-icon>cloud</md-icon>
-        <h4 md-line>Backend</h4>
-        <p md-line> Server-side, database, etc.</p>
-      </md-list-item>
-      <md-list-item>
-        <md-icon md-list-icon>cloud</md-icon>
-        <h4 md-line>Backend</h4>
-        <p md-line> Server-side, database, etc.</p>
-      </md-list-item>
-      <md-list-item>
-        <md-icon md-list-icon>cloud</md-icon>
-        <h4 md-line>Backend</h4>
-        <p md-line> Server-side, database, etc.</p>
-      </md-list-item>
-      <md-list-item>
-        <md-icon md-list-icon>cloud</md-icon>
-        <h4 md-line>Backend</h4>
-        <p md-line> Server-side, database, etc.</p>
-      </md-list-item>-->
 
     </md-list>
    

@@ -43,17 +43,41 @@ export class CategorySearchComponent implements OnInit {
   filterCategories() {
 
   }
-  
-   selectCategory(selectedCategoryId: string) {
+
+  selectedCategoryIndex: number = 0;
+  selectCategoryArrow(direction) {
+    if (direction == 'up') {
+      if (this.selectedCategoryIndex > 0)
+        this.selectedCategoryIndex--;
+    }
+    else if (direction == 'down') {
+      if (this.selectedCategoryIndex < this.categories.length)
+        this.selectedCategoryIndex++;
+    }
+  }
+  onSearchLostFocus() {
+    
+  }
+
+  waitForComplete() {
+    setTimeout(() => {
+      this.onBlur();
+    }, 100);
+  }
+
+   selectCategory(selectedCategoryId: string, index: number) {
+
+     console.log(selectedCategoryId);
+     this.selectedCategoryIndex = index;
      //Observable.from(this.categories).filter(x => x.filter)
      //this.selectedCategory = 
-     this.categories.forEach(cat => {
-       if (cat.id == selectedCategoryId) {
+     this.categories.forEach((cat, catIndex) => {
+       if (cat.id == selectedCategoryId || index == catIndex) {
         this.selectedCategory = cat;
         this.selectedCategoryChange.emit(this.selectedCategory);
+        this.onBlur();
        }
       });
-      
    }
   
 }
