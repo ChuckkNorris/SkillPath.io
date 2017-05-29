@@ -40,4 +40,10 @@ export class AdminPageComponent implements OnInit {
 
   }
 
+  updateParent(category?: Category) {
+    console.log(category);
+    this.categoryToSave.tier = category.tier + 1;
+    this.categoryToSave.parentId = category.id;
+  }
+
 }

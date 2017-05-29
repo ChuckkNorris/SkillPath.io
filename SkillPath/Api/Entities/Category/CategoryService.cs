@@ -16,6 +16,7 @@ namespace SkillPath.Api.Entities
 		}
 
 		public async Task SaveCategory(Category categoryToSave) {
+			Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(categoryToSave));
 			var existingCategory = await _context.Categories
 				.FirstOrDefaultAsync(cat => cat.Name == categoryToSave.Name 
 					&& cat.Tier == categoryToSave.Tier);
