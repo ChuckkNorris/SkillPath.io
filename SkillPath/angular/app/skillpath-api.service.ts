@@ -24,7 +24,8 @@ export class SkillpathApiService {
   }
 
   private mapResponse(response: Response) : any {
-    if (response.headers.get("content-type").startsWith("application/json")) {
+    var contentType = response.headers.get("content-type");
+    if (contentType && contentType.startsWith("application/json")) {
       return response.json();
     }
     else {

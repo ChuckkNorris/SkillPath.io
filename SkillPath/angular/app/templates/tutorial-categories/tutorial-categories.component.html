@@ -1,14 +1,16 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center"  fxLayoutWrap="wrap">
-
+  {{t2Category | json}}
   <app-category-search fxFlex="25" [fxFlex.sm]="getT1Flex()" tier="1" class="category-search"  
     title="Stack"
-    [(selectedCategory)]="t1Category">
+    [(selectedCategory)]="t1Category"
+    (selectedCategoryChange)="selectCategory($event)">
   </app-category-search>
 
   <app-category-search [fxFlex]="getFlex()" *ngIf="t1Category.id != undefined"
     title="Context"
     [parentId]="t1Category.id"
     [(selectedCategory)]="t2Category"
+    (selectedCategoryChange)="selectCategory($event)"
     tier="1" class="category-search">
 
   </app-category-search>
@@ -16,6 +18,7 @@
     title="Technology"
     [parentId]="t2Category.id"
     [(selectedCategory)]="t3Category"
+    (selectedCategoryChange)="selectCategory($event)"
     tier="1" class="category-search" >
 
   </app-category-search>
@@ -23,6 +26,7 @@
     title="Area"
     [parentId]="t3Category.id"
     [(selectedCategory)]="t4Category"
+    (selectedCategoryChange)="selectCategory($event)"
     tier="1" class="category-search">
 
   </app-category-search>
