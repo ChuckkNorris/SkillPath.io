@@ -25,6 +25,11 @@ namespace SkillPath.Api.Entities
 			await _categoryService.SaveCategory(category);
 		}
 
+		[HttpGet]
+		public async Task<IEnumerable<Category>> GetChildCategories([FromQuery]Guid selectedCategoryId) {
+			return await _categoryService.GetChildCategories(selectedCategoryId);
+		}
+
     }
 
 }

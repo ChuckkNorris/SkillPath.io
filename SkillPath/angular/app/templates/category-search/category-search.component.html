@@ -1,6 +1,8 @@
-<div fxLayoutAlign="center">
+<div>
   <md-input-container fxFlex>
-    
+    <div *ngIf="!isFocused && selectedCategory.id" class="category-tag" md-suffix>
+      {{selectedCategory.name}}
+      </div>
     <input (focus)="onFocused()" mdInput type="text"
     (keyup.arrowup)="selectCategoryArrow('up')"
     (keyup.arrowdown)="selectCategoryArrow('down')"
@@ -15,10 +17,13 @@
 <md-card class="category-list scrollbar" *ngIf="isFocused" (blur)="onBlur()" >
   <div id="style-1">
     <md-list>
+      <md-list-item *ngIf="categories.length == 0">
+          <h4 md-line>Loading Categories...</h4>
+          
+      </md-list-item>
       <md-list-item *ngFor="let cat of categories; let index=index" 
          [class.first-item]="selectedCategoryIndex == index"
         [class.selected-item]="cat.id == selectedCategory.id"
-        
         (click)="selectCategory(cat.id, index)" 
         [title]="cat.description">
         {{isFirst | json}}
