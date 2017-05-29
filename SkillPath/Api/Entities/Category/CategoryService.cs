@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace SkillPath.Api.Entities
 {
@@ -27,6 +28,16 @@ namespace SkillPath.Api.Entities
 
 		public async Task<IEnumerable<Category>> FindInTier(int tier) {
 			 return await _context.Categories.Where(cat => cat.Tier == tier).ToListAsync();
+		}
+
+		public async Task<IEnumerable<Category>> GetChildCategories(Guid selectedCategoryId) {
+			
+			return await Find(cat => cat.ParentId == selectedCategoryId).ToListAsync();
+		}
+	
+
+		public IQueryable<Category> Find(Expression<Func<Category, bool>> predicate) {
+			return _context.Categories.Where(predicate);
 		}
 	}
 }

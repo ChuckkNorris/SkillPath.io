@@ -8,18 +8,26 @@ import 'rxjs/Rx';
 @Component({
   selector: 'app-category-search',
   templateUrl: './category-search.component.html',
-  styleUrls: ['./category-search.component.css']
+  styleUrls: ['./category-search.component.scss']
 })
 export class CategorySearchComponent implements OnInit {
 
   constructor(private _categoryService: CategoryService) { }
   @Input() title: string;
   @Input() tier: number;
+  @Input() parentId: string;
+
   @Input() selectedCategory: Category = {};
   @Output() selectedCategoryChange: EventEmitter<Category> = new EventEmitter<Category>();
-  private categories: Category[];
+  private categories: Category[] = [];
   ngOnInit() {
-    this._categoryService.getCategories(this.tier).subscribe(categories => this.categories = categories);
+    console.log('cat service: ' + this.parentId);
+    if (this.parentId) {
+      this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
+    }
+    else {
+      this._categoryService.getCategories(this.tier).subscribe(categories => this.categories = categories);
+    }
   }
 
   private filteredCategories: Category[];
@@ -36,13 +44,6 @@ export class CategorySearchComponent implements OnInit {
     this.isFocused = false;
   }
 
-  log(message) {
-    console.log(message);
-  }
-
-  filterCategories() {
-
-  }
 
   selectedCategoryIndex: number = 0;
   selectCategoryArrow(direction) {
@@ -51,12 +52,9 @@ export class CategorySearchComponent implements OnInit {
         this.selectedCategoryIndex--;
     }
     else if (direction == 'down') {
-      if (this.selectedCategoryIndex < this.categories.length)
+      if (this.selectedCategoryIndex < this.categories.length - 1)
         this.selectedCategoryIndex++;
     }
-  }
-  onSearchLostFocus() {
-    
   }
 
   waitForComplete() {

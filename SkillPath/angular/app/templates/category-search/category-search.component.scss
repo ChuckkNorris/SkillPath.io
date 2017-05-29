@@ -10,8 +10,15 @@ md-list-item {
 
 .category-list {
     overflow:auto; 
-    height:350px;
+    min-height:100px;
     z-index: 1;
+}
+
+.category-tag {
+    background: #ff4081;
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
 }
 
 md-card {
@@ -38,7 +45,7 @@ md-list md-list-item:hover {
    -webkit-box-orient: vertical;
    -webkit-line-clamp: 2; /* number of lines to show */
    line-height: 1;        /* fallback */
-   max-height: X*N;       /* fallback */
+  // max-height: X*N;       /* fallback */
 }
 
 md-card {

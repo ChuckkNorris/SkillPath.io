@@ -23,6 +23,18 @@ export class CategoryService {
       });
   }
 
+  public getChildCategories(selectedCategoryId: string) : Observable<Category[]> {
+    let params = {
+      'selectedCategoryId': selectedCategoryId
+    };
+   
+    return this._api.get('/category/GetChildCategories', params)
+      .map(categories => {
+        console.log(categories);
+        return categories as Category[]
+      });
+  }
+
   public saveCategory(category: Category) {
     return this._api.post('/category/save', category);
   }
