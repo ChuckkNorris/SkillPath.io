@@ -1,5 +1,5 @@
-import { CategoryService } from './../../services/category.service';
-import { TUTORIALS } from './../../models/test-data';
+import { TutorialService } from './../../services/tutorial.service';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,13 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LearnPageComponent implements OnInit {
 
-  constructor(private _catService: CategoryService) { 
+  constructor(private _tutorialService: TutorialService) { 
 
   }
 
   ngOnInit() {
-    this._catService.getCategories(1);
+    this._tutorialService.getTutorials(1).subscribe(tutorials => this.tutorials = tutorials);
   }
-
-  tutorials = TUTORIALS;
+  tutorials = [];
 }

@@ -20,6 +20,18 @@ namespace SkillPath.Api.Entities
 			await _tutorialService.SaveTutorial(category);
 		}
 
+		[HttpGet]
+		public async Task<IEnumerable<Tutorial>> Get(int page, Guid? parentCategoryId = null) {
+			IEnumerable<Tutorial> toReturn;
+			if (parentCategoryId != null) {
+				toReturn = await _tutorialService.FindInCategory(parentCategoryId.Value);
+			}
+			else {
+				toReturn = await _tutorialService.GetTutorials(page);
+			}
+			return toReturn;
+		}
+
 	
     }
 

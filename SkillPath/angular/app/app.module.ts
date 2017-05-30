@@ -1,3 +1,4 @@
+import { TutorialService } from './services/tutorial.service';
 import { CategoryService } from './services/category.service';
 import { SkillpathApiService } from './skillpath-api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -56,7 +57,7 @@ import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-c
   entryComponents: [
     SubmitTutorialFormComponent
   ],
-  providers: [SkillpathApiService, CategoryService],
+  providers: [SkillpathApiService, CategoryService, TutorialService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
