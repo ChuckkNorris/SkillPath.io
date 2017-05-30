@@ -12,7 +12,14 @@ import 'rxjs/Rx';
 })
 export class CategorySearchComponent implements OnInit {
 
-  constructor(private _categoryService: CategoryService) { }
+  constructor(private _categoryService: CategoryService) { 
+    //  if (this.parentId) {
+    //   this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
+    // }
+    // else if (this.tier == 1) {
+    //   this._categoryService.getCategories(this.tier).subscribe(categories => this.categories = categories);
+    // }
+  }
   @Input() title: string;
   @Input() tier: number;
   @Input() parentId: string;
@@ -20,12 +27,14 @@ export class CategorySearchComponent implements OnInit {
   @Input() selectedCategory: Category = {};
   @Output() selectedCategoryChange: EventEmitter<Category> = new EventEmitter<Category>();
   private categories: Category[] = [];
+  
+
   ngOnInit() {
-    console.log('cat service: ' + this.parentId);
+    console.log('INitializing category search')
     if (this.parentId) {
       this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
     }
-    else {
+    else if (this.tier == 1) {
       this._categoryService.getCategories(this.tier).subscribe(categories => this.categories = categories);
     }
   }
@@ -60,7 +69,7 @@ export class CategorySearchComponent implements OnInit {
   waitForComplete() {
     setTimeout(() => {
       this.onBlur();
-    }, 100);
+    }, 200);
   }
 
    selectCategory(selectedCategoryId: string, index: number) {

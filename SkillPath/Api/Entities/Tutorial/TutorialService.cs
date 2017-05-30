@@ -23,6 +23,11 @@ namespace SkillPath.Api.Entities
 			return await Find(tut => tut.TutorialCategories.Any(tutCat => tutCat.CategoryId == categoryId)).ToListAsync();
 		}
 
+		public async Task<IEnumerable<Tutorial>> GetTutorials(int page) {
+			int countPerPage = 20;
+			int numberToSkip = (page - 1) * countPerPage;
+			return await _context.Tutorials.Skip(numberToSkip).Take(countPerPage).ToListAsync();
+		}
 		public IQueryable<Tutorial> Find(Expression<Func<Tutorial, bool>> predicate) {
 			return _context.Tutorials.Include(tut => tut.TutorialCategories).Where(predicate);
 		}

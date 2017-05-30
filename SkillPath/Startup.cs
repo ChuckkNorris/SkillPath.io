@@ -42,6 +42,7 @@ namespace SkillPath
 			services.AddDbContext<SkillPathContext>(options => options.UseSqlServer(Configuration["connection_string"]));
 
 			services.AddScoped<CategoryService>();
+            services.AddScoped<TutorialService>();
 
 		}
 

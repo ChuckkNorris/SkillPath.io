@@ -1,3 +1,6 @@
+import { TutorialService } from './../../services/tutorial.service';
+import { Category } from './../../models/category';
+import { Tutorial } from './../../models/tutorial';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubmitTutorialFormComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private _tutorialService: TutorialService) { }
+  tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
   ngOnInit() {
+  }
+
+  setCategoryId(tier: number, category: Category) {
+    this.tutorial.tutorialCategories[0].categoryId=category.id;
+  }
+
+  saveTutorial(form: any) {
+    console.log(form);
+    console.log(this.tutorial);
+    this._tutorialService.saveTutorial(this.tutorial).subscribe();
   }
 
 }
