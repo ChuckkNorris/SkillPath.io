@@ -10,6 +10,8 @@ namespace SkillPath.Api.Entities
     public class SkillPathContext : DbContext {
 		public SkillPathContext(DbContextOptions<SkillPathContext> options) : base(options) { }
 		public DbSet<Category> Categories { get; set; }
+		public DbSet<Tutorial> Tutorials { get; set; }
+		public DbSet<TutorialCategory> TutorialCategories { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			modelBuilder.Entity<Category>(category => {

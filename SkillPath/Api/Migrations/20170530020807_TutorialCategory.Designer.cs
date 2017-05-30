@@ -8,9 +8,10 @@ using SkillPath.Api.Entities;
 namespace SkillPath.api.Migrations
 {
     [DbContext(typeof(SkillPathContext))]
-    partial class SkillPathContextModelSnapshot : ModelSnapshot
+    [Migration("20170530020807_TutorialCategory")]
+    partial class TutorialCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
