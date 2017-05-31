@@ -14,7 +14,11 @@ export class LearnPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._tutorialService.getTutorials(1).subscribe(tutorials => this.tutorials = tutorials);
+   this.getTutorials(1);
   }
   tutorials = [];
+
+  getTutorials(page: number, categoryId?: string) {
+     this._tutorialService.getTutorials(page, categoryId).subscribe(tutorials => this.tutorials = tutorials);
+  }
 }
