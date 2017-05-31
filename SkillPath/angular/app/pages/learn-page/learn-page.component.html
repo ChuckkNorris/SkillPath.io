@@ -1,6 +1,14 @@
 <h1>Tell me a bit about what you want to learn...</h1>
 
 <!--fxLayout.xs="column" -->
+<div fxLayout="row">
+  <app-tutorial-categories
+    (t1CategoryChange)="getTutorials(1, $event.id)"
+    (t2CategoryChange)="getTutorials(1, $event.id)"
+    (t3CategoryChange)="getTutorials(1, $event.id)"
+    (t4CategoryChange)="getTutorials(1, $event.id)"
+  ></app-tutorial-categories>
+</div>
 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutAlign="center" fxLayoutGap="20px">
 
   <app-tutorial-card *ngFor="let tutorial of tutorials" [tutorial]="tutorial" fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="25"></app-tutorial-card>
