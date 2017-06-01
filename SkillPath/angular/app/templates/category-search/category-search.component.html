@@ -26,8 +26,8 @@
         [class.selected-item]="cat.id == selectedCategory.id"
         (click)="selectCategory(cat.id, index)" 
         [title]="cat.description">
-        {{isFirst | json}}
-        <md-icon md-list-icon>{{cat.icon}}</md-icon>
+        <i md-list-icon class="fa fa-{{cat.icon}}"></i>
+        <!--<md-icon md-list-icon>{{cat.icon}}</md-icon>-->
         <h4 md-line>{{cat.name}}</h4>
         <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
       </md-list-item>

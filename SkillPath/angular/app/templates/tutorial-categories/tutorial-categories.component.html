@@ -2,10 +2,11 @@
   <app-category-search fxFlex="25" [fxFlex.sm]="getT1Flex()" tier="1" class="category-search"  
     title="Stack"
     [(selectedCategory)]="t1Category"
-    (selectedCategoryChange)="selectCategory($event)">
+    (selectedCategoryChange)="selectCategory($event);">
   </app-category-search>
 
-  <app-category-search [fxFlex]="getFlex()" *ngIf="t1Category.id != undefined"
+  <app-category-search #t2 [fxFlex]="getFlex()" *ngIf="t1Category.id != undefined"
+    
     title="Context"
     [parentId]="t1Category.id"
     [(selectedCategory)]="t2Category"
