@@ -1,5 +1,6 @@
+import { CategorySearchComponent } from './../category-search/category-search.component';
 import { Category } from './../../models/category';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-tutorial-categories',
@@ -44,7 +45,9 @@ export class TutorialCategoriesComponent implements OnInit {
     }
     return toReturn;
   }
+  @ViewChild('t2') child: CategorySearchComponent;
 
+  
   selectCategory(category: Category) {
     //console.log(category);
     switch (category.tier) {
@@ -52,6 +55,7 @@ export class TutorialCategoriesComponent implements OnInit {
         this.t1CategoryChange.emit(category); 
         this.t2Category = {};
         this.deselectChildCategories(category.tier);
+        this.child.getCategories();
         break;
       case 2:
         this.t2CategoryChange.emit(category); 

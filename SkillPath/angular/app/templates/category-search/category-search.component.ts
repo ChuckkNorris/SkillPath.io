@@ -30,8 +30,13 @@ export class CategorySearchComponent implements OnInit {
   
 
   ngOnInit() {
+    
+    this.getCategories();
+  }
+
+  public getCategories() {
     console.log('INitializing category search')
-    if (this.parentId) {
+     if (this.parentId) {
       this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
     }
     else if (this.tier == 1) {
