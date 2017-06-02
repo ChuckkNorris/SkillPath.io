@@ -1,13 +1,21 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center"  fxLayoutWrap="wrap">
-  <app-category-search fxFlex="25" [fxFlex.sm]="getT1Flex()" tier="1" class="category-search"  
+<div fxLayout="row"  fxLayoutAlign="center center"  fxLayoutWrap="wrap">
+  <app-category-search 
+    [fxFlex.xs]="getXsFlex()" 
+    [fxFlex.sm]="getSmFlex()"
+    [fxFlex.md]="getMdFlex()"
+    [fxFlex.lg]="getLgFlex()"
+    tier="1" class="category-search"  
     title="Stack"
     [(selectedCategory)]="t1Category"
     (selectedCategoryChange)="selectCategory($event);">
   </app-category-search>
 
    <!--(onViewInitialized)="getChildCategories(2)"-->
-  <app-category-search #categoryTier [fxFlex]="getFlex()" *ngIf="t1Category.id != undefined"
-
+  <app-category-search #categoryTier *ngIf="t1Category.id != undefined"
+     [fxFlex.xs]="getXsFlex()" 
+    [fxFlex.sm]="getSmFlex()"
+    [fxFlex.md]="getMdFlex()"
+    [fxFlex.lg]="getLgFlex()"
     title="Context"
     [parentId]="t1Category.id"
     [(selectedCategory)]="t2Category"
@@ -15,7 +23,12 @@
     tier="2" class="category-search">
 
   </app-category-search>
-  <app-category-search #categoryTier [fxFlex]="getT3Flex()" *ngIf="t2Category.id != undefined"
+  <app-category-search #categoryTier 
+    [fxFlex.xs]="getXsFlex()" 
+    [fxFlex.sm]="getSmFlex()"
+    [fxFlex.md]="getMdFlex()"
+    [fxFlex.lg]="getLgFlex()"
+    *ngIf="t2Category.id != undefined"
     title="Technology"
     [parentId]="t2Category.id"
     [(selectedCategory)]="t3Category"
@@ -23,7 +36,11 @@
     tier="3" class="category-search" >
 
   </app-category-search>
-  <app-category-search #categoryTier fxFlex *ngIf="t3Category.id != undefined"
+  <app-category-search #categoryTier *ngIf="t3Category.id != undefined"
+    [fxFlex.xs]="getXsFlex()" 
+    [fxFlex.sm]="getSmFlex()"
+    [fxFlex.md]="getMdFlex()"
+    [fxFlex.lg]="getLgFlex()"
     title="Area"
     [parentId]="t3Category.id"
     [(selectedCategory)]="t4Category"

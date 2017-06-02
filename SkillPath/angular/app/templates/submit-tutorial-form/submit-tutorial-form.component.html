@@ -18,16 +18,12 @@
       </md-input-container>
     </div>
     <div fxLayout="row" fxLayoutAlign="center">
-         <!--(t1CategoryChange)="tutorial.tutorialCategories[0].categoryId=$event.id" 
-        (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id"
-        (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id" 
-        (t4CategoryChange)="tutorial.tutorialCategories[3].categoryId=$event.id"-->
+        
       <app-category-list 
         (t1CategoryChange)="tutorial.tutorialCategories[0].categoryId=$event.id" 
         (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id"
         (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id" 
-        (t4CategoryChange)="tutorial.tutorialCategories[3].categoryId=$event.id"
-        fxFlex="50">
+        (t4CategoryChange)="tutorial.tutorialCategories[3].categoryId=$event.id">
       </app-category-list>
     </div>
     <div fxLayout="row">
