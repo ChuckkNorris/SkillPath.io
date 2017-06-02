@@ -1,13 +1,13 @@
 import { CategorySearchComponent } from './../category-search/category-search.component';
 import { Category } from './../../models/category';
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ViewChildren, QueryList } from '@angular/core';
 
 @Component({
-  selector: 'app-tutorial-categories',
-  templateUrl: './tutorial-categories.component.html',
-  styleUrls: ['./tutorial-categories.component.css']
+  selector: 'app-category-list',
+  templateUrl: './category-list.component.html',
+  styleUrls: ['./category-list.component.css']
 })
-export class TutorialCategoriesComponent implements OnInit {
+export class CategoryListComponent implements OnInit {
 
   constructor() { }
 
@@ -45,35 +45,59 @@ export class TutorialCategoriesComponent implements OnInit {
     }
     return toReturn;
   }
-  @ViewChild('t2') child: CategorySearchComponent;
+  @ViewChildren('categoryTier') children: QueryList<CategorySearchComponent>;
 
+  getChildCategories(category: Category) {
+    console.log("GETTING CHILD CATEGORIES");
+    console.log(this.children);
+
+    let childSearch = this.children.find(catSearch => catSearch.tier == category.tier + 1);
+    console.log(childSearch);
+    if (childSearch) {
+      childSearch.getCategories(category.id);
+    }
+    
+    // if (this.children.first) {
+    //   console.log(this.children.first.parentId);
+    //   console.log(category.id);
+      
+    //   this.children.first.getCategories(category.id);
+    // }
+     
+   
+  }
   
   selectCategory(category: Category) {
     //console.log(category);
+    console.log('Selected Tier' + category.tier);
+    this.deselectChildCategories(category.tier);
     switch (category.tier) {
       case 1:
+      this.t1Category = category;
         this.t1CategoryChange.emit(category); 
-        this.t2Category = {};
-        this.deselectChildCategories(category.tier);
-        this.child.getCategories();
+        // this.t2Category = {};
+        this.getChildCategories(category);
         break;
       case 2:
+      this.t2Category = category;
         this.t2CategoryChange.emit(category); 
-        this.deselectChildCategories(category.tier);
+        this.getChildCategories(category);
         break;
       case 3:
+      this.t3Category = category;
         this.t3CategoryChange.emit(category); 
-        this.deselectChildCategories(category.tier);
+        this.getChildCategories(category);
         break;
       case 4:
+      this.t4Category = category;
         this.t4CategoryChange.emit(category); 
-        this.deselectChildCategories(category.tier);
         break;
     }
   }
 
+
   deselectChildCategories(tier: number) {
-    console.log('Selected Tier' + tier);
+
     if (tier < 2) {
       this.t2Category = {};
     }

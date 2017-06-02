@@ -23,7 +23,7 @@ import { SubmitTutorialFormComponent } from './templates/submit-tutorial-form/su
 import { LearnPageComponent } from './pages/learn-page/learn-page.component';
 import { TeachPageComponent } from './pages/teach-page/teach-page.component';
 import { TutorialCardComponent } from './templates/tutorial-card/tutorial-card.component';
-import { TutorialCategoriesComponent } from './templates/tutorial-categories/tutorial-categories.component';
+import { CategoryListComponent } from './templates/category-list/category-list.component';
 import { CategorySearchComponent } from './templates/category-search/category-search.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-complete-test.component';
@@ -36,7 +36,7 @@ import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-c
     LearnPageComponent,
     TeachPageComponent,
     TutorialCardComponent,
-    TutorialCategoriesComponent,
+    CategoryListComponent,
     CategorySearchComponent,
     AdminPageComponent,
     AutoCompleteTestComponent

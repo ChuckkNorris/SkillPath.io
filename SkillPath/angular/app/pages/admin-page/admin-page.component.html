@@ -5,14 +5,14 @@
   <md-list-item *ngFor="let cat of t1Categories | async;">{{cat.name}}</md-list-item>
 </md-list>-->
 <h3 fxLayoutAlign="center">Parent Category</h3>
-<app-tutorial-categories
+<app-category-list
   (t1CategoryChange)="updateParent($event)"
   (t2CategoryChange)="updateParent($event)"
   (t3CategoryChange)="updateParent($event)"
   (t4CategoryChange)="updateParent($event)"
 >
 
-</app-tutorial-categories>
+</app-category-list>
 <h3  fxLayoutAlign="center">Child Category</h3>
 <form (ngSubmit)="saveCategory()">
 {{categoryToSave | json}}
