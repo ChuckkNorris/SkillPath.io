@@ -4,7 +4,7 @@
     <div *ngIf="!isFocused && selectedCategory.id" class="category-tag" md-suffix>
       {{selectedCategory.name}}
       </div>
-    <input (focus)="onFocused()" mdInput type="text"
+    <input #categoryInput (focus)="onFocused()" mdInput type="text"
     (keyup.arrowup)="selectCategoryArrow('up')"
     (keyup.arrowdown)="selectCategoryArrow('down')"
     (keyup.enter)="selectCategory('', selectedCategoryIndex); onBlur()"

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Category } from './../../models/category';
 import { CategoryService } from './../../services/category.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import 'rxjs/add/observable/from';
 import 'rxjs/Rx';
 
@@ -10,9 +10,10 @@ import 'rxjs/Rx';
   templateUrl: './category-search.component.html',
   styleUrls: ['./category-search.component.scss']
 })
-export class CategorySearchComponent implements OnInit {
+export class CategorySearchComponent extends Element implements OnInit {
 
   constructor(private _categoryService: CategoryService) { 
+    super();
     //  if (this.parentId) {
     //   this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
     // }
@@ -38,6 +39,11 @@ export class CategorySearchComponent implements OnInit {
   ngAfterViewInit() {
     
     this.onViewInitialized.emit(true);
+  }
+
+  //@ViewChild('categoryInput') input: Input;
+  public focus() {
+    
   }
 
   public getCategories(parentCategoryId?: string) {
