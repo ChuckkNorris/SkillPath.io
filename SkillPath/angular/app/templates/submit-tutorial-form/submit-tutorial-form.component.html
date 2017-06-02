@@ -22,13 +22,13 @@
         (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id"
         (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id" 
         (t4CategoryChange)="tutorial.tutorialCategories[3].categoryId=$event.id"-->
-      <app-tutorial-categories 
+      <app-category-list 
         (t1CategoryChange)="tutorial.tutorialCategories[0].categoryId=$event.id" 
         (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id"
         (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id" 
         (t4CategoryChange)="tutorial.tutorialCategories[3].categoryId=$event.id"
         fxFlex="50">
-      </app-tutorial-categories>
+      </app-category-list>
     </div>
     <div fxLayout="row">
       <button fxFlex="100" md-raised-button color="primary" type="submit">Share</button>

@@ -5,29 +5,30 @@
     (selectedCategoryChange)="selectCategory($event);">
   </app-category-search>
 
-  <app-category-search #t2 [fxFlex]="getFlex()" *ngIf="t1Category.id != undefined"
-    
+   <!--(onViewInitialized)="getChildCategories(2)"-->
+  <app-category-search #categoryTier [fxFlex]="getFlex()" *ngIf="t1Category.id != undefined"
+
     title="Context"
     [parentId]="t1Category.id"
     [(selectedCategory)]="t2Category"
     (selectedCategoryChange)="selectCategory($event)"
-    tier="1" class="category-search">
+    tier="2" class="category-search">
 
   </app-category-search>
-  <app-category-search [fxFlex]="getT3Flex()" *ngIf="t2Category.id != undefined"
+  <app-category-search #categoryTier [fxFlex]="getT3Flex()" *ngIf="t2Category.id != undefined"
     title="Technology"
     [parentId]="t2Category.id"
     [(selectedCategory)]="t3Category"
     (selectedCategoryChange)="selectCategory($event)"
-    tier="1" class="category-search" >
+    tier="3" class="category-search" >
 
   </app-category-search>
-  <app-category-search fxFlex *ngIf="t3Category.id != undefined"
+  <app-category-search #categoryTier fxFlex *ngIf="t3Category.id != undefined"
     title="Area"
     [parentId]="t3Category.id"
     [(selectedCategory)]="t4Category"
     (selectedCategoryChange)="selectCategory($event)"
-    tier="1" class="category-search">
+    tier="4" class="category-search">
 
   </app-category-search>
 

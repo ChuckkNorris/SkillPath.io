@@ -21,22 +21,31 @@ export class CategorySearchComponent implements OnInit {
     // }
   }
   @Input() title: string;
-  @Input() tier: number;
+  @Input() public tier: number;
   @Input() parentId: string;
 
   @Input() selectedCategory: Category = {};
   @Output() selectedCategoryChange: EventEmitter<Category> = new EventEmitter<Category>();
   private categories: Category[] = [];
   
+  @Output() onViewInitialized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnInit() {
+     this.getCategories();
     
-    this.getCategories();
   }
 
-  public getCategories() {
+  ngAfterViewInit() {
+    
+    this.onViewInitialized.emit(true);
+  }
+
+  public getCategories(parentCategoryId?: string) {
     console.log('INitializing category search')
-     if (this.parentId) {
+    if (parentCategoryId) {
+      this._categoryService.getChildCategories(parentCategoryId).subscribe(categories => this.categories = categories);
+    }
+    else if (this.parentId) {
       this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
     }
     else if (this.tier == 1) {
@@ -46,9 +55,6 @@ export class CategorySearchComponent implements OnInit {
 
   private filteredCategories: Category[];
 
-  onSelectedCategoryChanged() {
-    
-  }
   isFocused: boolean = false;
   onFocused() {
      this.isFocused = true;

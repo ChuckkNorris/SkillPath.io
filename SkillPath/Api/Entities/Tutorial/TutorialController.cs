@@ -23,7 +23,8 @@ namespace SkillPath.Api.Entities
 		[HttpGet]
 		public async Task<IEnumerable<Tutorial>> Get(int page, Guid? parentCategoryId = null) {
 			IEnumerable<Tutorial> toReturn;
-			if (parentCategoryId != null) {
+			Console.WriteLine($"Page: {page}, ParentId: {parentCategoryId.HasValue}");
+			if (parentCategoryId.HasValue) {
 				toReturn = await _tutorialService.FindInCategory(parentCategoryId.Value);
 			}
 			else {
