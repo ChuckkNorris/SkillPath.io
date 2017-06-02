@@ -28,12 +28,17 @@ namespace SkillPath.Api.Entities
 		}
 
 		public async Task<IEnumerable<Category>> FindInTier(int tier) {
-			 return await _context.Categories.Where(cat => cat.Tier == tier).ToListAsync();
+			 return await _context.Categories
+			 .Where(cat => cat.Tier == tier && cat.TutorialCategories.Any())
+			 .ToListAsync();
 		}
 
 		public async Task<IEnumerable<Category>> GetChildCategories(Guid selectedCategoryId) {
 			
-			return await Find(cat => cat.ParentId == selectedCategoryId).ToListAsync();
+			return await Find(cat => 
+				cat.ParentId == selectedCategoryId
+				&& cat.TutorialCategories.Any()
+				).ToListAsync();
 		}
 	
 
