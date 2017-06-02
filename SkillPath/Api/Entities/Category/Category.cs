@@ -18,5 +18,6 @@ namespace SkillPath.Api.Entities
 		//[ForeignKey("ParentId")]
 		public Category Parent { get; set; }
 		public Guid? ParentId { get; set; }
+		public IEnumerable<TutorialCategory> TutorialCategories { get; set; }
 	}
 }

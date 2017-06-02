@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Text;
 using SkillPath.Api.ErrorHandling;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace SkillPath
 {
@@ -37,7 +39,10 @@ namespace SkillPath
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 			
 			services.AddDbContext<SkillPathContext>(options => options.UseSqlServer(Configuration["connection_string"]));
 
