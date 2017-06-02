@@ -1,4 +1,4 @@
-import { TutorialService } from './../../services/tutorial.service';
+import { TutorialService, Tutorial } from '../../entities/tutorial/tutorial.module';
 
 import { Component, OnInit } from '@angular/core';
 

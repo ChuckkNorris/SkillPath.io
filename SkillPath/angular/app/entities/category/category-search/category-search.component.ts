@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { Category } from './../../models/category';
-import { CategoryService } from './../../services/category.service';
+import { Category } from '../category';
+import { CategoryService } from './../services/category.service';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import 'rxjs/add/observable/from';
 import 'rxjs/Rx';

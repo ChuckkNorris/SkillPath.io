@@ -1,6 +1,6 @@
-import { Tutorial } from './../models/tutorial';
+import { Tutorial } from '../tutorial';
 import { Observable } from 'rxjs/Observable';
-import { SkillpathApiService } from './../skillpath-api.service';
+import { SkillpathApiService } from '../../shared/services/skillpath-api.service';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 

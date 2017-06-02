@@ -1,5 +1,4 @@
-import { Category } from './../../models/category';
-import { CategoryService } from './../../services/category.service';
+import { CategoryService, Category } from '../../entities/category/category.module';
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';

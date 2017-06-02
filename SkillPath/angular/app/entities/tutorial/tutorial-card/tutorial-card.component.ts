@@ -1,6 +1,6 @@
-import { LearnPageComponent } from './../../pages/learn-page/learn-page.component';
-import { SubmitTutorialFormComponent } from './../submit-tutorial-form/submit-tutorial-form.component';
-import { Tutorial } from './../../models/tutorial';
+
+import { SubmitTutorialFormComponent } from '../submit-tutorial-form/submit-tutorial-form.component';
+import { Tutorial } from '../tutorial';
 import { Component, OnInit, Input } from '@angular/core';
 import { MdDialog } from "@angular/material";
 

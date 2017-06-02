@@ -1,6 +1,7 @@
 import { CategorySearchComponent } from './../category-search/category-search.component';
-import { Category } from './../../models/category';
+
 import { Component, OnInit, Output, EventEmitter, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Category } from "../category";
 
 @Component({
   selector: 'app-category-list',

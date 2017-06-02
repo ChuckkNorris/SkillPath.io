@@ -1,7 +1,8 @@
-import { TutorialService } from './../../services/tutorial.service';
-import { Category } from './../../models/category';
-import { Tutorial } from './../../models/tutorial';
+import { TutorialService } from '../services/tutorial.service';
+
+import { Tutorial } from '../tutorial';
 import { Component, OnInit } from '@angular/core';
+import { Category } from "../../category/category";
 
 @Component({
   selector: 'app-submit-tutorial-form',

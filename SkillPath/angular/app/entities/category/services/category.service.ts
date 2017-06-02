@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { Category } from './../models/category';
-import { SkillpathApiService } from './../skillpath-api.service';
+import { Category } from '../category';
+import { SkillpathApiService } from '../../shared/services/skillpath-api.service';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 

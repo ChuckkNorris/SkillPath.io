@@ -1,6 +1,6 @@
-import { TutorialService } from './services/tutorial.service';
-import { CategoryService } from './services/category.service';
-import { SkillpathApiService } from './skillpath-api.service';
+import { SharedModule } from './entities/shared/shared.module';
+import { TutorialModule } from './entities/tutorial/tutorial.module';
+import { CategoryModule } from './entities/category/category.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { AnimationModule } from '@angular/platform-browser/animations';
 import { browser } from 'protractor';
@@ -14,33 +14,27 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { MaterialModule } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { NavigationMenuComponent } from './templates/navigation-menu/navigation-menu.component';
+
 
 import { Ng2CompleterModule } from "ng2-completer";
 //import { AnimationModule } from "@angular/platform-browser/animations"
 import 'hammerjs';
-import { SubmitTutorialFormComponent } from './templates/submit-tutorial-form/submit-tutorial-form.component';
+
 import { LearnPageComponent } from './pages/learn-page/learn-page.component';
 import { TeachPageComponent } from './pages/teach-page/teach-page.component';
-import { TutorialCardComponent } from './templates/tutorial-card/tutorial-card.component';
-import { CategoryListComponent } from './templates/category-list/category-list.component';
-import { CategorySearchComponent } from './templates/category-search/category-search.component';
+
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-complete-test.component';
+import { SubmitTutorialFormComponent } from './entities/tutorial/submit-tutorial-form/submit-tutorial-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationMenuComponent,
-    SubmitTutorialFormComponent,
+   
     LearnPageComponent,
     TeachPageComponent,
-    TutorialCardComponent,
-    CategoryListComponent,
-    CategorySearchComponent,
-    AdminPageComponent,
-    AutoCompleteTestComponent
     
+    AdminPageComponent,
+    SubmitTutorialFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,12 +46,14 @@ import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-c
     BrowserAnimationsModule,
     Ng2CompleterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+     SharedModule,
+    CategoryModule,
+    TutorialModule,
   ],
   entryComponents: [
     SubmitTutorialFormComponent
   ],
-  providers: [SkillpathApiService, CategoryService, TutorialService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
