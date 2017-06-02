@@ -41,32 +41,16 @@ export class CategoryListComponent implements OnInit {
    getLgFlex() {
     return 48;
   }
-  getT1Flex() {
-    if (this.t1Category.id) return "50";
-    else return "auto";
-  }
-
-  getFlex() {
-    let toReturn: string = "25";
-    if (!this.t2Category.id) {
-      toReturn="auto";
-    }
-    return toReturn;
-  }
-    getT3Flex() {
-    let toReturn: string = "25";
-    if (!this.t3Category.id) {
-      toReturn="auto";
-    }
-    return toReturn;
-  }
-  @ViewChildren('categoryTier') children: QueryList<CategorySearchComponent>;
+ 
+  @ViewChildren('categoryTier') children: QueryList<any>;
 
   getChildCategories(category: Category) {
     let childSearch = this.children.find(catSearch => catSearch.tier == category.tier + 1);
 
-    if (childSearch) 
+    if (childSearch) {
       childSearch.getCategories(category.id);
+      childSearch.nativeElement.focus();
+    }
   }
   
   selectCategory(category: Category) {
