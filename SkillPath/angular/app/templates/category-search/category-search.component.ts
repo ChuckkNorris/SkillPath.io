@@ -10,10 +10,10 @@ import 'rxjs/Rx';
   templateUrl: './category-search.component.html',
   styleUrls: ['./category-search.component.scss']
 })
-export class CategorySearchComponent extends Element implements OnInit {
+export class CategorySearchComponent implements OnInit {
 
   constructor(private _categoryService: CategoryService) { 
-    super();
+    //super();
     //  if (this.parentId) {
     //   this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
     // }
