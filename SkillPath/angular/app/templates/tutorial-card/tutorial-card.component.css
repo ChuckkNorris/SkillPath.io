@@ -1,3 +1,10 @@
 .tutorial-card {
     margin: 0px 20px 20px 0px;
 }
+md-card-subtitle {
+    height: 100px;
+    overflow: hidden;
+}
+md-card {
+    height: 222px;
+}
