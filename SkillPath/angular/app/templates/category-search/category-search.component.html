@@ -10,6 +10,7 @@
     (keyup.enter)="selectCategory('', selectedCategoryIndex); onBlur()"
     (keydown.tab)="selectCategory('', selectedCategoryIndex); onBlur()"
     (blur)="waitForComplete()"
+    
     (input)
     ="filterCategories($event.target.value)" [placeholder]="title" />
   </md-input-container>
