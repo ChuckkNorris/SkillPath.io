@@ -1,6 +1,6 @@
 import { CategorySearchComponent } from './../category-search/category-search.component';
 import { Category } from './../../models/category';
-import { Component, OnInit, Output, EventEmitter, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ViewChildren, QueryList, Input } from '@angular/core';
 
 @Component({
   selector: 'app-category-list',
@@ -13,6 +13,8 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  @Input() shouldHideEmpty: boolean;
 
   @Output() t1CategoryChange = new EventEmitter<Category>();
   t1Category: Category= {};
@@ -42,14 +44,14 @@ export class CategoryListComponent implements OnInit {
     return 48;
   }
  
-  @ViewChildren('categoryTier') children: QueryList<any>;
+  @ViewChildren('categoryTier') children: QueryList<CategorySearchComponent>;
 
   getChildCategories(category: Category) {
     let childSearch = this.children.find(catSearch => catSearch.tier == category.tier + 1);
 
     if (childSearch) {
       childSearch.getCategories(category.id);
-      childSearch.nativeElement.focus();
+      //childSearch.focus();
     }
   }
   
