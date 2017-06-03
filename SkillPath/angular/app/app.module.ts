@@ -27,6 +27,7 @@ import { CategoryListComponent } from './templates/category-list/category-list.c
 import { CategorySearchComponent } from './templates/category-search/category-search.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-complete-test.component';
+import { TutorialListComponent } from './templates/tutorial-list/tutorial-list.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-c
     CategoryListComponent,
     CategorySearchComponent,
     AdminPageComponent,
-    AutoCompleteTestComponent
+    AutoCompleteTestComponent,
+    TutorialListComponent
     
   ],
   imports: [

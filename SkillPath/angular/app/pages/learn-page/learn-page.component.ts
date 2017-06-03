@@ -19,6 +19,6 @@ export class LearnPageComponent implements OnInit {
   tutorials = [];
 
   getTutorials(page: number, categoryId?: string) {
-     this._tutorialService.getTutorials(page, categoryId).subscribe(tutorials => this.tutorials = tutorials);
+     this._tutorialService.getTutorials(page, categoryId).subscribe(tutorials => this.tutorials = tutorials.concat(tutorials).concat(tutorials).concat(tutorials).concat(tutorials));
   }
 }

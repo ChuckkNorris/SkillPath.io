@@ -39,11 +39,12 @@ export class CategorySearchComponent implements OnInit {
   ngAfterViewInit() {
     
     this.onViewInitialized.emit(true);
+    //this.input.nativeElement.focus();
   }
 
-  //@ViewChild('categoryInput') input: Input;
+  @ViewChild('categoryInput') input: any;
   public focus() {
-    
+    this.input.focus();
   }
 
   public getCategories(parentCategoryId?: string) {
