@@ -10,6 +10,10 @@
       <md-input-container fxFlex.gt-sm="60">
         <input name="linkUrl" [(ngModel)]="tutorial.linkUrl" placeholder="Tutorial Link" mdInput type="url">
       </md-input-container>
+     
+        <md-input-container fxFlex.gt-sm="60">
+        <input  (paste)="onImagePaste($event)" name="image" placeholder="Paste Image" mdInput type="url">
+      </md-input-container>
 
     </div>
     <div fxLayout="row">
@@ -32,3 +36,7 @@
   </form>
 
 </div>
+
+<br /><br />
+
+<img *ngIf="bannerImage" [src]="bannerImage">

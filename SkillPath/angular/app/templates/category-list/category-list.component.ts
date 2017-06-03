@@ -29,19 +29,19 @@ export class CategoryListComponent implements OnInit {
   t4Category: Category= {};
 
   getXsFlex() {
-    return 100;
+    return "300px";
   }
 
   getSmFlex() {
-    return 48;
+    return "300px";
   }
 
    getMdFlex() {
-    return 48;
+    return "300px";
   }
 
    getLgFlex() {
-    return 48;
+    return "300px";
   }
  
   @ViewChildren('categoryTier') children: QueryList<CategorySearchComponent>;
