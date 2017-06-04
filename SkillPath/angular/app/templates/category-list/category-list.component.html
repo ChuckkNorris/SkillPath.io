@@ -8,6 +8,7 @@
     tier="1" class="category-search"  
     title="Stack"
     [(selectedCategory)]="t1Category"
+    [shouldGetEmptyCategories]="shouldGetEmptyCategories"
     (selectedCategoryChange)="selectCategory($event);">
   </app-category-search>
 
@@ -21,6 +22,7 @@
     [parentId]="t1Category.id"
     [(selectedCategory)]="t2Category"
     (selectedCategoryChange)="selectCategory($event)"
+    [shouldGetEmptyCategories]="shouldGetEmptyCategories"
     tier="2" class="category-search">
 
   </app-category-search>
@@ -34,6 +36,7 @@
     [parentId]="t2Category.id"
     [(selectedCategory)]="t3Category"
     (selectedCategoryChange)="selectCategory($event)"
+    [shouldGetEmptyCategories]="shouldGetEmptyCategories"
     tier="3" class="category-search" >
 
   </app-category-search>
@@ -46,6 +49,7 @@
     [parentId]="t3Category.id"
     [(selectedCategory)]="t4Category"
     (selectedCategoryChange)="selectCategory($event)"
+    [shouldGetEmptyCategories]="shouldGetEmptyCategories"
     tier="4" class="category-search">
 
   </app-category-search>

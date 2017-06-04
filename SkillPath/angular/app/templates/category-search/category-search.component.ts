@@ -47,16 +47,27 @@ export class CategorySearchComponent implements OnInit {
     this.input.focus();
   }
 
+  @Input() shouldGetEmptyCategories: boolean = false;
   public getCategories(parentCategoryId?: string) {
     console.log('INitializing category search')
-    if (parentCategoryId) {
-      this._categoryService.getChildCategories(parentCategoryId).subscribe(categories => this.categories = categories);
-    }
-    else if (this.parentId) {
-      this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
+    let parentId = parentCategoryId || this.parentId;
+    console.log('Categories: ' + this.shouldGetEmptyCategories);
+    if (parentId) {
+      if (this.shouldGetEmptyCategories) {
+        this._categoryService.getChildCategories(parentId, true).subscribe(categories => this.categories = categories);
+      }
+      else {
+        this._categoryService.getChildCategories(parentId).subscribe(categories => this.categories = categories);
+      }
     }
     else if (this.tier == 1) {
-      this._categoryService.getCategories(this.tier).subscribe(categories => this.categories = categories);
+      if (this.shouldGetEmptyCategories) {
+        this._categoryService.getCategories(this.tier, true).subscribe(categories => this.categories = categories);
+      }
+      else {
+        this._categoryService.getCategories(this.tier).subscribe(categories => this.categories = categories);
+      }
+      
     }
   }
 

@@ -24,6 +24,7 @@
     <div fxLayout="row" fxLayoutAlign="center">
         
       <app-category-list 
+        shouldGetEmptyCategories="true"
         (t1CategoryChange)="tutorial.tutorialCategories[0].categoryId=$event.id" 
         (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id"
         (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id" 

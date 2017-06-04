@@ -43,9 +43,11 @@ export class CategoryListComponent implements OnInit {
    getLgFlex() {
     return "300px";
   }
+
+  
  
   @ViewChildren('categoryTier') children: QueryList<CategorySearchComponent>;
-
+  @Input() shouldGetEmptyCategories: boolean = false;
   getChildCategories(category: Category) {
     let childSearch = this.children.find(catSearch => catSearch.tier == category.tier + 1);
 
@@ -54,6 +56,8 @@ export class CategoryListComponent implements OnInit {
       //childSearch.focus();
     }
   }
+
+ 
   
   selectCategory(category: Category) {
     this.deselectChildCategories(category.tier);

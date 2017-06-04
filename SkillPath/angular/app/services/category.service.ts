@@ -11,11 +11,14 @@ export class CategoryService {
    
   }
 
-  public getCategories(tier: number) : Observable<Category[]> {
+  public getCategories(tier: number, getEmpty: boolean = false) : Observable<Category[]> {
     let params = {
       'tier': tier
     };
-   
+    if (getEmpty) {
+      params['getEmpty'] = "true";
+    }
+   console.log(params);
     return this._api.get('/category/find', params)
       .map(categories => {
         console.log(categories);
@@ -23,11 +26,14 @@ export class CategoryService {
       });
   }
 
-  public getChildCategories(selectedCategoryId: string) : Observable<Category[]> {
+  public getChildCategories(selectedCategoryId: string, getEmpty: boolean = false) : Observable<Category[]> {
     let params = {
       'selectedCategoryId': selectedCategoryId
     };
-   
+    if (getEmpty) {
+      params['getEmpty'] = "True";
+    }
+    console.log(params);
     return this._api.get('/category/GetChildCategories', params)
       .map(categories => {
         console.log(categories);
