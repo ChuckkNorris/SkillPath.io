@@ -15,8 +15,8 @@ namespace SkillPath.Api.Entities
 			_categoryService = categoryService;
 		}
         [HttpGet]
-		public async Task<IEnumerable<Category>> Find(int tier) {
-			var toReturn =  await _categoryService.FindInTier(tier);
+		public async Task<IEnumerable<Category>> Find(int tier, bool getEmpty = false) {
+			var toReturn =  await _categoryService.FindInTier(tier, getEmpty);
 			return toReturn.ToArray();
 		}
 
@@ -26,8 +26,8 @@ namespace SkillPath.Api.Entities
 		}
 
 		[HttpGet]
-		public async Task<IEnumerable<Category>> GetChildCategories([FromQuery]Guid selectedCategoryId) {
-			return await _categoryService.GetChildCategories(selectedCategoryId);
+		public async Task<IEnumerable<Category>> GetChildCategories([FromQuery]Guid selectedCategoryId, bool getEmpty = false) {
+			return await _categoryService.GetChildCategories(selectedCategoryId, getEmpty);
 		}
 
     }

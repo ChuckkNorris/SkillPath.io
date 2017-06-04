@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SkillPath.Api.Entities
 {
@@ -27,19 +28,30 @@ namespace SkillPath.Api.Entities
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<IEnumerable<Category>> FindInTier(int tier) {
-			 return await _context.Categories
-			 .Where(cat => cat.Tier == tier && cat.TutorialCategories.Any())
-			 .ToListAsync();
+		public async Task<IEnumerable<Category>> FindInTier(int tier, bool getEmpty = false) {
+			IEnumerable<Category> toReturn;
+			var query = Find(cat => cat.Tier == tier);
+			Console.WriteLine(getEmpty);
+			if (!getEmpty) {
+				query = query.Where(cat => cat.TutorialCategories.Any());
+			}
+			toReturn = await query.ToListAsync();
+			return toReturn;
 		}
 
-		public async Task<IEnumerable<Category>> GetChildCategories(Guid selectedCategoryId) {
-			
-			return await Find(cat => 
-				cat.ParentId == selectedCategoryId
-				&& cat.TutorialCategories.Any()
-				).ToListAsync();
+		public async Task<IEnumerable<Category>> GetChildCategories(Guid selectedCategoryId, bool getEmpty = false) {
+			IEnumerable<Category> toReturn;
+			var query = Find(cat => 
+				cat.ParentId == selectedCategoryId);
+				if (!getEmpty) {
+					query = query.Where(cat => cat.TutorialCategories.Any());
+				}
+			toReturn = await query.ToListAsync();
+			return toReturn;
 		}
+
+		
+	
 	
 
 		public IQueryable<Category> Find(Expression<Func<Category, bool>> predicate) {
