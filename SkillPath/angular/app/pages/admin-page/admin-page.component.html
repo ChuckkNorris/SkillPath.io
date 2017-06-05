@@ -6,16 +6,33 @@
 </md-list>-->
 <h3 fxLayoutAlign="center">Parent Category</h3>
 <app-category-list
+  shouldGetEmptyCategories="true"
   (t1CategoryChange)="updateParent($event)"
   (t2CategoryChange)="updateParent($event)"
   (t3CategoryChange)="updateParent($event)"
-  (t4CategoryChange)="updateParent($event)"
->
-
+  (t4CategoryChange)="updateParent($event)">
 </app-category-list>
-<h3  fxLayoutAlign="center">Child Category</h3>
+
+<h3 fxLayoutAlign="center">Edit Category</h3>
+<form *ngIf="categoryToUpdate" (ngSubmit)="updateCategory()">
+  <div fxLayoutAlign="center center" fxLayoutGap="10px">
+    <md-input-container>
+      <input required name="name" [(ngModel)]="categoryToUpdate.name" mdInput placeholder="Name">
+    </md-input-container>
+    <md-input-container>
+      <input required name="description" [(ngModel)]="categoryToUpdate.description" mdInput placeholder="Description">
+    </md-input-container>
+    <md-input-container>
+      <input required name="icon" [(ngModel)]="categoryToUpdate.icon" mdInput placeholder="Icon">
+    </md-input-container>
+  </div>
+  <div fxLayoutAlign="center" fxLayoutGap="10px">
+  <button md-raised-button color="primary">Update Category</button>
+   <button type="button" (click)="deleteCategory()" md-raised-button color="warn">Delete Category</button>
+  </div>
+</form>
+<h3  fxLayoutAlign="center">Add Child Category</h3>
 <form (ngSubmit)="saveCategory()">
-{{categoryToSave | json}}
   <div fxLayoutAlign="center center" fxLayoutGap="10px">
      <!--<md-select required placeholder="Tier" [(ngModel)]="categoryToSave.tier" name="tier">
       <md-option value="1">1</md-option>

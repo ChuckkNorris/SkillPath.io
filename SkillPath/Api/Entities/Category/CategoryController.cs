@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SkillPath.Api.Entities
 {
@@ -25,10 +26,24 @@ namespace SkillPath.Api.Entities
 			await _categoryService.SaveCategory(category);
 		}
 
+		[HttpPut]
+		public async Task Update([FromBody]Category updatedCategory) {
+			await _categoryService.UpdateCategory(updatedCategory);
+		}
+
 		[HttpGet]
 		public async Task<IEnumerable<Category>> GetChildCategories([FromQuery]Guid selectedCategoryId, bool getEmpty = false) {
 			return await _categoryService.GetChildCategories(selectedCategoryId, getEmpty);
 		}
+
+		[HttpPost]
+		public async Task Delete([FromBody]dynamic category) {
+			Console.WriteLine(JsonConvert.SerializeObject(category));
+			Guid categoryId = category.categoryId;
+			Console.WriteLine($"Category to Delete: {categoryId}");
+			await _categoryService.Delete(categoryId);
+		}
+
 
     }
 

@@ -44,6 +44,17 @@ export class CategoryService {
   public saveCategory(category: Category) {
     return this._api.post('/category/save', category);
   }
+
+  public updateCategory(category: Category) {
+    return this._api.put('/category/update', category);
+  }
+
+  public deleteCategory(categoryId: string) {
+    let body = {
+      categoryId: categoryId
+    };
+    return this._api.post('/category/delete', body);
+  }
   
   
 
