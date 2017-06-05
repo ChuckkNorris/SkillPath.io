@@ -28,6 +28,16 @@ namespace SkillPath.Api.Entities
 			await _context.SaveChangesAsync();
 		}
 
+		public async Task UpdateCategory(Category updatedCategory) {
+			var existingCategory = await _context.Categories.FindAsync(updatedCategory.Id);
+			if (existingCategory != null) {
+				existingCategory.Description = updatedCategory.Description;
+				existingCategory.Icon = updatedCategory.Icon;
+				existingCategory.Name = updatedCategory.Name;
+				await _context.SaveChangesAsync();
+			}
+		}
+
 		public async Task<IEnumerable<Category>> FindInTier(int tier, bool getEmpty = false) {
 			IEnumerable<Category> toReturn;
 			var query = Find(cat => cat.Tier == tier);
@@ -56,6 +66,15 @@ namespace SkillPath.Api.Entities
 
 		public IQueryable<Category> Find(Expression<Func<Category, bool>> predicate) {
 			return _context.Categories.Where(predicate);
+		}
+
+		public async Task Delete(Guid categoryId) {
+			var existingCategory = await _context.Categories.FindAsync(categoryId);
+			Console.WriteLine(existingCategory?.Name);
+			if (existingCategory != null) {
+				_context.Categories.Remove(existingCategory);
+				await _context.SaveChangesAsync();
+			}
 		}
 	}
 }
