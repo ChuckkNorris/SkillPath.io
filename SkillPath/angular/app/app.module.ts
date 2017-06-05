@@ -1,3 +1,4 @@
+import { ImageService } from './services/image.service';
 import { TutorialService } from './services/tutorial.service';
 import { CategoryService } from './services/category.service';
 import { SkillpathApiService } from './skillpath-api.service';
@@ -59,7 +60,7 @@ import { TutorialListComponent } from './templates/tutorial-list/tutorial-list.c
   entryComponents: [
     SubmitTutorialFormComponent
   ],
-  providers: [SkillpathApiService, CategoryService, TutorialService],
+  providers: [SkillpathApiService, CategoryService, TutorialService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
