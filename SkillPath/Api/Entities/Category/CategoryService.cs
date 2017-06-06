@@ -20,7 +20,7 @@ namespace SkillPath.Api.Entities
 			Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(categoryToSave));
 			var existingCategory = await _context.Categories
 				.FirstOrDefaultAsync(cat => cat.Name == categoryToSave.Name 
-					&& cat.Tier == categoryToSave.Tier);
+					&& cat.Tier == categoryToSave.Tier && cat.ParentId == categoryToSave.ParentId);
 			if (existingCategory != null)
 				throw new SkillPathException("That category already exists");
 

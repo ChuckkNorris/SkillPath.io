@@ -17,6 +17,7 @@ export class AdminPageComponent implements OnInit {
   ngOnInit() {
     this.getCategories();
   }
+  
   categoryToSave: Category = {};
   saveCategory() {
     this._categoryService.saveCategory(this.categoryToSave).subscribe((response) => {

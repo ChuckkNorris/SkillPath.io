@@ -1,4 +1,4 @@
-<div (paste)="onImagePaste($event)" class="container">
+<div  class="container">
   {{tutorial | json}}
   <form #tutorialForm="ngForm" (ngSubmit)="saveTutorial(tutorialForm)">
     <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayoutAlign.gt-sm="space-between center">
@@ -12,7 +12,7 @@
       </md-input-container>
      
         <md-input-container fxFlex.gt-sm="60">
-        <input   name="image" placeholder="Paste Image" mdInput type="url">
+        <input name="image" placeholder="Paste Image" mdInput type="url">
       </md-input-container>
 
     </div>
@@ -39,5 +39,7 @@
 </div>
 
 <br /><br />
-
+<div fxLayout="row" fxLayoutAlign="center center" (paste)="onImagePaste($event)" style="background-color: red; width: 300px; height: 300px;" >
+  <h2 fxFlexAlign="center center">Paste Your Image Here</h2>
+</div>
 <img *ngIf="bannerImage" [src]="bannerImage">
