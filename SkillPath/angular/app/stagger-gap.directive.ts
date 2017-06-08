@@ -45,8 +45,8 @@ export class StaggerGapDirective {
   }
 
   // 
-  @HostListener('resize') onResize() {
-    //this.isOnNextRow();
+  @HostListener('window:resize') onResize() {
+    this.isOnNextRow();
   }
 
   getTotalHeight(element): number {
