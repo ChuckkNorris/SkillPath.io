@@ -29,6 +29,7 @@ import { CategorySearchComponent } from './templates/category-search/category-se
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-complete-test.component';
 import { TutorialListComponent } from './templates/tutorial-list/tutorial-list.component';
+import { StaggerGapDirective } from './stagger-gap.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TutorialListComponent } from './templates/tutorial-list/tutorial-list.c
     CategorySearchComponent,
     AdminPageComponent,
     AutoCompleteTestComponent,
-    TutorialListComponent
+    TutorialListComponent,
+    StaggerGapDirective
     
   ],
   imports: [

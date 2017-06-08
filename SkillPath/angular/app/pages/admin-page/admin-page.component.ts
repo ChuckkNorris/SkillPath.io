@@ -28,6 +28,7 @@ export class AdminPageComponent implements OnInit {
     this.getCategories();
   }
   t1Categories: Observable<Category[]>;
+  
   getCategories() {
     this.t1Categories = this._categoryService.getCategories(1);
   }

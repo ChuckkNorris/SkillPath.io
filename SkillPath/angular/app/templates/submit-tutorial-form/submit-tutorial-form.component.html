@@ -1,4 +1,4 @@
-<div  class="container">
+<div class="container">
   {{tutorial | json}}
   <form #tutorialForm="ngForm" (ngSubmit)="saveTutorial(tutorialForm)">
     <div fxLayout.gt-md="row" fxLayout.lt-md="column" fxLayoutAlign.gt-sm="space-between center">
@@ -40,6 +40,6 @@
 
 <br /><br />
 <div fxLayout="row" fxLayoutAlign="center center" (paste)="onImagePaste($event)" style="background-color: red; width: 300px; height: 300px;" >
-  <h2 fxFlexAlign="center center">Paste Your Image Here</h2>
+  <h2 fxFlexAlign="center center">Paste Your Banner Image Here</h2>
 </div>
 <img *ngIf="bannerImage" [src]="bannerImage">
