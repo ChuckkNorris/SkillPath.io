@@ -17,15 +17,13 @@ export class StaggerGapDirective {
   @Input() aboveElement: ElementRef;
 
   ngAfterViewInit() {
-     console.log(this.flexElement);
-    console.log(this.index);
-    //this.setHeight();
-     //this.flexElement.nativeElement.marginTop = this.getMarginTop();
-     //this.isOnNextRow();
      setTimeout(() => {
       this.setMarginTop();
      }, 200);
-     
+  }
+
+  @HostListener('window:resize') onResize() {
+    this.setMarginTop();
   }
 
   getMarginTop() {
@@ -50,9 +48,7 @@ export class StaggerGapDirective {
   }
 
   // 
-  @HostListener('window:resize') onResize() {
-    this.setMarginTop();
-  }
+  
 
   getTotalHeight(element): number {
     return element.offsetHeight;
@@ -82,58 +78,27 @@ export class StaggerGapDirective {
     this.flexElement.nativeElement.style.marginTop = newMarginTop + "px";
   }
 
-  // getFlexRowElement(index: number) : FlexRowElement {
-     
-  //   let toReturn: FlexRowElement = {};
-  //   // 3 per row
-  //   let countPerRow = this.getItemCountPerRow();
-  //   // 2.66 = two rows before me exist and I'm the second one in my row (66% * 3)
-  //   let rowIndexAndPercentOfCurrRow = this.index + 1 / countPerRow;
-  //   toReturn.rowIndex = Math.floor(rowIndexAndPercentOfCurrRow);
-  //   // aka nth item in row - 1
-  //   toReturn.columnIndex = Math.round((rowIndexAndPercentOfCurrRow - toReturn.rowIndex) * countPerRow) - 1;
-  //   return toReturn;
-  // }
-
-  //  getFlexRowElementByRow(rowIndex: number, somethingIndex: number) : FlexRowElement {
-  //   let toReturn: FlexRowElement = {};
-  //   // 3 per row
-  //   let countPerRow = this.getItemCountPerRow();
-  //   // 2.66 = two rows before me exist and I'm the second one in my row (66% * 3)
-  //   let rowIndexAndPercentOfCurrRow = this.index + 1 / countPerRow;
-  //   toReturn.rowIndex = Math.floor(rowIndexAndPercentOfCurrRow);
-  //   // aka nth item in row - 1
-  //   toReturn.columnIndex = Math.round((rowIndexAndPercentOfCurrRow - toReturn.rowIndex) * countPerRow) - 1;
-  //   return toReturn;
-  // }
-
   getItemCountPerRow() {
     let toReturn;
-    let styles = this.flexElement.nativeElement.style.cssText.split(';');
-    let maxWidthPercent = "1";
-    styles.forEach(style => {
-      let nameValue = style.split(':');
-      if (nameValue[0].trim() == "max-width") {
-        maxWidthPercent = (nameValue[1] as string).substring(0, nameValue[1].indexOf('%'));
-      }
-    });
-     // 3
-    toReturn = Math.floor(100 / parseFloat(maxWidthPercent));
+    // let styles = this.flexElement.nativeElement.style.cssText.split(';');
+    // let maxWidthPercent = "1";
+    // styles.forEach(style => {
+    //   let nameValue = style.split(':');
+    //   if (nameValue[0].trim() == "max-width") {
+    //     maxWidthPercent = (nameValue[1] as string).substring(0, nameValue[1].indexOf('%'));
+    //   }
+    // });
+     let maxWidthPercentStyle = this.flexElement.nativeElement.style.maxWidth;
+     let maxWidth = maxWidthPercentStyle.substring(0, maxWidthPercentStyle.indexOf('%'));
+    toReturn = Math.floor(100 / parseFloat(maxWidth));
     return toReturn;
   }
 
   isOnNextRow(): boolean {
     let toReturn: boolean = false;
-    // Get count of children in flex container
-    // Get width of first child
-    // 3
     let countPerRow = this.getItemCountPerRow();
-    // 3
     toReturn = this.index >= countPerRow;
-
     return toReturn;
   }
-
-  
 
 }
