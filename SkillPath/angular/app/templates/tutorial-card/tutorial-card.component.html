@@ -3,14 +3,16 @@
   <md-card-header>
     <!--<div md-card-avatar class="example-header-image"></div>-->
     <md-card-title><h3>{{tutorial.title}}</h3></md-card-title>
-    <md-card-subtitle>{{tutorial.description}}</md-card-subtitle>
+    <md-card-subtitle>
+     
+    </md-card-subtitle>
   </md-card-header>
   <img md-card-image src="http://michaelbrant.com/wp-content/uploads/2012/06/photodune-907221-css3-code-m.jpg">
-  <!--<md-card-content>
-    <p>
-     {{tutorial.description}}
-    </p>
-  </md-card-content>-->
+  <md-card-content>
+    <div class="description">
+      {{tutorial.description}}
+      </div>
+  </md-card-content>
   <md-card-actions>
     <button (click)="openTutorialInNewWindow()" md-button>START</button>
     <button (click)="showDetailsModal()" md-button>DETAILS</button>

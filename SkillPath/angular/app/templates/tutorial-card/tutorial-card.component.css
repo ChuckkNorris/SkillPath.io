@@ -1,10 +1,15 @@
 .tutorial-card {
     margin: 0px 20px 20px 0px;
 }
-/*md-card-subtitle {
-    height: 100px;
+.description {
+    max-height: 100px;
     overflow: hidden;
-}*/
+    text-overflow: clip;
+}
 /*md-card {
     height: 222px;
 }*/
+
+.md-card-image {
+    position: absolute;
+}
