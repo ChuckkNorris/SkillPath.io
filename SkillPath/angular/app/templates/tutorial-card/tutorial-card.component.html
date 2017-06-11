@@ -7,7 +7,7 @@
      
     </md-card-subtitle>
   </md-card-header>
-  <img md-card-image src="http://michaelbrant.com/wp-content/uploads/2012/06/photodune-907221-css3-code-m.jpg">
+  <img md-card-image [src]="tutorial.imageUrl || defaultImageUrl">
   <md-card-content>
     <div class="description">
       {{tutorial.description}}

@@ -4,7 +4,7 @@ import { CategoryListComponent } from './../category-list/category-list.componen
 import { TutorialService } from './../../services/tutorial.service';
 import { Category } from './../../models/category';
 import { Tutorial } from './../../models/tutorial';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 
 
@@ -23,7 +23,9 @@ export class SubmitTutorialFormComponent implements OnInit {
   constructor(private _imageService: ImageService,
     private _tutorialService: TutorialService) { }
 
-  tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
+  @Input() tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
+  @Output() tutorialChange = new EventEmitter<Tutorial>();
+
   ngOnInit() {
   }
 
@@ -39,11 +41,22 @@ export class SubmitTutorialFormComponent implements OnInit {
   bannerImage: any;
   onImagePaste(event: ClipboardEvent) {
     if (event.clipboardData.items) {
+      let imageUrl;
       this._imageService.getImage(event.clipboardData).subscribe(image => {
-        this.bannerImage = image;
+        if (image) {
+          this.tutorial.imageUrl = image;
+        }
+        else {
+          event.clipboardData.items[0].getAsString(imageUrl => {
+            if (imageUrl.startsWith('https')) {
+              this.tutorial.imageUrl = imageUrl;
+            }
+          });
+        }
         event.preventDefault();
       });
     }
   }
+  // https://cdn-images-1.medium.com/max/1200/1*5WzlrdAGGGSKqJBesbl8cA.png
 
 }
