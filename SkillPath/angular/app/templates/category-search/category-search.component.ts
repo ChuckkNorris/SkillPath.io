@@ -27,7 +27,7 @@ export class CategorySearchComponent implements OnInit {
 
   @Input() selectedCategory: Category = {};
   @Output() selectedCategoryChange: EventEmitter<Category> = new EventEmitter<Category>();
-  private categories: Category[] = [];
+  public categories: Category[] = [];
   
   @Output() onViewInitialized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -81,6 +81,12 @@ export class CategorySearchComponent implements OnInit {
   onBlur() {
     this.isFocused = false;
   }
+
+  filterCategories(searchText: any) {
+
+  }
+
+  
 
 
   selectedCategoryIndex: number = 0;
