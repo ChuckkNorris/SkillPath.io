@@ -1,12 +1,15 @@
+<h2 class="center-text">
+  SkillPath coming soon</h2>
 
-<h2 class="center-text">SkillPath coming soon</h2>
-<form (ngSubmit)="login($event)">
-<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" class="container">
-  <md-input-container fxFlex="300px">
-    <input mdInput name="username" placeholder="Username" [(ngModel)]="username" type="text">
-  </md-input-container>
-  <md-input-container fxFlex="300px">
-    <input mdInput (keyup.enter)="login()" name="password" placeholder="Password" [(ngModel)]="password" type="password">
-  </md-input-container>
-</div>
+<!--(ngSubmit)="login($event)"-->
+<form > 
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px" class="container">
+    <md-input-container fxFlex="300px">
+      <input mdInput name="username" placeholder="Username" [(ngModel)]="username" type="text">
+    </md-input-container>
+  
+    <md-input-container fxFlex="300px">
+      <input mdInput   (keyup.enter)="login(null)" name="password" placeholder="Password" [(ngModel)]="password" type="password">
+    </md-input-container>
+  </div>
 </form>

@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit {
 
   username: string;
   password: string;
-  login() {
+  login(event) {
     if (this._authService.login(this.username, this.password)) {
       this._router.navigate(['/learn']);
     }

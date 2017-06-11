@@ -1,7 +1,7 @@
 <div class="category-search">
   <div>
   <md-input-container fxFlex="100">
-    <div *ngIf="!isFocused && selectedCategory.id" class="category-tag" md-suffix>
+    <div *ngIf="!isFocused && selectedCategory.id != undefined" class="category-tag" md-suffix>
       {{selectedCategory.name}}
       </div>
     <input #categoryInput (focus)="onFocused()" mdInput type="text"
