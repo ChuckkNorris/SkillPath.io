@@ -1,3 +1,4 @@
+import { Tutorial } from './../../models/tutorial';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,5 +12,5 @@ export class TeachPageComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
 }
