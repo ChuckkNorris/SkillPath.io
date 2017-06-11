@@ -1,3 +1,5 @@
+import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationGuard } from './services/authentication-guard.service';
 import { ImageService } from './services/image.service';
 import { TutorialService } from './services/tutorial.service';
 import { CategoryService } from './services/category.service';
@@ -30,6 +32,7 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-complete-test.component';
 import { TutorialListComponent } from './templates/tutorial-list/tutorial-list.component';
 import { StaggerGapDirective } from './stagger-gap.directive';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { StaggerGapDirective } from './stagger-gap.directive';
     AdminPageComponent,
     AutoCompleteTestComponent,
     TutorialListComponent,
-    StaggerGapDirective
+    StaggerGapDirective,
+    LoginPageComponent
     
   ],
   imports: [
@@ -62,7 +66,7 @@ import { StaggerGapDirective } from './stagger-gap.directive';
   entryComponents: [
     SubmitTutorialFormComponent
   ],
-  providers: [SkillpathApiService, CategoryService, TutorialService, ImageService],
+  providers: [SkillpathApiService, CategoryService, TutorialService, ImageService, AuthenticationGuard, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

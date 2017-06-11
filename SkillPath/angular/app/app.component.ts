@@ -14,4 +14,9 @@ export class AppComponent {
         // });
     }
   title = 'app works!';
+  
+  isAuthenticated: boolean = false;
+  allowAccess() {
+    this.isAuthenticated = true;
+  }
 }
