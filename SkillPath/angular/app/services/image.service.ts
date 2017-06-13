@@ -20,7 +20,7 @@ export class ImageService {
         if (items[i].type.indexOf("image") !== -1) {
           let file = items[i].getAsFile();
           this.getResizedImage(file).subscribe(imageBlob => {
-            obs.next(imageBlob.data);
+            obs.next(imageBlob);
           });
         }
         else if (i == items.length - 1) {
