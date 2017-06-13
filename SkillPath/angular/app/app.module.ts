@@ -1,3 +1,4 @@
+import { ImgurService } from './services/imgur.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthenticationGuard } from './services/authentication-guard.service';
 import { ImageService } from './services/image.service';
@@ -66,7 +67,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
   entryComponents: [
     SubmitTutorialFormComponent
   ],
-  providers: [SkillpathApiService, CategoryService, TutorialService, ImageService, AuthenticationGuard, AuthenticationService],
+  providers: [SkillpathApiService, CategoryService, TutorialService, ImageService, AuthenticationGuard, AuthenticationService, ImgurService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

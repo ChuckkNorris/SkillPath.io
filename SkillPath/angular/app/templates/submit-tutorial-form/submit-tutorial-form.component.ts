@@ -1,3 +1,4 @@
+import { ImgurService } from './../../services/imgur.service';
 import { ImageService } from './../../services/image.service';
 import { Observable } from 'rxjs/Observable';
 import { CategoryListComponent } from './../category-list/category-list.component';
@@ -5,8 +6,6 @@ import { TutorialService } from './../../services/tutorial.service';
 import { Category } from './../../models/category';
 import { Tutorial } from './../../models/tutorial';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-
-
 
 export interface ImageBlob {
   blob?: Blob;
@@ -21,6 +20,7 @@ export interface ImageBlob {
 export class SubmitTutorialFormComponent implements OnInit {
 
   constructor(private _imageService: ImageService,
+    private _imgurService: ImgurService,
     private _tutorialService: TutorialService) { }
 
   @Input() tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
@@ -36,15 +36,27 @@ export class SubmitTutorialFormComponent implements OnInit {
   saveTutorial(form: any) {
     console.log(form);
     console.log(this.tutorial);
-    this._tutorialService.saveTutorial(this.tutorial).subscribe();
+    if (this.pastedImage) {
+      this._imgurService.uploadBlob(this.pastedImage.blob).subscribe((imageLink) => {
+        this.tutorial.imageUrl = imageLink;
+        this._tutorialService.saveTutorial(this.tutorial).subscribe();
+      })
+    }
+    // else {
+    //   this._tutorialService.saveTutorial(this.tutorial).subscribe();
+    // }
+
+    
   }
-  bannerImage: any;
+  pastedImage: ImageBlob;
+
   onImagePaste(event: ClipboardEvent) {
     if (event.clipboardData.items) {
       let imageUrl;
       this._imageService.getImage(event.clipboardData).subscribe(image => {
         if (image) {
-          this.tutorial.imageUrl = image;
+          this.pastedImage = image;
+          this.tutorial.imageUrl = image.data;
         }
         else {
           event.clipboardData.items[0].getAsString(imageUrl => {
