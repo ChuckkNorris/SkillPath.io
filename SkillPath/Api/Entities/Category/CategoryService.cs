@@ -50,15 +50,23 @@ namespace SkillPath.Api.Entities
 		}
 
 		public async Task<IEnumerable<Category>> GetChildCategories(Guid selectedCategoryId, bool getEmpty = false) {
-			IEnumerable<Category> toReturn;
+			List<Category> toReturn;
 			var query = Find(cat => 
 				cat.ParentId == selectedCategoryId);
 				if (!getEmpty) {
 					query = query.Where(cat => cat.TutorialCategories.Any());
 				}
 			toReturn = await query.ToListAsync();
+
+			// foreach (var cat in toReturn)
+			// {
+			// 	cat.TutorialCount = cat.TutorialCategories.Count();
+			// }
+
 			return toReturn;
 		}
+
+
 
 		
 	
