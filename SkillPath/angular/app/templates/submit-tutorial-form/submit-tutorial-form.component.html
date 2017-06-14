@@ -9,15 +9,10 @@
       <md-input-container fxFlex.gt-sm="60">
         <input name="linkUrl" [(ngModel)]="tutorial.linkUrl" placeholder="Tutorial Link" mdInput type="url">
       </md-input-container>
-    
 
       <md-input-container fxFlex.gt-sm="30">
         <input name="title" [(ngModel)]="tutorial.title" placeholder="Tutorial Title" mdInput type="text">
       </md-input-container>
-
-      
-     
-
 
     </div>
     <div fxLayout="row">
@@ -38,7 +33,6 @@
          <!--<h2 class="center-text" style="background-color: darkgray; width: 300px; height: 300px;" >Paste Your Banner Image Here</h2>-->
       
       </div>
-      <img *ngIf="bannerImage" [src]="bannerImage">
     <div fxLayout="row" fxLayoutAlign="center">
         
       <app-category-list 
