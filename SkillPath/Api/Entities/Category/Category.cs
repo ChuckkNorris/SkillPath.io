@@ -19,5 +19,8 @@ namespace SkillPath.Api.Entities
 		public Category Parent { get; set; }
 		public Guid? ParentId { get; set; }
 		public IEnumerable<TutorialCategory> TutorialCategories { get; set; }
+		
+		[NotMapped]
+		public int TutorialCount { get; set; }
 	}
 }
