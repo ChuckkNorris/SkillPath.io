@@ -13,7 +13,7 @@ const routes: Routes = [
    // canActivate: [AuthenticationGuard]
   },
   { path: 'teach', component: TeachPageComponent, 
-   // canActivate: [AuthenticationGuard] 
+    //canActivate: [AuthenticationGuard] 
   },
   { path: 'admin', component: AdminPageComponent, 
    // canActivate: [AuthenticationGuard] 

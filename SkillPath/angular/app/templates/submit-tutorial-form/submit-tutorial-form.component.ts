@@ -7,12 +7,13 @@ import { TutorialService } from './../../services/tutorial.service';
 import { Category } from './../../models/category';
 import { Tutorial } from './../../models/tutorial';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 export interface ImageBlob {
   blob?: Blob;
   data?: string;
 }
-
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 @Component({
   selector: 'app-submit-tutorial-form',
   templateUrl: './submit-tutorial-form.component.html',
@@ -32,6 +33,8 @@ export class SubmitTutorialFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  public emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
+
   setCategoryId(tier: number, category: Category) {
     this.tutorial.tutorialCategories[0].categoryId=category.id;
   }
@@ -46,24 +49,9 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
 
   submitTutorial() {
-
+    //this._tutorialService.saveTutorial(this.tutorial).subscribe();
+    console.log('Saved');
   }
-
-  saveTutorial(form: any) {
-    console.log(form);
-    console.log(this.tutorial);
-    if (this.pastedImage) {
-      
-    }
-    // else {
-    //   this._tutorialService.saveTutorial(this.tutorial).subscribe();
-    // }
-
-    
-  }
-  pastedImage: ImageBlob;
-
-
 
   onImagePaste(event: ClipboardEvent) {
     console.log(event);
@@ -71,9 +59,8 @@ export class SubmitTutorialFormComponent implements OnInit {
       let imageUrl;
       this._imageService.getImage(event.clipboardData).subscribe(image => {
         if (image) {
-          this.pastedImage = image;
           this._loaderService.show();
-          this._imgurService.uploadBlob(this.pastedImage.blob).subscribe((imageLink) => {
+          this._imgurService.uploadBlob(image.blob).subscribe((imageLink) => {
             this.tutorial.imageUrl = imageLink;
             this._loaderService.hide();
             //this._tutorialService.saveTutorial(this.tutorial).subscribe();
