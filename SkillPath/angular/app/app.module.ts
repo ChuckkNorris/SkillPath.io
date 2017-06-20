@@ -1,3 +1,4 @@
+import { LoaderService } from './services/loader.service';
 import { ImgurService } from './services/imgur.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthenticationGuard } from './services/authentication-guard.service';
@@ -34,6 +35,8 @@ import { AutoCompleteTestComponent } from './templates/auto-complete-test/auto-c
 import { TutorialListComponent } from './templates/tutorial-list/tutorial-list.component';
 import { StaggerGapDirective } from './stagger-gap.directive';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { FilePickerModule } from 'angular-file-picker';
+import { LoaderComponent } from './templates/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     AutoCompleteTestComponent,
     TutorialListComponent,
     StaggerGapDirective,
-    LoginPageComponent
+    LoginPageComponent,
+    LoaderComponent
     
   ],
   imports: [
@@ -62,12 +66,13 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     BrowserAnimationsModule,
     Ng2CompleterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FilePickerModule,
   ],
   entryComponents: [
     SubmitTutorialFormComponent
   ],
-  providers: [SkillpathApiService, CategoryService, TutorialService, ImageService, AuthenticationGuard, AuthenticationService, ImgurService],
+  providers: [SkillpathApiService, CategoryService, TutorialService, ImageService, AuthenticationGuard, AuthenticationService, ImgurService, LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

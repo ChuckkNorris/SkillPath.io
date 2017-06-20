@@ -10,13 +10,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'learn', component: LearnPageComponent,
-    canActivate: [AuthenticationGuard]
+   // canActivate: [AuthenticationGuard]
   },
   { path: 'teach', component: TeachPageComponent, 
-    canActivate: [AuthenticationGuard] 
+   // canActivate: [AuthenticationGuard] 
   },
   { path: 'admin', component: AdminPageComponent, 
-    canActivate: [AuthenticationGuard] 
+   // canActivate: [AuthenticationGuard] 
   },
   { path: 'login', component: LoginPageComponent },
 ];

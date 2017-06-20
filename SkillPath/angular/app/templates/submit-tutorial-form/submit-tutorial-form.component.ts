@@ -1,3 +1,4 @@
+import { LoaderService } from './../../services/loader.service';
 import { ImgurService } from './../../services/imgur.service';
 import { ImageService } from './../../services/image.service';
 import { Observable } from 'rxjs/Observable';
@@ -21,10 +22,12 @@ export class SubmitTutorialFormComponent implements OnInit {
 
   constructor(private _imageService: ImageService,
     private _imgurService: ImgurService,
+    private _loaderService: LoaderService,
     private _tutorialService: TutorialService) { }
 
   @Input() tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
   @Output() tutorialChange = new EventEmitter<Tutorial>();
+  @Output() submit = new EventEmitter<Tutorial>();
 
   ngOnInit() {
   }
@@ -32,15 +35,25 @@ export class SubmitTutorialFormComponent implements OnInit {
   setCategoryId(tier: number, category: Category) {
     this.tutorial.tutorialCategories[0].categoryId=category.id;
   }
+  picked: any;
+  selectImage(image) {
+    this.picked = image;
+    console.log(image);
+  }
+
+  log(something: any) {
+    console.log(something);
+  }
+
+  submitTutorial() {
+
+  }
 
   saveTutorial(form: any) {
     console.log(form);
     console.log(this.tutorial);
     if (this.pastedImage) {
-      this._imgurService.uploadBlob(this.pastedImage.blob).subscribe((imageLink) => {
-        this.tutorial.imageUrl = imageLink;
-        this._tutorialService.saveTutorial(this.tutorial).subscribe();
-      })
+      
     }
     // else {
     //   this._tutorialService.saveTutorial(this.tutorial).subscribe();
@@ -50,13 +63,22 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
   pastedImage: ImageBlob;
 
+
+
   onImagePaste(event: ClipboardEvent) {
+    console.log(event);
     if (event.clipboardData.items) {
       let imageUrl;
       this._imageService.getImage(event.clipboardData).subscribe(image => {
         if (image) {
           this.pastedImage = image;
-          this.tutorial.imageUrl = image.data;
+          this._loaderService.show();
+          this._imgurService.uploadBlob(this.pastedImage.blob).subscribe((imageLink) => {
+            this.tutorial.imageUrl = imageLink;
+            this._loaderService.hide();
+            //this._tutorialService.saveTutorial(this.tutorial).subscribe();
+          })
+          //this.tutorial.imageUrl = image.data;
         }
         else {
           event.clipboardData.items[0].getAsString(imageUrl => {
