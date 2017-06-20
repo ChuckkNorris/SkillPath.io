@@ -3,61 +3,78 @@
 </div>-->
 
 
-<div class="container">
-  <!--fxLayoutAlign.gt-sm="space-between center"-->
-  <!--fxLayoutWrap="wrap" fxLayoutGap="20px"  -->
-  <form #tutorialForm="ngForm" (ngSubmit)="submitTutorial(tutorialForm)">
+<!--<div class="container">-->
+<!--fxLayoutAlign.gt-sm="space-between center"-->
+<!--fxLayoutWrap="wrap" fxLayoutGap="20px"  -->
+<form #tutorialForm="ngForm" (ngSubmit)="submitTutorial()">
 
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="center center">
-      <div fxFlex.sm="70" fxFlex.md="50" fxFlex.gt-md="40">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="center center">
+    <div fxFlex.sm="80" fxFlex.md="70" fxFlex.gt-md="60">
 
-        <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign.gt-xs="center center">
-          <md-input-container fxFlex="100">
-            <input name="title" required [(ngModel)]="tutorial.title" placeholder="Tutorial Title" mdInput type="text">
-          </md-input-container>
-          <md-input-container fxFlex="100">
-            <input name="linkUrl" required [(ngModel)]="tutorial.linkUrl" placeholder="Tutorial Link" mdInput type="url">
-          </md-input-container>
-           <md-input-container fxFlex="100">
-            <input (paste)="onImagePaste($event)" name="image" [(ngModel)]="tutorial.imageUrl" placeholder="Image (Paste Image or URL)"
+      <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign.gt-xs="center center">
+        <md-input-container fxFlex="100">
+          <input name="title" required [(ngModel)]="tutorial.title" placeholder="Tutorial Title" mdInput type="text">
+           <md-error>
+            What do you call this tutorial you stumbled upon?
+            </md-error>
+        </md-input-container>
+
+        <md-input-container fxFlex="100">
+          <input name="linkUrl" required [(ngModel)]="tutorial.linkUrl" placeholder="Tutorial Link" mdInput type="url" pattern="https?://.+">
+           <md-error>
+            Must be a valid link to the tutorial starting with http://
+            </md-error>
+        </md-input-container>
+        
+        <md-input-container fxFlex="100">
+          <textarea name="description" required [(ngModel)]="tutorial.description" placeholder="Description" mdInput type=""></textarea>
+          <md-error>
+            Tell us about what the tutorial teaches us
+            </md-error>
+        </md-input-container>
+
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="start center" fxLayoutGap.gt-xs="6%" fxLayoutWrap="wrap">
+          <md-input-container fxFlex.gt-xs="64" dividerColor="warn">
+            <input [formControl]="emailFormControl" required type="" (paste)="onImagePaste($event)" name="image" [(ngModel)]="tutorial.imageUrl" placeholder="Image (Paste Image or URL)" pattern="https?://.+"
               mdInput>
-          </md-input-container>
-          <button fxFlex.gt-sm="30" md-raised-button ngFilePicker color="primary" accept="image/*" (filePick)="selectImage($event)">Browse for Image</button>
-          
-          <md-input-container fxFlex="100">
-            <textarea name="description" required [(ngModel)]="tutorial.description" placeholder="Description" mdInput type="text"></textarea>
+              <md-error>
+              Must paste an image from the clipboard or enter a valid URL starting with http://
+              </md-error>
           </md-input-container>
 
-        </div>
+          <button fxFlex.gt-xs="30" fxFlex="100" md-raised-button ngFilePicker color="primary" accept="image/*" (filePick)="selectImage($event)">Browse for Image</button>
+      </div>
 
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
-         
-        </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
 
-
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
-          
-          <img *ngIf="picked" [src]="picked.dataURL" />
-        </div>
+      </div>
 
 
-        <div fxLayout="row" fxLayoutAlign="center">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
 
-          <app-category-list shouldGetEmptyCategories="true" (t1CategoryChange)="tutorial.tutorialCategories[0].categoryId=$event.id"
-            (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id" (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id"
-            (t4CategoryChange)="tutorial.tutorialCategories[3].categoryId=$event.id">
-          </app-category-list>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="center">
-          <app-tutorial-card fxFlex.xs="100" fxFlex="500px" [tutorial]="tutorial"></app-tutorial-card>
-        </div>
+        <img *ngIf="picked" [src]="picked.dataURL" />
+      </div>
 
 
-        <div fxLayout="row" fxLayoutAlign="center">
-          <button [disabled]="!tutorialForm.valid" fxFlex.xs="100" fxFlex="400px" md-raised-button color="accent" type="submit">Share</button>
-        </div>
+      <div fxLayout="row" fxLayoutAlign="center">
+
+        <app-category-list shouldGetEmptyCategories="true" (t1CategoryChange)="tutorial.tutorialCategories[0].categoryId=$event.id"
+          (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id" (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id"
+          (t4CategoryChange)="tutorial.tutorialCategories[3].categoryId=$event.id">
+        </app-category-list>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <app-tutorial-card fxFlex.xs="100" fxFlex="500px" [tutorial]="tutorial"></app-tutorial-card>
+      </div>
+
+
+      <div fxLayout="row" fxLayoutAlign="center">
+        <button [disabled]="!tutorialForm.valid" fxFlex.xs="100" fxFlex="400px" md-raised-button color="accent" type="submit">Share</button>
       </div>
     </div>
-  </form>
+  </div>
+</form>
 
-</div>
+<!--</div>-->
