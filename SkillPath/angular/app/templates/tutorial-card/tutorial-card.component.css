@@ -15,10 +15,11 @@
 }*/
 
 .img-container {
-    max-height: 300px;
+    max-height: 250px;
     overflow: hidden;
     margin: 0 -24px 16px -24px;
     width: calc(100% + 48px);
+    text-align: center;
 }
 
 @media (max-width: 600px) {
