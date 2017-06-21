@@ -10,6 +10,21 @@
     height: 222px;
 }*/
 
-.md-card-image {
+/*.md-card-image {
     position: absolute;
+}*/
+
+.img-container {
+    max-height: 300px;
+    overflow: hidden;
+    margin: 0 -24px 16px -24px;
+    width: calc(100% + 48px);
 }
+
+@media (max-width: 600px) {
+    .img-container {
+        margin: 16px -16px;
+        width: calc(100% + 32px);
+    }
+}
+

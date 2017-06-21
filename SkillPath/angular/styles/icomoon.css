@@ -1,0 +1,97 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?dit2nh');
+  src:  url('../fonts/icomoon.eot?dit2nh#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?dit2nh') format('truetype'),
+    url('../fonts/icomoon.woff?dit2nh') format('woff'),
+    url('../fonts/icomoon.svg?dit2nh#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-document-file-java:before {
+  content: "\e90a";
+}
+.icon-database:before {
+  content: "\e964";
+}
+.icon-csharp .path1:before {
+  content: "\e905";
+  color: rgb(155, 79, 150);
+}
+.icon-csharp .path2:before {
+  content: "\e906";
+  margin-left: -1em;
+  color: rgb(104, 33, 122);
+}
+.icon-csharp .path3:before {
+  content: "\e907";
+  margin-left: -1em;
+  color: rgb(129, 55, 135);
+}
+.icon-csharp .path4:before {
+  content: "\e908";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-embed2:before {
+  content: "\ea80";
+}
+.icon-html-five:before {
+  content: "\eae4";
+}
+.icon-css3:before {
+  content: "\eae6";
+}
+.icon-books:before {
+  content: "\e920";
+}
+.icon-switch:before {
+  content: "\e9b6";
+}
+.icon-cogs:before {
+  content: "\e995";
+}
+.icon-Routing:before {
+  content: "\e909";
+}
+.icon-display:before {
+  content: "\e956";
+}
+.icon-brand:before {
+  content: "\e900";
+  color: #f7df1e;
+}
+.icon-angular .path1:before {
+  content: "\e901";
+  color: rgb(221, 0, 49);
+}
+.icon-angular .path2:before {
+  content: "\e902";
+  margin-left: -1em;
+  color: rgb(195, 0, 47);
+}
+.icon-angular .path3:before {
+  content: "\e903";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-react-js-react-logo-js-icon:before {
+  content: "\e904";
+  color: #00d8ff;
+}
