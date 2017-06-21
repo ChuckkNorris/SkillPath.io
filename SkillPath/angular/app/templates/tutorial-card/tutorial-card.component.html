@@ -2,25 +2,25 @@
   <md-card-header>
     <!--<div md-card-avatar class="example-header-image"></div>-->
     <md-card-title>
+      
+      <h3> {{tutorial.title}}</h3>
+
+
+    </md-card-title>
+    <md-card-subtitle>
       <span aria-hidden="true" data-icon="&#xe001;" class="icon-html-five"></span>
       
       <span class="icon-csharp"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
       </span>
       
       <span class="icon-react-js-react-logo-js-icon"></span>
-      <h3> {{tutorial.title}}</h3>
-
-
-    </md-card-title>
-    <md-card-subtitle>
-
     </md-card-subtitle>
   </md-card-header>
-  <!--<img md-card-image [src]="tutorial.imageUrl || defaultImageUrl">-->
+  <img md-card-image [src]="tutorial.imageUrl || defaultImageUrl">
 
-  <div class="img-container">
+  <!--<div class="img-container">
     <img [src]="tutorial.imageUrl || defaultImageUrl">
-  </div>
+  </div>-->
   <md-card-content>
     <div class="description">
       {{tutorial.description}}
