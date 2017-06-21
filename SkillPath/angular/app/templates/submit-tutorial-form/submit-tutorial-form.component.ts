@@ -40,8 +40,16 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
   picked: any;
   selectImage(image) {
-    this.picked = image;
-    console.log(image);
+    this._imageService.getImageFromDataUrl(image._dataURL).subscribe(imageBlob => {
+      this.uploadImage(imageBlob);
+    })
+    // let blob = this._imageService.dataURLToBlob(image._dataURL);
+    // console.log(blob);
+    // // 
+    
+    // // .subscribe(imageBlob => {
+    // //   console.log(imageBlob);
+    // // });
   }
 
   log(something: any) {
@@ -53,18 +61,22 @@ export class SubmitTutorialFormComponent implements OnInit {
     console.log('Saved');
   }
 
+  private uploadImage(blob: Blob) {
+      this._loaderService.show();
+          this._imgurService.uploadBlob(blob).subscribe((imageLink) => {
+            this.tutorial.imageUrl = imageLink;
+            this._loaderService.hide();
+            //this._tutorialService.saveTutorial(this.tutorial).subscribe();
+          });
+  }
+
   onImagePaste(event: ClipboardEvent) {
     console.log(event);
     if (event.clipboardData.items) {
       let imageUrl;
       this._imageService.getImage(event.clipboardData).subscribe(image => {
         if (image) {
-          this._loaderService.show();
-          this._imgurService.uploadBlob(image.blob).subscribe((imageLink) => {
-            this.tutorial.imageUrl = imageLink;
-            this._loaderService.hide();
-            //this._tutorialService.saveTutorial(this.tutorial).subscribe();
-          })
+          this.uploadImage(image.blob);
           //this.tutorial.imageUrl = image.data;
         }
         else {

@@ -15,8 +15,8 @@
     ="filterCategories($event.target.value)" [placeholder]="title" />
   </md-input-container>
 </div>
-
-<md-card class="category-list scrollbar" *ngIf="isFocused" (blur)="onBlur()" >
+<!---->
+<md-card *ngIf="isFocused"  class="category-list scrollbar" (blur)="onBlur()" >
   <div id="style-1">
     <md-list>
       <md-list-item *ngIf="categories.length == 0">
@@ -28,8 +28,15 @@
         [class.selected-item]="cat.id == selectedCategory.id"
         (click)="selectCategory(cat.id, index)" 
         [title]="cat.description">
-        <i md-list-icon class="fa fa-{{cat.icon}}"></i>
-        <!--<md-icon md-list-icon>{{cat.icon}}</md-icon>-->
+
+        <!--<i *ngIf="cat.iconClasses.length > 0" md-list-icon class="fa fa-{{cat.iconClasses[0]}}">
+
+        </i>-->
+        <span *ngIf="cat.iconClasses.length > 0" md-list-icon class="icon-{{cat.iconClasses[0]}} parent-icon">
+          <span *ngFor="let iconClass of cat.iconClasses | slice:1" [class]="iconClass"></span>
+        </span>
+        
+        <!--<i md-list-icon class="fa fa-{{cat.icon}}"></i>-->
         <h4 md-line>{{cat.name}}</h4>
         <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
       </md-list-item>

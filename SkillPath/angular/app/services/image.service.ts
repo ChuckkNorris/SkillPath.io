@@ -31,6 +31,18 @@ export class ImageService {
 
   }
 
+  getImageFromDataUrl(dataUrl): Observable<any> {
+    return Observable.create(obs => {
+       let image = new Image();
+        image.onload = (imageEvent) => {
+          let resizedUrl = this.resize(image, 600, 400);
+          let resizedImage = this.dataURLToBlob(resizedUrl);
+          obs.next(resizedImage);
+        };
+        image.src = dataUrl;
+    });
+  }
+
   getResizedImage(imageFile: File) : Observable<ImageBlob> {
     let toReturn: ImageBlob = {};
     let fr = new FileReader();
@@ -81,7 +93,7 @@ export class ImageService {
     return dataUrl;
   }
 
-  private dataURLToBlob(dataURL) {
+  public dataURLToBlob(dataURL) {
     let BASE64_MARKER = ';base64,';
     if (dataURL.indexOf(BASE64_MARKER) == -1) {
         let parts = dataURL.split(',');

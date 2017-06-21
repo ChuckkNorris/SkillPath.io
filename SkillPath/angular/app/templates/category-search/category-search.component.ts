@@ -54,21 +54,32 @@ export class CategorySearchComponent implements OnInit {
     console.log('Categories: ' + this.shouldGetEmptyCategories);
     if (parentId) {
       if (this.shouldGetEmptyCategories) {
-        this._categoryService.getChildCategories(parentId, true).subscribe(categories => this.categories = categories);
+        this._categoryService.getChildCategories(parentId, true).subscribe(categories => this.setCategories(categories));
       }
       else {
-        this._categoryService.getChildCategories(parentId).subscribe(categories => this.categories = categories);
+        this._categoryService.getChildCategories(parentId).subscribe(categories => this.setCategories(categories));
       }
     }
     else if (this.tier == 1) {
       if (this.shouldGetEmptyCategories) {
-        this._categoryService.getCategories(this.tier, true).subscribe(categories => this.categories = categories);
+        this._categoryService.getCategories(this.tier, true).subscribe(categories => this.setCategories(categories));
       }
       else {
-        this._categoryService.getCategories(this.tier).subscribe(categories => this.categories = categories);
+        this._categoryService.getCategories(this.tier).subscribe(categories => this.setCategories(categories));
       }
       
     }
+  }
+
+  setCategories(categories: Category[]) {
+    let categoriesWithIcons = [];
+    categories.forEach(cat => {
+      cat.iconClasses = [];
+      if (cat.icon)
+        cat.iconClasses = cat.icon.split('.');
+      categoriesWithIcons.push(cat);
+    });
+    this.categories = categoriesWithIcons;
   }
 
   private filteredCategories: Category[];
