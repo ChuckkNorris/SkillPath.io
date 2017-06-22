@@ -20,16 +20,38 @@ namespace SkillPath.Api.Entities
 			await _context.SaveChangesAsync();
 		}
 		public async Task<IEnumerable<Tutorial>> FindInCategory(Guid categoryId) {
-			return await Find(tut => tut.TutorialCategories.Any(tutCat => tutCat.CategoryId == categoryId)).ToListAsync();
+			var toReturn = await Find(tut => tut.TutorialCategories.Any(tutCat => tutCat.CategoryId == categoryId)).ToListAsync();
+			return toReturn.Select(tut => MapTutorial(tut));
 		}
 
 		public async Task<IEnumerable<Tutorial>> GetTutorials(int page) {
 			int countPerPage = 20;
 			int numberToSkip = (page - 1) * countPerPage;
-			return await _context.Tutorials.Skip(numberToSkip).Take(countPerPage).ToListAsync();
+			var toReturn = await _context.Tutorials.Include(tut => tut.TutorialCategories).ThenInclude(tutCat => tutCat.Category).Skip(numberToSkip).Take(countPerPage).ToListAsync();
+			return toReturn.Select(tut => MapTutorial(tut));
+
 		}
+
+		private Tutorial MapTutorial(Tutorial tutorial) {
+			var namedCategories = new List<TutorialCategory>();
+			foreach (var tutCat in tutorial.TutorialCategories)
+			{
+				var newTutCat = new TutorialCategory() {
+					CategoryId = tutCat.CategoryId,
+					TutorialId = tutCat.TutorialId,
+					Name = tutCat.Category?.Name,
+					Icon = tutCat.Category?.Icon
+				};
+				namedCategories.Add(newTutCat);
+			}
+			tutorial.TutorialCategories = namedCategories;
+			return tutorial;
+		}
+
+
+
 		public IQueryable<Tutorial> Find(Expression<Func<Tutorial, bool>> predicate) {
-			return _context.Tutorials.Include(tut => tut.TutorialCategories).Where(predicate);
+			return _context.Tutorials.Include(tut => tut.TutorialCategories).ThenInclude(tutCat => tutCat.Category).Where(predicate);
 		}
 	}
 }

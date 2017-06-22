@@ -17,5 +17,11 @@ namespace SkillPath.Api.Entities
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
         public Guid CategoryId { get; set; }
+
+        [NotMapped]
+        public string Name { get; set; }
+
+         [NotMapped]
+        public string Icon { get; set; }
 	}
 }
