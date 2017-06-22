@@ -62,7 +62,4 @@
 </form>
 <h1 fxLayoutAlign="center">Tutorials</h1>
 <app-tutorial-list [tutorials]="tutorials"></app-tutorial-list>
-<div *ngIf="tutorials.length > 0">
-  {{tutorials[0] | json}}
-</div>
 <app-submit-tutorial-form *ngIf="tutorials.length > 0" [tutorial]="tutorials[0]"></app-submit-tutorial-form>

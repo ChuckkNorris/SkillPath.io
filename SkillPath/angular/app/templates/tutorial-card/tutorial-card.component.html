@@ -8,12 +8,13 @@
 
     </md-card-title>
     <md-card-subtitle>
-      <span aria-hidden="true" data-icon="&#xe001;" class="icon-html-five"></span>
+      <app-icomoon-icon md-list-icon *ngFor="let tutCat of tutorial.tutorialCategories" [icon]="tutCat.icon"></app-icomoon-icon>
+      <!--<span aria-hidden="true" data-icon="&#xe001;" class="icon-html-five"></span>
       
       <span class="icon-csharp"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
       </span>
       
-      <span class="icon-react-js-react-logo-js-icon"></span>
+      <span class="icon-react-js-react-logo-js-icon"></span>-->
     </md-card-subtitle>
   </md-card-header>
   <img md-card-image [src]="tutorial.imageUrl || defaultImageUrl">

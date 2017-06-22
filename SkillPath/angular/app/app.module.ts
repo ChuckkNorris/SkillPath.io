@@ -37,6 +37,7 @@ import { StaggerGapDirective } from './stagger-gap.directive';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FilePickerModule } from 'angular-file-picker';
 import { LoaderComponent } from './templates/loader/loader.component';
+import { IcomoonIconComponent } from './templates/icomoon-icon/icomoon-icon.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { LoaderComponent } from './templates/loader/loader.component';
     TutorialListComponent,
     StaggerGapDirective,
     LoginPageComponent,
-    LoaderComponent
+    LoaderComponent,
+    IcomoonIconComponent
     
   ],
   imports: [

@@ -5,5 +5,5 @@ export interface Category {
     icon?: string;
     parentId?: string;
     tier?: number;
-    iconClasses?: string[];
+    // iconClasses?: string[];
 }
