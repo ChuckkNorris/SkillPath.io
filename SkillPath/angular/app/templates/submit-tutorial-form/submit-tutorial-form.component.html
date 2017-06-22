@@ -37,7 +37,8 @@
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="start center" fxLayoutGap.gt-xs="6%" fxLayoutWrap="wrap">
           <md-input-container fxFlex.gt-xs="64" dividerColor="warn">
-            <input [formControl]="emailFormControl" required type="" (paste)="onImagePaste($event)" name="image" [(ngModel)]="tutorial.imageUrl" placeholder="Image (Paste Image or URL)" pattern="https?://.+"
+            <!--[formControl]="emailFormControl"-->
+            <input required type="" (paste)="onImagePaste($event)" name="image" [(ngModel)]="tutorial.imageUrl" placeholder="Image (Paste Image or URL)" pattern="https?://.+"
               mdInput>
               <md-error>
               Must paste an image from the clipboard or enter a valid URL starting with http://

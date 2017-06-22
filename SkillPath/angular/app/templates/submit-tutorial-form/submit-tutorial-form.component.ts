@@ -7,13 +7,13 @@ import { TutorialService } from './../../services/tutorial.service';
 import { Category } from './../../models/category';
 import { Tutorial } from './../../models/tutorial';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
 
 export interface ImageBlob {
   blob?: Blob;
   data?: string;
 }
-const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 @Component({
   selector: 'app-submit-tutorial-form',
   templateUrl: './submit-tutorial-form.component.html',
@@ -24,6 +24,7 @@ export class SubmitTutorialFormComponent implements OnInit {
   constructor(private _imageService: ImageService,
     private _imgurService: ImgurService,
     private _loaderService: LoaderService,
+    private _router: Router,
     private _tutorialService: TutorialService) { }
 
   @Input() tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
@@ -39,8 +40,6 @@ export class SubmitTutorialFormComponent implements OnInit {
       this.submitButtonText = "Update";
   }
 
-  public emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);
-
   setCategoryId(tier: number, category: Category) {
     this.tutorial.tutorialCategories[0].categoryId=category.id;
   }
@@ -49,22 +48,15 @@ export class SubmitTutorialFormComponent implements OnInit {
     this._imageService.getImageFromDataUrl(image._dataURL).subscribe(imageBlob => {
       this.uploadImage(imageBlob);
     })
-    // let blob = this._imageService.dataURLToBlob(image._dataURL);
-    // console.log(blob);
-    // // 
-    
-    // // .subscribe(imageBlob => {
-    // //   console.log(imageBlob);
-    // // });
-  }
-
-  log(something: any) {
-    console.log(something);
   }
 
   submitTutorial() {
-    //this._tutorialService.saveTutorial(this.tutorial).subscribe();
-    console.log('Saved');
+    this._loaderService.show();
+    this._tutorialService.saveTutorial(this.tutorial).subscribe(() => {
+      
+      this._loaderService.hide();
+      this._router.navigate(['learn']);
+    });
   }
 
   private uploadImage(blob: Blob) {
@@ -77,22 +69,22 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
 
   onImagePaste(event: ClipboardEvent) {
-    console.log(event);
     if (event.clipboardData.items) {
       let imageUrl;
       this._imageService.getImage(event.clipboardData).subscribe(image => {
         if (image) {
           this.uploadImage(image.blob);
+          event.preventDefault();
           //this.tutorial.imageUrl = image.data;
         }
         else {
           event.clipboardData.items[0].getAsString(imageUrl => {
-            if (imageUrl.startsWith('https')) {
+            if (imageUrl.startsWith('http')) {
               this.tutorial.imageUrl = imageUrl;
             }
           });
         }
-        event.preventDefault();
+        
       });
     }
   }

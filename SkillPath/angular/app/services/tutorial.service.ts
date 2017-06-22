@@ -1,3 +1,4 @@
+import { LoaderService } from './loader.service';
 import { Tutorial } from './../models/tutorial';
 import { Observable } from 'rxjs/Observable';
 import { SkillpathApiService } from './../skillpath-api.service';
@@ -7,12 +8,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TutorialService {
 
-  constructor(private _api: SkillpathApiService ) { }
+  constructor(private _api: SkillpathApiService) { }
 
   public saveTutorial(tutorial: Tutorial) {
     // let copy: Tutorial;
     // copy = Object.assign(copy, tutorial);
-
+    
     return this._api.post('/Tutorial/save', tutorial);
   }
 
