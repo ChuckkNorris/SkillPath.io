@@ -1,0 +1,3 @@
+  <span *ngIf="parsedIcon.length > 0" md-list-icon class="icon-{{parsedIcon[0]}} parent-icon">
+          <span *ngFor="let iconClass of parsedIcon | slice:1" [class]="iconClass"></span>
+        </span>

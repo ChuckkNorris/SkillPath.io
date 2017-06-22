@@ -29,14 +29,8 @@
         (click)="selectCategory(cat.id, index)" 
         [title]="cat.description">
 
-        <!--<i *ngIf="cat.iconClasses.length > 0" md-list-icon class="fa fa-{{cat.iconClasses[0]}}">
-
-        </i>-->
-        <span *ngIf="cat.iconClasses.length > 0" md-list-icon class="icon-{{cat.iconClasses[0]}} parent-icon">
-          <span *ngFor="let iconClass of cat.iconClasses | slice:1" [class]="iconClass"></span>
-        </span>
+        <app-icomoon-icon md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
         
-        <!--<i md-list-icon class="fa fa-{{cat.icon}}"></i>-->
         <h4 md-line>{{cat.name}}</h4>
         <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
       </md-list-item>

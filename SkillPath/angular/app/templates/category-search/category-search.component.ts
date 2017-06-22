@@ -72,14 +72,14 @@ export class CategorySearchComponent implements OnInit {
   }
 
   setCategories(categories: Category[]) {
-    let categoriesWithIcons = [];
-    categories.forEach(cat => {
-      cat.iconClasses = [];
-      if (cat.icon)
-        cat.iconClasses = cat.icon.split('.');
-      categoriesWithIcons.push(cat);
-    });
-    this.categories = categoriesWithIcons;
+    // let categoriesWithIcons = [];
+    // categories.forEach(cat => {
+    //   cat.iconClasses = [];
+    //   if (cat.icon)
+    //     cat.iconClasses = cat.icon.split('.');
+    //   categoriesWithIcons.push(cat);
+    // });
+    this.categories = categories;
   }
 
   private filteredCategories: Category[];
