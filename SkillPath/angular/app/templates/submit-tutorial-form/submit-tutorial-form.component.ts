@@ -30,7 +30,13 @@ export class SubmitTutorialFormComponent implements OnInit {
   @Output() tutorialChange = new EventEmitter<Tutorial>();
   @Output() submit = new EventEmitter<Tutorial>();
 
+  @Input() isEditing: boolean;
+
+  submitButtonText: string = "Share";
+
   ngOnInit() {
+    if (this.isEditing)
+      this.submitButtonText = "Update";
   }
 
   public emailFormControl = new FormControl('', [Validators.required, Validators.pattern(EMAIL_REGEX)]);

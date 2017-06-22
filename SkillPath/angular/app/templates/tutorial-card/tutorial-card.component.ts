@@ -22,9 +22,11 @@ export class TutorialCardComponent implements OnInit {
   openTutorialInNewWindow() {
     window.open(this.tutorial.linkUrl, "_blank");
   }
-
+  DialogRef
   showDetailsModal() {
-    this._dialog.open(SubmitTutorialFormComponent);
+    let dialogRef = this._dialog.open(SubmitTutorialFormComponent);
+    dialogRef.componentInstance.tutorial = this.tutorial;
+    dialogRef.componentInstance.isEditing = true;
   }
 
   defaultImageUrl:string = "http://michaelbrant.com/wp-content/uploads/2012/06/photodune-907221-css3-code-m.jpg";
