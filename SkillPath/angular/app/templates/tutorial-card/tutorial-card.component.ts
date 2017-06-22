@@ -1,3 +1,4 @@
+import { TutorialDetailsComponent } from './../tutorial-details/tutorial-details.component';
 import { LearnPageComponent } from './../../pages/learn-page/learn-page.component';
 import { SubmitTutorialFormComponent } from './../submit-tutorial-form/submit-tutorial-form.component';
 import { Tutorial } from './../../models/tutorial';
@@ -22,11 +23,13 @@ export class TutorialCardComponent implements OnInit {
   openTutorialInNewWindow() {
     window.open(this.tutorial.linkUrl, "_blank");
   }
-  DialogRef
+
   showDetailsModal() {
-    let dialogRef = this._dialog.open(SubmitTutorialFormComponent);
+    //SubmitTutorialFormComponent
+    let dialogRef = this._dialog.open(TutorialDetailsComponent);
     dialogRef.componentInstance.tutorial = this.tutorial;
-    dialogRef.componentInstance.isEditing = true;
+    dialogRef.componentInstance.dialogRef = dialogRef;
+    //dialogRef.componentInstance.isEditing = true;
   }
 
   defaultImageUrl:string = "http://michaelbrant.com/wp-content/uploads/2012/06/photodune-907221-css3-code-m.jpg";

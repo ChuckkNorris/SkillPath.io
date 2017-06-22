@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <h1 fxFlex fxFlexAlign="center">{{tutorial.title}}</h1>
+  <div class="header">
+    <img class="header-image" [src]="tutorial.imageUrl">
+  </div>
+  
+  
+  <p>{{tutorial.description}}</p>
+  <button fxFlex="75px" md-raised-button color="primary">Begin Tutorial</button>
+  <div fxLayout="row" fxLayoutAlign="end">
+    
+    <button (click)="requestUpdate()" md-raised-button color="warn">Request Update</button>
+  </div>
+ 
+</div>

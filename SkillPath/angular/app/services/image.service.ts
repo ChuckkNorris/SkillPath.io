@@ -50,7 +50,7 @@ export class ImageService {
       fr.onload = (frEvent) => {
         let image = new Image();
         image.onload = (imageEvent) => {
-          let resizedUrl = this.resize(image, 300, 200);
+          let resizedUrl = this.resize(image, 900, 500);
           toReturn.data = resizedUrl;
           console.log(resizedUrl);
           let resizedImage = this.dataURLToBlob(resizedUrl);

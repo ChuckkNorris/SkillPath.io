@@ -38,6 +38,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { FilePickerModule } from 'angular-file-picker';
 import { LoaderComponent } from './templates/loader/loader.component';
 import { IcomoonIconComponent } from './templates/icomoon-icon/icomoon-icon.component';
+import { AboutTheSiteComponent } from './templates/about-the-site/about-the-site.component';
+import { TutorialDetailsComponent } from './templates/tutorial-details/tutorial-details.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { IcomoonIconComponent } from './templates/icomoon-icon/icomoon-icon.comp
     StaggerGapDirective,
     LoginPageComponent,
     LoaderComponent,
-    IcomoonIconComponent
+    IcomoonIconComponent,
+    AboutTheSiteComponent,
+    TutorialDetailsComponent
     
   ],
   imports: [
@@ -72,7 +76,8 @@ import { IcomoonIconComponent } from './templates/icomoon-icon/icomoon-icon.comp
     FilePickerModule,
   ],
   entryComponents: [
-    SubmitTutorialFormComponent
+    SubmitTutorialFormComponent,
+    TutorialDetailsComponent
   ],
   providers: [SkillpathApiService, CategoryService, TutorialService, ImageService, AuthenticationGuard, AuthenticationService, ImgurService, LoaderService],
   bootstrap: [AppComponent]
