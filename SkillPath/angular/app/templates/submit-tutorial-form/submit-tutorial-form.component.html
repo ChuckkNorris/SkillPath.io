@@ -44,7 +44,7 @@
               </md-error>
           </md-input-container>
 
-          <button fxFlex.gt-xs="30" fxFlex="100" md-raised-button ngFilePicker color="primary" accept="image/*" (filePick)="selectImage($event)">Browse for Image</button>
+          <button fxFlex.gt-xs="30" fxFlex="100" md-raised-button ngFilePicker color="primary" accept="image/*" (filePick)="selectImage($event)">Browse</button>
       </div>
 
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
@@ -60,8 +60,14 @@
 
       <div fxLayout="row" fxLayoutAlign="center">
 
-        <app-category-list shouldGetEmptyCategories="true" (t1CategoryChange)="tutorial.tutorialCategories[0].categoryId=$event.id"
-          (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id" (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id"
+        <app-category-list shouldGetEmptyCategories="true" 
+          [t1Category]="tutorial.tutorialCategories[0]"
+          [t2Category]="tutorial.tutorialCategories[1]"
+          [t3Category]="tutorial.tutorialCategories[2]"
+          [t4Category]="tutorial.tutorialCategories[3]"
+          (t1CategoryChange)="tutorial.tutorialCategories[0].categoryId=$event.id"
+          (t2CategoryChange)="tutorial.tutorialCategories[1].categoryId=$event.id" 
+          (t3CategoryChange)="tutorial.tutorialCategories[2].categoryId=$event.id"
           (t4CategoryChange)="tutorial.tutorialCategories[3].categoryId=$event.id">
         </app-category-list>
       </div>
@@ -72,6 +78,7 @@
 
       <div fxLayout="row" fxLayoutAlign="center">
         <button [disabled]="!tutorialForm.valid" fxFlex.xs="100" fxFlex="400px" md-raised-button color="accent" type="submit">Share</button>
+        
       </div>
     </div>
   </div>

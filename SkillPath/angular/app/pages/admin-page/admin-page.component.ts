@@ -1,3 +1,5 @@
+import { Tutorial } from './../../models/tutorial';
+import { TutorialService } from './../../services/tutorial.service';
 import { Category } from './../../models/category';
 import { CategoryService } from './../../services/category.service';
 import { Observable } from 'rxjs/Observable';
@@ -11,11 +13,13 @@ import { MdSnackBar } from "@angular/material";
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
+  tutorials: Tutorial[] = [];
 
-  constructor(private _categoryService: CategoryService, private toast: MdSnackBar) { }
+  constructor(private _categoryService: CategoryService, private _tutorialService:TutorialService, private toast: MdSnackBar) { }
 
   ngOnInit() {
     this.getCategories();
+    this.getTutorials();
   }
   
   categoryToSave: Category = {};
@@ -33,6 +37,10 @@ export class AdminPageComponent implements OnInit {
     this.t1Categories = this._categoryService.getCategories(1);
   }
 
+  getTutorials(categoryId?) {
+    this._tutorialService.getTutorials(1, categoryId).subscribe(tutorials => this.tutorials = tutorials);
+  }
+
   showMessage(message: string) {
     this.toast.open(message);
   }
@@ -42,6 +50,7 @@ export class AdminPageComponent implements OnInit {
     
     this.categoryToSave.tier = category.tier < 4 ? category.tier + 1 : category.tier;
     this.categoryToSave.parentId = category.id;
+    this.getTutorials(category.id);
   }
 
   categoryToUpdate: Category;
