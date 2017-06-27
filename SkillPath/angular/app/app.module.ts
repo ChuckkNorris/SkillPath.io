@@ -40,6 +40,7 @@ import { LoaderComponent } from './templates/loader/loader.component';
 import { IcomoonIconComponent } from './templates/icomoon-icon/icomoon-icon.component';
 import { AboutTheSiteComponent } from './templates/about-the-site/about-the-site.component';
 import { TutorialDetailsComponent } from './templates/tutorial-details/tutorial-details.component';
+import { CookieService } from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -79,7 +80,17 @@ import { TutorialDetailsComponent } from './templates/tutorial-details/tutorial-
     SubmitTutorialFormComponent,
     TutorialDetailsComponent
   ],
-  providers: [SkillpathApiService, CategoryService, TutorialService, ImageService, AuthenticationGuard, AuthenticationService, ImgurService, LoaderService],
+  providers: [
+    SkillpathApiService, 
+    CategoryService, 
+    TutorialService, 
+    ImageService, 
+    AuthenticationGuard, 
+    AuthenticationService, 
+    ImgurService, 
+    LoaderService,
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

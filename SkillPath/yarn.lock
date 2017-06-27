@@ -3022,6 +3022,10 @@ ng2-completer@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ng2-completer/-/ng2-completer-1.4.0.tgz#43caec0dff44c7ad998327d411307b5d54546527"
 
+ngx-cookie-service@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-1.0.7.tgz#35d433b775a5a2a808c54975f4faf500acc52f68"
+
 no-case@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
