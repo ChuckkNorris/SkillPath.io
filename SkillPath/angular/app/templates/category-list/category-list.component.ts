@@ -14,6 +14,8 @@ export class CategoryListComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  @Input() required: boolean = false;
   @Input() shouldHideEmpty: boolean;
 
   @Output() t1CategoryChange = new EventEmitter<Category>();

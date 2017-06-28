@@ -41,6 +41,7 @@ import { IcomoonIconComponent } from './templates/icomoon-icon/icomoon-icon.comp
 import { AboutTheSiteComponent } from './templates/about-the-site/about-the-site.component';
 import { TutorialDetailsComponent } from './templates/tutorial-details/tutorial-details.component';
 import { CookieService } from "ngx-cookie-service";
+import { CategorySearchRequired } from './directives/category-search-validator.directive';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CookieService } from "ngx-cookie-service";
     LoaderComponent,
     IcomoonIconComponent,
     AboutTheSiteComponent,
-    TutorialDetailsComponent
+    TutorialDetailsComponent,
+    CategorySearchRequired
     
   ],
   imports: [

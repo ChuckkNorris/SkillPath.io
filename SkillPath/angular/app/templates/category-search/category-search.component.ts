@@ -1,18 +1,38 @@
 import { Observable } from 'rxjs/Observable';
 import { Category } from './../../models/category';
 import { CategoryService } from './../../services/category.service';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, forwardRef } from '@angular/core';
 import 'rxjs/add/observable/from';
 import 'rxjs/Rx';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from "@angular/forms";
+
+
+export function validateCategorySearch(c: FormControl) {
+  let err = {
+          requiredError: {
+            given: c.value,
+          }
+        };
+
+        return c.value == null || c.value == undefined ? err : null;
+}
 
 @Component({
   selector: 'app-category-search',
   templateUrl: './category-search.component.html',
-  styleUrls: ['./category-search.component.scss']
+  styleUrls: ['./category-search.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+     // useValue: validateCategorySearch,
+      useExisting: forwardRef(() => CategorySearchComponent),
+      multi: true
+    }
+  ]
 })
-export class CategorySearchComponent implements OnInit {
+export class CategorySearchComponent implements OnInit, ControlValueAccessor {
 
-  constructor(private _categoryService: CategoryService) { 
+  constructor(private _categoryService: CategoryService)  { 
     //super();
     //  if (this.parentId) {
     //   this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
@@ -25,7 +45,7 @@ export class CategorySearchComponent implements OnInit {
   @Input() public tier: number;
   @Input() parentId: string;
 
-  @Input() selectedCategory: Category = {};
+  @Input() _selectedCategory: Category = {};
   @Output() selectedCategoryChange: EventEmitter<Category> = new EventEmitter<Category>();
   public categories: Category[] = [];
   
@@ -128,9 +148,31 @@ export class CategorySearchComponent implements OnInit {
        if (cat.id == selectedCategoryId || index == catIndex) {
         this.selectedCategory = cat;
         this.selectedCategoryChange.emit(this.selectedCategory);
+        //this.propogateChange(this.selectedCategory);
         this.onBlur();
        }
       });
    }
+
+  set selectedCategory(val) {
+    this._selectedCategory = val;
+    this.propogateChange(this.selectedCategory);
+  }
+
+  get selectedCategory() {
+     return this._selectedCategory;
+  }
+
+   writeValue(value: any) {
+     this.selectedCategory = value;
+   }
+
+   propogateChange = (_: any) => {};
+
+   registerOnChange(fn) {
+     this.propogateChange = fn;
+   }
+
+   registerOnTouched() {}
   
 }

@@ -1,5 +1,8 @@
 <div fxLayout="row"  fxLayoutAlign="center"  fxLayoutWrap="wrap">
+  
+  <!--categorySearchRequired-->
   <app-category-search 
+    
     [fxFlex.xs]="getXsFlex()" 
     [fxFlex.sm]="getSmFlex()"
     [fxFlex.md]="getMdFlex()"
@@ -7,11 +10,12 @@
     fxFlexAlign="center"
     tier="1" class="category-search"  
     title="Stack"
-    [(selectedCategory)]="t1Category"
+    [(ngModel)]="t1Category"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
+
     (selectedCategoryChange)="selectCategory($event);">
   </app-category-search>
-
+  <!--[required]="required"-->
    <!--(onViewInitialized)="getChildCategories(2)"-->
   <app-category-search #categoryTier *ngIf="t1Category.id != undefined"
      [fxFlex.xs]="getXsFlex()" 
@@ -20,9 +24,10 @@
     [fxFlex.lg]="getLgFlex()"
     title="Context"
     [parentId]="t1Category.id"
-    [(selectedCategory)]="t2Category"
+    [(ngModel)]="t2Category"
     (selectedCategoryChange)="selectCategory($event)"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
+    
     tier="2" class="category-search">
 
   </app-category-search>
@@ -34,7 +39,7 @@
     *ngIf="t2Category.id != undefined"
     title="Technology"
     [parentId]="t2Category.id"
-    [(selectedCategory)]="t3Category"
+    [(ngModel)]="t3Category"
     (selectedCategoryChange)="selectCategory($event)"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
     tier="3" class="category-search" >
@@ -47,7 +52,7 @@
     [fxFlex.lg]="getLgFlex()"
     title="Area"
     [parentId]="t3Category.id"
-    [(selectedCategory)]="t4Category"
+    [(ngModel)]="t4Category"
     (selectedCategoryChange)="selectCategory($event)"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
     tier="4" class="category-search">
