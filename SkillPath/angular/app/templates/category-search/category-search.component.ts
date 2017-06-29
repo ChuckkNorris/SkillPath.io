@@ -69,9 +69,7 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
 
   @Input() shouldGetEmptyCategories: boolean = false;
   public getCategories(parentCategoryId?: string) {
-    console.log('INitializing category search')
     let parentId = parentCategoryId || this.parentId;
-    console.log('Categories: ' + this.shouldGetEmptyCategories);
     if (parentId) {
       if (this.shouldGetEmptyCategories) {
         this._categoryService.getChildCategories(parentId, true).subscribe(categories => this.setCategories(categories));
@@ -139,8 +137,6 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
    selectCategory(selectedCategoryId: string, index: number) {
-
-     console.log(selectedCategoryId);
      this.selectedCategoryIndex = index;
      //Observable.from(this.categories).filter(x => x.filter)
      //this.selectedCategory = 

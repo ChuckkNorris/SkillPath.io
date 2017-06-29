@@ -4,9 +4,9 @@ import { ValidatorFn, NG_VALIDATORS, Validator, FormControl, AbstractControl } f
 
 
 @Directive({
-  selector: '[categorySearchRequired]',
+  selector: '[categorySearchRequired][ngModel]',
   providers: [
-    {provide: NG_VALIDATORS, useExisting: CategorySearchRequired, multi: true}
+    { provide: NG_VALIDATORS, useExisting: CategorySearchRequired, multi: true }
   ]
 })
 export class CategorySearchRequired implements Validator {
@@ -19,9 +19,22 @@ export class CategorySearchRequired implements Validator {
     return this.validator(c);
   }
 
-  validateDropdown() : ValidatorFn {
+  validateDropdown(): ValidatorFn {
     return (c: AbstractControl) => {
-      return null;
+      let err = {
+        rangeError: {
+          given: c.value,
+          max: 10,
+          min: 0
+        }
+      };
+      if (c.value && c.value.id)
+        return null;
+      else
+        return err;
     }
   }
+
+
+
 }

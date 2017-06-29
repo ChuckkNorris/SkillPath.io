@@ -13,21 +13,22 @@
 
       <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign.gt-xs="center center">
         <md-input-container fxFlex="100">
-          <input name="title" required [(ngModel)]="tutorial.title" placeholder="Tutorial Title" mdInput type="text">
+          <!--required-->
+          <input name="title" [(ngModel)]="tutorial.title" placeholder="Tutorial Title" mdInput type="text">
            <md-error>
             What do you call this tutorial you stumbled upon?
             </md-error>
         </md-input-container>
 
         <md-input-container fxFlex="100">
-          <input name="linkUrl" required [(ngModel)]="tutorial.linkUrl" placeholder="Tutorial Link" mdInput type="url" pattern="https?://.+">
+          <input name="linkUrl" [(ngModel)]="tutorial.linkUrl" placeholder="Tutorial Link" mdInput type="url" pattern="https?://.+">
            <md-error>
             Must be a valid link to the tutorial starting with http://
             </md-error>
         </md-input-container>
         
         <md-input-container fxFlex="100">
-          <textarea name="description" required [(ngModel)]="tutorial.description" placeholder="Description" mdInput type=""></textarea>
+          <textarea name="description" [(ngModel)]="tutorial.description" placeholder="Description" mdInput type=""></textarea>
           <md-error>
             Tell us about what the tutorial teaches us
             </md-error>
@@ -38,7 +39,7 @@
       <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign.gt-xs="start center" fxLayoutGap.gt-xs="6%" fxLayoutWrap="wrap">
           <md-input-container fxFlex.gt-xs="64" dividerColor="warn">
             <!--[formControl]="emailFormControl"-->
-            <input required type="" (paste)="onImagePaste($event)" name="image" [(ngModel)]="tutorial.imageUrl" placeholder="Image (Paste Image or URL)" pattern="https?://.+"
+            <input type="" (paste)="onImagePaste($event)" name="image" [(ngModel)]="tutorial.imageUrl" placeholder="Image (Paste Image or URL)" pattern="https?://.+"
               mdInput>
               <md-error>
               Must paste an image from the clipboard or enter a valid URL starting with http://
@@ -51,14 +52,7 @@
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
 
       </div>
-
-
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
-
-        <img *ngIf="picked" [src]="picked.dataURL" />
-      </div>
-
-
+      
       <div fxLayout="row" fxLayoutAlign="center">
 
         <app-category-list shouldGetEmptyCategories="true" 

@@ -1,6 +1,6 @@
 <div class="category-search">
   <div>
-  <md-input-container fxFlex="100">
+  <md-input-container dividerColor="warn" fxFlex="100">
     <div *ngIf="!isFocused && selectedCategory && selectedCategory.id != undefined" class="category-tag" md-suffix>
       {{selectedCategory.name}}
       </div>
@@ -25,7 +25,7 @@
       </md-list-item>
       <md-list-item *ngFor="let cat of categories; let index=index" 
          [class.first-item]="selectedCategoryIndex == index"
-        [class.selected-item]="cat.id == selectedCategory.id"
+        [class.selected-item]="cat.id == selectedCategory?.id"
         (click)="selectCategory(cat.id, index)" 
         [title]="cat.description">
 

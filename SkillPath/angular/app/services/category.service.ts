@@ -18,10 +18,8 @@ export class CategoryService {
     if (getEmpty) {
       params['getEmpty'] = "true";
     }
-   console.log(params);
     return this._api.get('/category/find', params)
       .map(categories => {
-        console.log(categories);
         return categories as Category[]
       });
   }
@@ -33,10 +31,8 @@ export class CategoryService {
     if (getEmpty) {
       params['getEmpty'] = "True";
     }
-    console.log(params);
     return this._api.get('/category/GetChildCategories', params)
       .map(categories => {
-        console.log(categories);
         return categories as Category[]
       });
   }
