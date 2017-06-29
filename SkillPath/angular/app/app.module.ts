@@ -13,7 +13,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -91,7 +91,8 @@ import { CategorySearchRequired } from './directives/category-search-validator.d
     AuthenticationService, 
     ImgurService, 
     LoaderService,
-    CookieService
+    CookieService,
+    NgForm
   ],
   bootstrap: [AppComponent]
 })
