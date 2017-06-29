@@ -1,6 +1,8 @@
 import { CategorySearchComponent } from './../category-search/category-search.component';
 import { Category } from './../../models/category';
 import { Component, OnInit, Output, EventEmitter, ViewChild, ViewChildren, QueryList, Input } from '@angular/core';
+import { NgForm, NgModel, ValidatorFn, AbstractControl } from "@angular/forms";
+
 
 @Component({
   selector: 'app-category-list',
@@ -9,12 +11,39 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ViewChildren, Query
 })
 export class CategoryListComponent implements OnInit {
 
-  constructor() { }
+  @ViewChildren(NgModel) controls: QueryList<NgModel>;
+  constructor(private tutorialForm: NgForm) { }
 
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    this.controls.forEach((control: NgModel) => {
+    
+      this.tutorialForm.addControl(control);
+    });
+  }
 
+  validateDropdown(): ValidatorFn {
+    return (c: AbstractControl) => {
+      let err = {
+        rangeError: {
+          given: c.value,
+          max: 10,
+          min: 0
+        }
+      };
+      console.log('VALIDATING')
+      console.log(c.value);
+      if (c.value && c.value.id)
+        return null;
+      else
+        return err;
+    }
+  }
+
+
+  @Input() nameControl;
   @Input() required: boolean = false;
   @Input() shouldHideEmpty: boolean;
 

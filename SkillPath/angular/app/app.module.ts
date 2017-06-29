@@ -69,7 +69,7 @@ import { CategorySearchRequired } from './directives/category-search-validator.d
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
     BrowserAnimationsModule,

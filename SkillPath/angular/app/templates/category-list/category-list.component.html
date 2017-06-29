@@ -1,8 +1,9 @@
 <div fxLayout="row"  fxLayoutAlign="center"  fxLayoutWrap="wrap">
   
+
   <!--categorySearchRequired-->
   <app-category-search 
-    
+    name="t1Category"
     [fxFlex.xs]="getXsFlex()" 
     [fxFlex.sm]="getSmFlex()"
     [fxFlex.md]="getMdFlex()"
@@ -12,22 +13,23 @@
     title="Stack"
     [(ngModel)]="t1Category"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
-
+    categorySearchRequired
     (selectedCategoryChange)="selectCategory($event);">
   </app-category-search>
   <!--[required]="required"-->
    <!--(onViewInitialized)="getChildCategories(2)"-->
-  <app-category-search #categoryTier *ngIf="t1Category.id != undefined"
+  <app-category-search #categoryTier [class.hidden]="t1Category?.id != undefined"
+    name="t2Category"
      [fxFlex.xs]="getXsFlex()" 
     [fxFlex.sm]="getSmFlex()"
     [fxFlex.md]="getMdFlex()"
     [fxFlex.lg]="getLgFlex()"
     title="Context"
-    [parentId]="t1Category.id"
+    [parentId]="t1Category?.id"
     [(ngModel)]="t2Category"
     (selectedCategoryChange)="selectCategory($event)"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
-    
+    categorySearchRequired
     tier="2" class="category-search">
 
   </app-category-search>
@@ -36,7 +38,7 @@
     [fxFlex.sm]="getSmFlex()"
     [fxFlex.md]="getMdFlex()"
     [fxFlex.lg]="getLgFlex()"
-    *ngIf="t2Category.id != undefined"
+    *ngIf="t2Category?.id != undefined"
     title="Technology"
     [parentId]="t2Category.id"
     [(ngModel)]="t3Category"
@@ -45,7 +47,7 @@
     tier="3" class="category-search" >
 
   </app-category-search>
-  <app-category-search #categoryTier *ngIf="t3Category.id != undefined"
+  <app-category-search #categoryTier *ngIf="t3Category?.id != undefined"
     [fxFlex.xs]="getXsFlex()" 
     [fxFlex.sm]="getSmFlex()"
     [fxFlex.md]="getMdFlex()"
