@@ -1,69 +1,82 @@
-<div fxLayout="row"  fxLayoutAlign="center"  fxLayoutWrap="wrap">
-  
-
-  <!--categorySearchRequired-->
+<div fxLayout="row"  fxLayoutWrap="wrap">
+  <!-- Tier 1 fxLayoutAlign="center"  -->
   <app-category-search 
+    fxAlign="center"
     name="t1Category"
-    [fxFlex.xs]="getXsFlex()" 
-    [fxFlex.sm]="getSmFlex()"
-    [fxFlex.md]="getMdFlex()"
-    [fxFlex.lg]="getLgFlex()"
+    autoSelect="Frontend"
+    readonly="true"
     fxFlexAlign="center"
     tier="1" class="category-search"  
     title="Stack"
     [(ngModel)]="t1Category"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
     categorySearchRequired
-    (selectedCategoryChange)="selectCategory($event);">
-  </app-category-search>
-  <!--[required]="required"-->
-   <!--(onViewInitialized)="getChildCategories(2)"-->
-  <app-category-search #categoryTier [class.hidden]="t1Category?.id != undefined"
-    name="t2Category"
-     [fxFlex.xs]="getXsFlex()" 
+    (selectedCategoryChange)="selectCategory($event);"
+    [fxFlex.xs]="getXsFlex()" 
     [fxFlex.sm]="getSmFlex()"
     [fxFlex.md]="getMdFlex()"
-    [fxFlex.lg]="getLgFlex()"
+    [fxFlex.lg]="getLgFlex()">
+  </app-category-search>
+
+   <!-- Tier 2 -->
+  <app-category-search 
+    autoSelect="Frameworks/Libraries"
+    readonly="true"
+    #categoryTier 
+    [class.hidden]="!t1Category?.id"
+    name="t2Category"
     title="Context"
     [parentId]="t1Category?.id"
     [(ngModel)]="t2Category"
     (selectedCategoryChange)="selectCategory($event)"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
     categorySearchRequired
-    tier="2" class="category-search">
-
-  </app-category-search>
-  <app-category-search #categoryTier 
+    tier="2" 
+    class="category-search"
     [fxFlex.xs]="getXsFlex()" 
     [fxFlex.sm]="getSmFlex()"
     [fxFlex.md]="getMdFlex()"
-    [fxFlex.lg]="getLgFlex()"
-    *ngIf="t2Category?.id != undefined"
+    [fxFlex.lg]="getLgFlex()">
+
+  </app-category-search>
+
+   <!-- Tier 3 -->
+  <app-category-search 
+    autoSelect="Angular 2.x+"
+    #categoryTier  [class.hidden]="!t2Category?.id"
+    name="t3Category"
+    readonly="true"
     title="Technology"
     [parentId]="t2Category.id"
     [(ngModel)]="t3Category"
     (selectedCategoryChange)="selectCategory($event)"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
-    tier="3" class="category-search" >
-
-  </app-category-search>
-  <app-category-search #categoryTier *ngIf="t3Category?.id != undefined"
+    tier="3" 
+    class="category-search" 
+    categorySearchRequired
     [fxFlex.xs]="getXsFlex()" 
     [fxFlex.sm]="getSmFlex()"
     [fxFlex.md]="getMdFlex()"
-    [fxFlex.lg]="getLgFlex()"
+    [fxFlex.lg]="getLgFlex()">
+  </app-category-search>
+
+   <!-- Tier 4 *ngIf="t3Category?.id"     -->
+  <app-category-search 
+    #categoryTier 
+    name="t4Category"
+    [class.hidden]="!t3Category?.id"
     title="Area"
     [parentId]="t3Category.id"
     [(ngModel)]="t4Category"
     (selectedCategoryChange)="selectCategory($event)"
     [shouldGetEmptyCategories]="shouldGetEmptyCategories"
-    tier="4" class="category-search">
-
+    tier="4" 
+    class="category-search"
+    categorySearchRequired
+    [fxFlex.xs]="getXsFlex()" 
+    [fxFlex.sm]="getSmFlex()"
+    [fxFlex.md]="getMdFlex()"
+    [fxFlex.lg]="getLgFlex()">
   </app-category-search>
 
 </div>
- <!--fxFlex.gt-sm="48" fxFlex.gt-md="24"
-fxFlex.gt-sm="48" fxFlex.gt-md="24"
-fxFlex.gt-sm="48" fxFlex.gt-md="24"
-fxFlex.gt-sm="48" fxFlex.gt-md="24"-->
- <!--fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="wrap" fxLayoutGap="20px;"-->

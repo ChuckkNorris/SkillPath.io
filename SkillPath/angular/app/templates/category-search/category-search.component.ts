@@ -32,18 +32,12 @@ export function validateCategorySearch(c: FormControl) {
 })
 export class CategorySearchComponent implements OnInit, ControlValueAccessor {
 
-  constructor(private _categoryService: CategoryService)  { 
-    //super();
-    //  if (this.parentId) {
-    //   this._categoryService.getChildCategories(this.parentId).subscribe(categories => this.categories = categories);
-    // }
-    // else if (this.tier == 1) {
-    //   this._categoryService.getCategories(this.tier).subscribe(categories => this.categories = categories);
-    // }
-  }
+  constructor(private _categoryService: CategoryService)  { }
   @Input() title: string;
   @Input() public tier: number;
   @Input() parentId: string;
+  @Input() autoSelect: string;
+  @Input() readonly: boolean = false;
 
   @Input() _selectedCategory: Category = {};
   @Output() selectedCategoryChange: EventEmitter<Category> = new EventEmitter<Category>();
@@ -53,13 +47,10 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit() {
      this.getCategories();
-    
   }
 
   ngAfterViewInit() {
-    
     this.onViewInitialized.emit(true);
-    //this.input.nativeElement.focus();
   }
 
   @ViewChild('categoryInput') input: any;
@@ -85,26 +76,21 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
       else {
         this._categoryService.getCategories(this.tier).subscribe(categories => this.setCategories(categories));
       }
-      
     }
   }
 
   setCategories(categories: Category[]) {
-    // let categoriesWithIcons = [];
-    // categories.forEach(cat => {
-    //   cat.iconClasses = [];
-    //   if (cat.icon)
-    //     cat.iconClasses = cat.icon.split('.');
-    //   categoriesWithIcons.push(cat);
-    // });
     this.categories = categories;
+    if (this.autoSelect)
+      this.selectCategoryByName(this.autoSelect);
   }
 
   private filteredCategories: Category[];
 
   isFocused: boolean = false;
   onFocused() {
-     this.isFocused = true;
+    if (!this.readonly)
+      this.isFocused = true;
   }
 
   onBlur() {
@@ -114,9 +100,6 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   filterCategories(searchText: any) {
 
   }
-
-  
-
 
   selectedCategoryIndex: number = 0;
   selectCategoryArrow(direction) {
@@ -135,6 +118,15 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
       this.onBlur();
     }, 200);
   }
+
+  selectCategoryByName(categoryName: string) {
+    let selectedCat = this.categories.find(cat => cat.name == categoryName);;
+    if (selectedCat) {
+       this.selectedCategory = selectedCat;
+        this.selectedCategoryChange.emit(this.selectedCategory);
+        this.onBlur();
+    }
+   }
 
    selectCategory(selectedCategoryId: string, index: number) {
      this.selectedCategoryIndex = index;

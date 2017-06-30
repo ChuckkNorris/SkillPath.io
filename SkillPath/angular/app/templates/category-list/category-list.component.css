@@ -3,3 +3,8 @@
     min-width: 292px;
     max-width: 370px;
 }
+
+.hidden {
+    visibility: hidden;
+    /*display: none;*/
+}
