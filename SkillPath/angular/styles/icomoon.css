@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?dit2nh');
-  src:  url('../fonts/icomoon.eot?dit2nh#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?dit2nh') format('truetype'),
-    url('../fonts/icomoon.woff?dit2nh') format('woff'),
-    url('../fonts/icomoon.svg?dit2nh#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?rnuxv7');
+  src:  url('../fonts/icomoon.eot?rnuxv7#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?rnuxv7') format('truetype'),
+    url('../fonts/icomoon.woff?rnuxv7') format('woff'),
+    url('../fonts/icomoon.svg?rnuxv7#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,8 +24,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-document-file-java:before {
-  content: "\e90a";
+.icon-module:before {
+  content: "\e92e";
+}
+.icon-form:before {
+  content: "\e926";
+}
+.icon-data-binding:before {
+  content: "\e993";
+}
+.icon-directive:before {
+  content: "\ea72";
+}
+.icon-component:before {
+  content: "\e9ae";
 }
 .icon-database:before {
   content: "\e964";
@@ -67,11 +79,17 @@
 .icon-cogs:before {
   content: "\e995";
 }
-.icon-Routing:before {
+.icon-routing:before {
   content: "\e909";
 }
 .icon-display:before {
   content: "\e956";
+}
+.icon-cycle:before {
+  content: "\e90b";
+}
+.icon-document-file-java:before {
+  content: "\e90a";
 }
 .icon-brand:before {
   content: "\e900";
