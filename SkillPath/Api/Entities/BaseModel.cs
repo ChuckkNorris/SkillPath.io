@@ -11,5 +11,6 @@ namespace SkillPath.Api.Entities
     {
 		[Key]
 		public Guid Id { get; set; }
+		public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 	}
 }
