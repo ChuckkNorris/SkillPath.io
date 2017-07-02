@@ -28,14 +28,12 @@ export class CategorySearchRequired implements Validator {
           min: 0
         }
       };
-      console.log(c.value);
       if (c.value && c.value.id)
         return null;
       else
         return err;
     }
   }
-
 
 
 }

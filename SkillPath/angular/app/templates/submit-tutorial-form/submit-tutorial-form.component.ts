@@ -68,6 +68,20 @@ export class SubmitTutorialFormComponent implements OnInit {
           });
   }
 
+  linkUrlErrorText: string = "";
+  tutorialExistError: boolean = false;
+  doesTutorialExist() {
+    this._tutorialService.doesTutorialExist(this.tutorial.linkUrl).subscribe(doesTutExist => {
+      console.log(doesTutExist);
+      if (doesTutExist) {
+        this.tutorialExistError = true;
+      }
+      else {
+        this.tutorialExistError = false;
+      }
+    });
+  }
+
   onImagePaste(event: ClipboardEvent) {
     if (event.clipboardData.items) {
       let imageUrl;
