@@ -25,4 +25,11 @@ export class TutorialService {
     return this._api.get('/Tutorial/Get', params).map(x => x as Tutorial[]);
   }
 
+  public doesTutorialExist(tutorialLinkUrl: string) {
+    var params = {
+      tutorialLinkUrl: tutorialLinkUrl
+    };
+    return this._api.get('/Tutorial/DoesTutorialExist', params);
+  }
+
 }

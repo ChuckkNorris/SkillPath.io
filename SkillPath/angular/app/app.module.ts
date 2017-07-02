@@ -1,3 +1,4 @@
+import { TutorialLinkExists } from './directives/tutorial-link-exists.directive';
 import { LoaderService } from './services/loader.service';
 import { ImgurService } from './services/imgur.service';
 import { AuthenticationService } from './services/authentication.service';
@@ -62,7 +63,8 @@ import { CategorySearchRequired } from './directives/category-search-validator.d
     IcomoonIconComponent,
     AboutTheSiteComponent,
     TutorialDetailsComponent,
-    CategorySearchRequired
+    CategorySearchRequired,
+    TutorialLinkExists
     
   ],
   imports: [

@@ -32,6 +32,11 @@ namespace SkillPath.Api.Entities
 			return toReturn;
 		}
 
+		[HttpGet]
+		public async Task<bool> DoesTutorialExist(string tutorialLinkUrl) {
+			return await _tutorialService.DoesTutorialExist(tutorialLinkUrl);
+		} 
+
 	
     }
 

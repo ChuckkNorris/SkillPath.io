@@ -30,7 +30,15 @@ namespace SkillPath.Api.Entities
 			int numberToSkip = (page - 1) * countPerPage;
 			var toReturn = await Find().Skip(numberToSkip).Take(countPerPage).ToListAsync();
 			return toReturn.Select(tut => MapTutorial(tut));
+		}
 
+		public async Task<bool> DoesTutorialExist(string tutorialLinkUrl) {
+			bool toReturn = false;
+			string baseUrlToCheck = tutorialLinkUrl?.Split('?').FirstOrDefault();
+			var matchingTutorial = await _context.Tutorials.FirstOrDefaultAsync(tut => tut.LinkUrl == baseUrlToCheck);
+			if (matchingTutorial != null)
+				toReturn = true;
+			return toReturn;
 		}
 
 		private Tutorial MapTutorial(Tutorial tutorial) {
