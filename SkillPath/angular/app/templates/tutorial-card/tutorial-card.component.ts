@@ -32,6 +32,6 @@ export class TutorialCardComponent implements OnInit {
     //dialogRef.componentInstance.isEditing = true;
   }
 
-  defaultImageUrl:string = "http://michaelbrant.com/wp-content/uploads/2012/06/photodune-907221-css3-code-m.jpg";
+  defaultImageUrl:string = "../../../assets/SkillPath_Default_Image.png" //"http://michaelbrant.com/wp-content/uploads/2012/06/photodune-907221-css3-code-m.jpg";
 
 }
