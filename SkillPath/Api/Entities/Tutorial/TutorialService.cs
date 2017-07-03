@@ -19,18 +19,32 @@ namespace SkillPath.Api.Entities
 			_context.Tutorials.Add(tutorialToSave);
 			await _context.SaveChangesAsync();
 		}
-		public async Task<IEnumerable<Tutorial>> FindInCategory(Guid categoryId) {
-			var toReturn = await Find(tut => tut.TutorialCategories.Any(tutCat => tutCat.CategoryId == categoryId))
-			.OrderByDescending(x => x.DateCreated).ToListAsync();
-			return toReturn.Select(tut => MapTutorial(tut));
-		}
-
-		public async Task<IEnumerable<Tutorial>> GetTutorials(int page) {
+		public async Task<IEnumerable<Tutorial>> GetTutorials(int page, Guid? categoryId) {
+			IEnumerable<Tutorial> toReturn = null;
+			IQueryable<Tutorial> tutorialQuery;
 			int countPerPage = 20;
 			int numberToSkip = (page - 1) * countPerPage;
-			var toReturn = await Find().Skip(numberToSkip).Take(countPerPage).ToListAsync();
+			if (categoryId != null)
+				tutorialQuery = Find(tut => tut.TutorialCategories.Any(tutCat => tutCat.CategoryId == categoryId));
+			else
+				tutorialQuery = Find();
+			toReturn = await tutorialQuery
+				.OrderByDescending(x => x.DateCreated)
+				.Skip(numberToSkip)
+				.Take(countPerPage)
+				.ToListAsync();
 			return toReturn.Select(tut => MapTutorial(tut));
+			// var toReturn = await Find(tut => tut.TutorialCategories.Any(tutCat => tutCat.CategoryId == categoryId))
+			// .OrderByDescending(x => x.DateCreated).ToListAsync();
+			// return toReturn.Select(tut => MapTutorial(tut));
 		}
+
+		// public async Task<IEnumerable<Tutorial>> GetTutorials(int page) {
+		// 	int countPerPage = 20;
+		// 	int numberToSkip = (page - 1) * countPerPage;
+		// 	var toReturn = await Find().Skip(numberToSkip).Take(countPerPage).ToListAsync();
+		// 	return toReturn.Select(tut => MapTutorial(tut));
+		// }
 
 		public async Task<bool> DoesTutorialExist(string tutorialLinkUrl) {
 			bool toReturn = false;
