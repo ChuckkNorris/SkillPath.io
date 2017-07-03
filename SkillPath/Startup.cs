@@ -16,6 +16,7 @@ using System.Text;
 using SkillPath.Api.ErrorHandling;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using SkillPath.Middleware;
 
 namespace SkillPath
 {
@@ -26,9 +27,11 @@ namespace SkillPath
         public Startup(IHostingEnvironment env) {
       var builder = new ConfigurationBuilder()
           .SetBasePath(env.ContentRootPath)
+          .AddJsonFile("credentials.json", false)
           .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
           .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
           .AddEnvironmentVariables();
+
       Configuration = builder.Build();
 
       //Console.WriteLine($"Environment Name -> {env.EnvironmentName}");
@@ -64,6 +67,9 @@ namespace SkillPath
                 await next();
               }
             });
+
+            app.UseMiddleware<AuthorizeRequest>();
+
 			app.UseExceptionHandler(appError => {
 				appError.Run(async context => {
 					context.Response.StatusCode = 500;

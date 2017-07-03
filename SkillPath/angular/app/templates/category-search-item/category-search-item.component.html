@@ -1,0 +1,8 @@
+<md-list-item
+  [class.first-item]="selectedCategoryIndex == index"
+  [class.selected-item]="cat.id == selectedCategory?.id"
+  [title]="cat.description">
+  <app-icomoon-icon md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
+  <h4 md-line>{{cat.name}}</h4>
+  <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
+</md-list-item>

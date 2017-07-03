@@ -12,14 +12,10 @@ import { ValidatorFn, NG_VALIDATORS, Validator, FormControl, AbstractControl, NG
   ]
 })
 export class TutorialLinkExists implements Validator {
-  //validator: ValidatorFn;
-  constructor(private _tutorialService: TutorialService) {
-   //this.validator = this.doesLinkExist();
-  }
+  constructor(private _tutorialService: TutorialService) {}
 
   validate(c: AbstractControl) {
-    console.log(c.value);
-    return this.doesLinkExist(c.value).first();  //this.validator(c.value);
+    return this.doesLinkExist(c.value).first(); 
   }
 
   doesLinkExist(tutorialLinkUrl: string) {
@@ -37,17 +33,5 @@ export class TutorialLinkExists implements Validator {
       });
     });
   }
-
-  // doesLinkExist2(): ValidatorFn {
-  //   return (c: AbstractControl) => {
-     
-  //     console.log(c.value);
-  //     if (c.value && c.value.id)
-  //       return null;
-  //     else
-  //       return err;
-  //   }
-  // }
-
 
 }

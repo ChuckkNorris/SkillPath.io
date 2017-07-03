@@ -35,7 +35,7 @@ export class StaggerGapDirective {
       let countPerRow = this.getItemCountPerRow();
       let parentIndex = this.index - countPerRow;
       let parent = this.flexElement.nativeElement.parentElement;
-      if (parent.children) {
+      if (parent && parent.children) {
         let parentEl = parent.children[parentIndex];
       
         let parentHeight = parentEl.offsetHeight;

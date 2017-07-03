@@ -9,12 +9,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from "@angular/f
 
 export function validateCategorySearch(c: FormControl) {
   let err = {
-          requiredError: {
-            given: c.value,
-          }
-        };
+    requiredError: {
+      given: c.value,
+    }
+  };
 
-        return c.value == null || c.value == undefined ? err : null;
+  return c.value == null || c.value == undefined ? err : null;
 }
 
 @Component({
@@ -24,7 +24,7 @@ export function validateCategorySearch(c: FormControl) {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-     // useValue: validateCategorySearch,
+      // useValue: validateCategorySearch,
       useExisting: forwardRef(() => CategorySearchComponent),
       multi: true
     }
@@ -32,7 +32,7 @@ export function validateCategorySearch(c: FormControl) {
 })
 export class CategorySearchComponent implements OnInit, ControlValueAccessor {
 
-  constructor(private _categoryService: CategoryService)  { }
+  constructor(private _categoryService: CategoryService) { }
   @Input() title: string;
   @Input() public tier: number;
   @Input() parentId: string;
@@ -42,11 +42,11 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   @Input() _selectedCategory: Category = {};
   @Output() selectedCategoryChange: EventEmitter<Category> = new EventEmitter<Category>();
   public categories: Category[] = [];
-  
+
   @Output() onViewInitialized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnInit() {
-     this.getCategories();
+    this.getCategories();
   }
 
   ngAfterViewInit() {
@@ -122,25 +122,22 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   selectCategoryByName(categoryName: string) {
     let selectedCat = this.categories.find(cat => cat.name == categoryName);;
     if (selectedCat) {
-       this.selectedCategory = selectedCat;
-        this.selectedCategoryChange.emit(this.selectedCategory);
-        this.onBlur();
+      this.selectedCategory = selectedCat;
+      this.selectedCategoryChange.emit(this.selectedCategory);
+      this.onBlur();
     }
-   }
+  }
 
-   selectCategory(selectedCategoryId: string, index: number) {
-     this.selectedCategoryIndex = index;
-     //Observable.from(this.categories).filter(x => x.filter)
-     //this.selectedCategory = 
-     this.categories.forEach((cat, catIndex) => {
-       if (cat.id == selectedCategoryId || index == catIndex) {
-        this.selectedCategory = cat;
-        this.selectedCategoryChange.emit(this.selectedCategory);
-        //this.propogateChange(this.selectedCategory);
-        this.onBlur();
-       }
-      });
-   }
+  selectCategory(selectedCategoryId: string, index: number) {
+    this.selectedCategoryIndex = index;
+    let selectedCat = this.categories.find((cat, catIndex) => cat.id == selectedCategoryId || catIndex == index);
+    if (selectedCat) 
+      this.selectedCategory = selectedCat;
+    else
+      this.selectedCategory = {tier: parseInt(this.tier.toString())};
+    this.selectedCategoryChange.emit(this.selectedCategory);
+    this.onBlur();
+  }
 
   set selectedCategory(val) {
     this._selectedCategory = val;
@@ -148,19 +145,19 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
   get selectedCategory() {
-     return this._selectedCategory;
+    return this._selectedCategory;
   }
 
-   writeValue(value: any) {
-     this.selectedCategory = value;
-   }
+  writeValue(value: any) {
+    this.selectedCategory = value;
+  }
 
-   propogateChange = (_: any) => {};
+  propogateChange = (_: any) => { };
 
-   registerOnChange(fn) {
-     this.propogateChange = fn;
-   }
+  registerOnChange(fn) {
+    this.propogateChange = fn;
+  }
 
-   registerOnTouched() {}
-  
+  registerOnTouched() { }
+
 }
