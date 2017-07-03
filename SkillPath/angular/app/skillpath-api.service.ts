@@ -1,4 +1,4 @@
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptionsArgs } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
 
@@ -10,17 +10,18 @@ export class SkillpathApiService {
 
   public get(endpoint: string, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    return this._http.get(fullUrl).map(response => this.mapResponse(response));
+
+    return this._http.get(fullUrl, this.getRequestOptions()).map(response => this.mapResponse(response));
   }
 
   public post(endpoint: string, body: any, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    return this._http.post(fullUrl, body).map(response => this.mapResponse(response));
+    return this._http.post(fullUrl, body, this.getRequestOptions()).map(response => this.mapResponse(response));
   }
 
   public put(endpoint: string, body: any, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    return this._http.put(fullUrl, body).map(response => this.mapResponse(response));
+    return this._http.put(fullUrl, body, this.getRequestOptions()).map(response => this.mapResponse(response));
   }
 
   private mapResponse(response: Response) : any {
@@ -31,6 +32,16 @@ export class SkillpathApiService {
     else {
       return response;
     }
+  }
+
+  private getRequestOptions(): RequestOptionsArgs {
+    let toReturn: RequestOptionsArgs = {};
+    let headers = new Headers();
+    let authValue = btoa("test:test");
+    headers.append("Authorization", 'Basic ' + authValue);
+    toReturn.headers = headers;
+
+    return toReturn;
   }
 
   private constructFullUrl(endpoint: string, queryStringParams?: { [key: string]: any }): string {

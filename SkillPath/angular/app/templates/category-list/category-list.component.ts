@@ -74,8 +74,6 @@ export class CategoryListComponent implements OnInit {
    getLgFlex() {
     return "300px";
   }
-
-  
  
   @ViewChildren('categoryTier') children: QueryList<CategorySearchComponent>;
   @Input() shouldGetEmptyCategories: boolean = false;
@@ -84,7 +82,6 @@ export class CategoryListComponent implements OnInit {
 
     if (childSearch) {
       childSearch.getCategories(category.id);
-      //childSearch.focus();
     }
   }
 
@@ -108,6 +105,9 @@ export class CategoryListComponent implements OnInit {
       case 4:
         this.t4CategoryChange.emit(category); 
         break;
+      // default:
+      //   console.log('DEFAULT: ' + category.tier);
+      //   break;
     }
   }
 

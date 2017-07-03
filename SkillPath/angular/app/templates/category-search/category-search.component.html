@@ -23,14 +23,23 @@
           <h4 md-line>Loading Categories...</h4>
           
       </md-list-item>
+
+      <md-list-item
+       
+        [class.selected-item]="!selectedCategory?.id"
+        (click)="selectCategory(undefined, -1)" 
+        [title]="hello">
+        <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
+        <h4 md-line>All</h4>
+        <!--<p md-line class="giveMeEllipsis"> {{cat.description}}</p>-->
+      </md-list-item>
+
       <md-list-item *ngFor="let cat of categories; let index=index" 
          [class.first-item]="selectedCategoryIndex == index"
         [class.selected-item]="cat.id == selectedCategory?.id"
         (click)="selectCategory(cat.id, index)" 
         [title]="cat.description">
-
         <app-icomoon-icon md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
-        
         <h4 md-line>{{cat.name}}</h4>
         <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
       </md-list-item>
