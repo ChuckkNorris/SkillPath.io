@@ -31,6 +31,11 @@ md-list-item {
     text-align: center;
 }
 
+.hand {
+    cursor: pointer;
+}
+
+
 .readonly {
     z-index: 99999;
     background-color: gray;
