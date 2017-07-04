@@ -57,20 +57,8 @@ namespace SkillPath.Api.Entities
 					query = query.Where(cat => cat.TutorialCategories.Any());
 				}
 			toReturn = await query.ToListAsync();
-
-			// foreach (var cat in toReturn)
-			// {
-			// 	cat.TutorialCount = cat.TutorialCategories.Count();
-			// }
-
 			return toReturn;
 		}
-
-
-
-		
-	
-	
 
 		public IQueryable<Category> Find(Expression<Func<Category, bool>> predicate) {
 			return _context.Categories.Where(predicate);

@@ -75,6 +75,23 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
 
   }
 
+  isFirstInitialization: boolean = true;
+  setCategories(categories: Category[]) {
+    // THIS IS CAUSING THE TAG ERRORS
+    this.categories = categories;
+    if (this.selectedCategory && this.selectedCategory.id) {
+      console.log(this.tier + ': ' + this.selectedCategory.name);
+    }
+    else {
+      if (this.autoSelect)
+        this.selectCategoryByName(this.autoSelect);
+      else if (this.isFirstInitialization) {
+        this.selectAllCategory();
+        this.isFirstInitialization = false;
+      }
+    }
+  }
+
   selectAllCategory() {
     this.selectedCategory = {
       name: 'All',
@@ -83,24 +100,8 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     };
     this.selectedCategoryChange.emit(this.selectedCategory);
     this.onBlur();
-    //this.selectCategory(undefined, -1);
   }
 
-  isFirstInitialization: boolean = true;
-  setCategories(categories: Category[]) {
-    this.categories = categories;
-    console.log(this.selectedCategory);
-    // if (this.selectCategory)
-    //   this.selectCategory(this.selectedCategory.id);
-    if (this.autoSelect)
-      this.selectCategoryByName(this.autoSelect);
-    else if (this.isFirstInitialization && !this.selectedCategory.id) {
-      this.selectAllCategory();
-      this.isFirstInitialization = false;
-    }
-  }
-
-  private filteredCategories: Category[];
 
   isFocused: boolean = false;
   onFocused() {
@@ -110,22 +111,6 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
 
   onBlur() {
     this.isFocused = false;
-  }
-
-  filterCategories(searchText: any) {
-
-  }
-
-  selectedCategoryIndex: number = 0;
-  selectCategoryArrow(direction) {
-    if (direction == 'up') {
-      if (this.selectedCategoryIndex > 0)
-        this.selectedCategoryIndex--;
-    }
-    else if (direction == 'down') {
-      if (this.selectedCategoryIndex < this.categories.length - 1)
-        this.selectedCategoryIndex++;
-    }
   }
 
   waitForComplete() {
@@ -143,9 +128,9 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  selectCategory(selectedCategoryId: string, index?: number) {
-    this.selectedCategoryIndex = index;
-    let selectedCat = this.categories.find((cat, catIndex) => cat.id == selectedCategoryId || catIndex == index);
+  selectCategory(selectedCategoryId: string) {
+    console.log(selectedCategoryId);
+    let selectedCat = this.categories.find((cat, catIndex) => cat.id == selectedCategoryId);
     if (selectedCat)
       this.selectedCategory = selectedCat;
     else

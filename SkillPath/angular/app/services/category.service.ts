@@ -71,8 +71,6 @@ export class CategoryService {
     return uniqueKey;
   }
   private mapAsCategories(key, categories: any, getEmpty?: boolean): Category[] {
-    // this.storeCategoriesInMemory(key, categories);
-    console.log('GETTING CATEGORIES FROM SERVER');
     let uniqueKey = this.getCategoryKey(key, getEmpty);
     this.allCategories[uniqueKey] = categories;
     return categories as Category[];

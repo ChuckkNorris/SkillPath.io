@@ -22,7 +22,7 @@ namespace SkillPath.Api.Entities
 
 		public async Task<Tutorial> GetTutorial(Guid id) {
 			var toReturn = await Find(tut => tut.Id == id).FirstOrDefaultAsync();
-			return toReturn;
+			return MapTutorial(toReturn);
 		}
 
 		public async Task<IEnumerable<Tutorial>> GetTutorials(int page, Guid? categoryId) {
@@ -40,17 +40,7 @@ namespace SkillPath.Api.Entities
 				.Take(countPerPage)
 				.ToListAsync();
 			return toReturn.Select(tut => MapTutorial(tut));
-			// var toReturn = await Find(tut => tut.TutorialCategories.Any(tutCat => tutCat.CategoryId == categoryId))
-			// .OrderByDescending(x => x.DateCreated).ToListAsync();
-			// return toReturn.Select(tut => MapTutorial(tut));
 		}
-
-		// public async Task<IEnumerable<Tutorial>> GetTutorials(int page) {
-		// 	int countPerPage = 20;
-		// 	int numberToSkip = (page - 1) * countPerPage;
-		// 	var toReturn = await Find().Skip(numberToSkip).Take(countPerPage).ToListAsync();
-		// 	return toReturn.Select(tut => MapTutorial(tut));
-		// }
 
 		public async Task<bool> DoesTutorialExist(string tutorialLinkUrl) {
 			bool toReturn = false;
