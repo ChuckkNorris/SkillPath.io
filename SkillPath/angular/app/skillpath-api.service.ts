@@ -1,3 +1,4 @@
+import { CREDENTIALS } from './models/credentials';
 import { Http, Response, Headers, RequestOptionsArgs } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
@@ -9,7 +10,6 @@ export class SkillpathApiService {
   private BASE_URL = "/api";
 
   public get(endpoint: string, queryStringParams?: { [key: string]: any }): Observable<any> {
-    console.log(endpoint);
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
 
     return this._http.get(fullUrl, this.getRequestOptions()).map(response => this.mapResponse(response));
@@ -38,7 +38,7 @@ export class SkillpathApiService {
   private getRequestOptions(): RequestOptionsArgs {
     let toReturn: RequestOptionsArgs = {};
     let headers = new Headers();
-    let authValue = btoa("test:test");
+    let authValue = btoa(CREDENTIALS.username + ":" + CREDENTIALS.password);
     headers.append("Authorization", 'Basic ' + authValue);
     toReturn.headers = headers;
 
