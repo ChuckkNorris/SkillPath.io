@@ -24,38 +24,17 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
-  // validateDropdown(): ValidatorFn {
-  //   return (c: AbstractControl) => {
-  //     let err = {
-  //       rangeError: {
-  //         given: c.value,
-  //         max: 10,
-  //         min: 0
-  //       }
-  //     };
-  //     if (c.value && c.value.id)
-  //       return null;
-  //     else
-  //       return err;
-  //   }
-  // }
-
-
-  @Input() nameControl;
-  @Input() required: boolean = false;
-  @Input() shouldHideEmpty: boolean;
-
   @Output() t1CategoryChange = new EventEmitter<Category>();
-  @Input() t1Category: Category = {};
+  @Input() t1Category: Category;// = {};
 
   @Output() t2CategoryChange = new EventEmitter<Category>();
-  @Input() t2Category: Category = {};
+  @Input() t2Category: Category;// = {};
 
   @Output() t3CategoryChange = new EventEmitter<Category>();
-  @Input() t3Category: Category = {};
+  @Input() t3Category: Category;// = {};
 
   @Output() t4CategoryChange = new EventEmitter<Category>();
-  @Input() t4Category: Category = {};
+  @Input() t4Category: Category;// = {};
 
   getXsFlex() {
     return "300px";
@@ -85,6 +64,8 @@ export class CategoryListComponent implements OnInit {
 
 
   selectCategory(category: Category) {
+    console.log('Selecting Category...');
+    console.log(category);
     this.deselectChildCategories(category.tier);
     switch (category.tier) {
       case 1:

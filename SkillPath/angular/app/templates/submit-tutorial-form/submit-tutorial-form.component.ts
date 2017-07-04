@@ -27,7 +27,7 @@ export class SubmitTutorialFormComponent implements OnInit {
     private _router: Router,
     private _tutorialService: TutorialService) { }
 
-  @Input() tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
+  @Input() tutorial: Tutorial = { tutorialCategories: [] }
   @Output() tutorialChange = new EventEmitter<Tutorial>();
   @Output() submit = new EventEmitter<Tutorial>();
 
@@ -38,18 +38,9 @@ export class SubmitTutorialFormComponent implements OnInit {
   ngOnInit() {
     if (this.isEditing)
       this.submitButtonText = "Update";
-    if (this.tutorial.id) {
-      this._tutorialService.getTutorial(this.tutorial.id).subscribe(tut => {
-        console.log(tut);
-        this.tutorial = tut;
-      });
-    }
 
   }
 
-  // setCategoryId(tier: number, category: Category) {
-  //   this.tutorial.tutorialCategories[0].categoryId=category.id;
-  // }
   picked: any;
   selectImage(image) {
     this._imageService.getImageFromDataUrl(image._dataURL).subscribe(imageBlob => {
@@ -67,26 +58,18 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
 
   private uploadImage(blob: Blob) {
-      this._loaderService.show();
-          this._imgurService.uploadBlob(blob).subscribe((imageLink) => {
-            this.tutorial.imageUrl = imageLink;
-            this._loaderService.hide();
-            //this._tutorialService.saveTutorial(this.tutorial).subscribe();
-          });
+    this._loaderService.show();
+    this._imgurService.uploadBlob(blob).subscribe((imageLink) => {
+      this.tutorial.imageUrl = imageLink;
+      this._loaderService.hide();
+    });
   }
 
-  linkUrlErrorText: string = "";
-  tutorialExistError: boolean = false;
-  doesTutorialExist() {
-    this._tutorialService.doesTutorialExist(this.tutorial.linkUrl).subscribe(doesTutExist => {
-      console.log(doesTutExist);
-      if (doesTutExist) {
-        this.tutorialExistError = true;
-      }
-      else {
-        this.tutorialExistError = false;
-      }
-    });
+  onCategoryChange(tier: number, categoryId: string) {
+    if (this.tutorial && this.tutorial.tutorialCategories[tier]) {
+      this.tutorial.tutorialCategories[tier].categoryId=categoryId;
+    }
+    
   }
 
   onImagePaste(event: ClipboardEvent) {

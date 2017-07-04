@@ -1,3 +1,4 @@
+import { TutorialService } from './../../services/tutorial.service';
 import { ActivatedRoute } from '@angular/router';
 import { Tutorial } from './../../models/tutorial';
 import { Component, OnInit } from '@angular/core';
@@ -9,13 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeachPageComponent implements OnInit {
 
-  constructor(private _route: ActivatedRoute) { }
+  constructor(private _route: ActivatedRoute, private _tutorialService: TutorialService) { }
   
-
+  tutorial: Tutorial = { tutorialCategories: []};
   ngOnInit() {
     this._route.params.subscribe(params => {
-      this.tutorial.id = params['id'];
+      let tutorialId = params['id'];
+      if (tutorialId)
+        this._tutorialService.getTutorial(tutorialId).subscribe(tut => {
+          console.log(tut);
+          this.tutorial = tut;
+        });
     })
   }
-  tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
+  
 }
