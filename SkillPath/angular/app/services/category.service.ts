@@ -42,6 +42,7 @@ export class CategoryService {
 
     let inMemoryCategories = this.getCategoriesFromMemory(selectedCategoryId, getEmpty);
     if (inMemoryCategories) {
+      console.log(inMemoryCategories);
       return Observable.of(inMemoryCategories as Category[]);
     }
     else {
@@ -56,10 +57,12 @@ export class CategoryService {
 
   private getCategoriesFromMemory(key, getEmpty) {
     let toReturn;
-    let uniqueKey = this.getCategoryKey(key, getEmpty);
-    let inMemoryCategories = this.allCategories[uniqueKey];
-    if (inMemoryCategories)
-      toReturn = inMemoryCategories;
+    if (key) {
+      let uniqueKey = this.getCategoryKey(key, getEmpty);
+      let inMemoryCategories = this.allCategories[uniqueKey];
+      if (inMemoryCategories)
+        toReturn = inMemoryCategories;
+    }
     return toReturn;
   }
 
@@ -71,8 +74,10 @@ export class CategoryService {
     return uniqueKey;
   }
   private mapAsCategories(key, categories: any, getEmpty?: boolean): Category[] {
-    let uniqueKey = this.getCategoryKey(key, getEmpty);
-    this.allCategories[uniqueKey] = categories;
+    if (key && key != '00000000-0000-0000-0000-000000000000') {
+      let uniqueKey = this.getCategoryKey(key, getEmpty);
+      this.allCategories[uniqueKey] = categories;
+    }
     return categories as Category[];
   }
 
