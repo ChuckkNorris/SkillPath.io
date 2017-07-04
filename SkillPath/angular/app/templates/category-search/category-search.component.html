@@ -2,13 +2,13 @@
 
 
 <div class="category-search">
-  <div (click)="onFocused()" fxLayout="column">
+  <div (click)="categoryBtn.focus()" fxLayout="column">
     <button #categoryBtn type="button" class="category-dropdown" fxFlex="100" [disabled]="readonly"
       md-raised-button color="primary" (focus)="onFocused()" (blur)="waitForComplete()">
       <md-icon style="padding-right: 5px;">style</md-icon>
       Filter {{title}}
     </button>
-    <div *ngIf="!isFocused && selectedCategory" class="category-tag" md-suffix>
+    <div *ngIf="!isFocused && selectedCategory != undefined" [class.hand]="!readonly" class="category-tag" md-suffix>
         <app-icomoon-icon md-list-icon *ngIf="selectedCategory.icon" [icon]="selectedCategory.icon"></app-icomoon-icon> {{selectedCategory.name}} 
     </div>
   </div>

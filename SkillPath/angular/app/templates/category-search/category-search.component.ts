@@ -62,19 +62,19 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   public getCategories(parentCategoryId?: string) { // : Observable<any>
     let parentId = parentCategoryId || this.parentId;
     // return Observable.create(obs => {
-      if (parentId) {
-        this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
-          this.setCategories(categories);
-         // obs.next();
-        });
-      }
-      else if (this.tier == 1) {
-        this._categoryService.getCategories(this.tier, this.shouldGetEmptyCategories).subscribe(categories => {
-          this.setCategories(categories);
-         // obs.next();
-        });
-      }
-   // });
+    if (parentId) {
+      this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
+        this.setCategories(categories);
+        // obs.next();
+      });
+    }
+    else if (this.tier == 1) {
+      this._categoryService.getCategories(this.tier, this.shouldGetEmptyCategories).subscribe(categories => {
+        this.setCategories(categories);
+        // obs.next();
+      });
+    }
+    // });
 
   }
 
@@ -89,7 +89,7 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     //this.selectCategory(undefined, -1);
   }
 
-  isFirstInitialization: boolean =  true;
+  isFirstInitialization: boolean = true;
   setCategories(categories: Category[]) {
     this.categories = categories;
     if (this.autoSelect)
