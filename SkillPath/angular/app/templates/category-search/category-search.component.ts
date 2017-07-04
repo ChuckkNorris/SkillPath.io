@@ -77,6 +77,7 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   isFirstInitialization: boolean = true;
   initializeCategorySearch(categories: Category[]) {
     this.categories = categories;
+    // TODO: FIGURE OUT WHY CATEGORY parentId AND tier are undefined
     if (this.selectedCategory && this.selectedCategory.id) {
       // Logic is just simpler this way
     }
