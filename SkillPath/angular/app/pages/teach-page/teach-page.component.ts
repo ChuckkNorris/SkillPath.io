@@ -18,7 +18,6 @@ export class TeachPageComponent implements OnInit {
       let tutorialId = params['id'];
       if (tutorialId)
         this._tutorialService.getTutorial(tutorialId).subscribe(tut => {
-          console.log(tut);
           this.tutorial = tut;
         });
     })

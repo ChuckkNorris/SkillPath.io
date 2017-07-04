@@ -64,8 +64,6 @@ export class CategoryListComponent implements OnInit {
 
 
   selectCategory(category: Category) {
-    console.log('Selecting Category...');
-    console.log(category);
     this.deselectChildCategories(category.tier);
     switch (category.tier) {
       case 1:
@@ -83,9 +81,6 @@ export class CategoryListComponent implements OnInit {
       case 4:
         this.t4CategoryChange.emit(category);
         break;
-      // default:
-      //   console.log('DEFAULT: ' + category.tier);
-      //   break;
     }
   }
 
