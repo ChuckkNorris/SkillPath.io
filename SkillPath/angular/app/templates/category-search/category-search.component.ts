@@ -38,11 +38,10 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   @Input() parentId: string;
   @Input() autoSelect: string;
   @Input() readonly: boolean = false;
-
   @Input() _selectedCategory: Category = {};
   @Output() selectedCategoryChange: EventEmitter<Category> = new EventEmitter<Category>();
-  public categories: Category[] = [];
 
+  public categories: Category[] = [];
   @Output() onViewInitialized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnInit() {
@@ -64,23 +63,22 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     let parentId = parentCategoryId || this.parentId;
     if (parentId) {
       this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
-        this.setCategories(categories);
+        this.initializeCategorySearch(categories);
       });
     }
     else if (this.tier == 1) {
       this._categoryService.getCategories(this.tier, this.shouldGetEmptyCategories).subscribe(categories => {
-        this.setCategories(categories);
+        this.initializeCategorySearch(categories);
       });
     }
 
   }
 
   isFirstInitialization: boolean = true;
-  setCategories(categories: Category[]) {
-    // THIS IS CAUSING THE TAG ERRORS
+  initializeCategorySearch(categories: Category[]) {
     this.categories = categories;
     if (this.selectedCategory && this.selectedCategory.id) {
-      console.log(this.tier + ': ' + this.selectedCategory.name);
+      // Logic is just simpler this way
     }
     else {
       if (this.autoSelect)
@@ -129,7 +127,6 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
   selectCategory(selectedCategoryId: string) {
-    console.log(selectedCategoryId);
     let selectedCat = this.categories.find((cat, catIndex) => cat.id == selectedCategoryId);
     if (selectedCat)
       this.selectedCategory = selectedCat;

@@ -52,9 +52,7 @@ export class ImageService {
         image.onload = (imageEvent) => {
           let resizedUrl = this.resize(image, 900, 500);
           toReturn.data = resizedUrl;
-          console.log(resizedUrl);
           let resizedImage = this.dataURLToBlob(resizedUrl);
-          console.log(resizedImage);
           toReturn.blob = resizedImage;
           obs.next(toReturn);
         };

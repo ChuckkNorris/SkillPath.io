@@ -25,12 +25,10 @@ export class AutoCompleteTestComponent implements OnInit {
   }
   selectedValue: string;
   selectState(state) {
-    console.log(state);
     this.selectedValue = state;
   }
 
   logState(state) {
-    console.log(state);
   }
   myFirst: any;
 
