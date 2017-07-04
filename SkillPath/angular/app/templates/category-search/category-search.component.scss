@@ -4,6 +4,7 @@ md-list-item {
 
 .category-search {
     max-width: 300px;
+    margin-bottom: 45px;
 }
 
 .category-active {
@@ -18,11 +19,16 @@ md-list-item {
     z-index: 1;
 }
 
+.category-dropdown {
+    border-radius: 10px 10px 0px 0px;
+}
+
 .category-tag {
     background: #ff4081;
     color: white;
-    border-radius: 5px;
+    border-radius: 0px 0px 10px 10px;
     padding: 5px;
+    text-align: center;
 }
 
 .readonly {

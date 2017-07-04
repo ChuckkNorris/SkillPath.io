@@ -14,7 +14,6 @@ export class LearnPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getTutorials(1);
     this.initializeInfiniteScroll();
   }
   tutorials = [];
@@ -49,7 +48,6 @@ export class LearnPageComponent implements OnInit {
         let scrollPos = window.pageYOffset;
         let currentPosition = scrollPos + clientHeight;
         let percentageScrolled = currentPosition / pageHeight;
-        console.log('Percentage scrolled: ' + percentageScrolled);
         if (percentageScrolled > .8) {
           this.isRetreivingTutorials = true;
           this.currentPage++;

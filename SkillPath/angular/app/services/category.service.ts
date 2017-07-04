@@ -20,7 +20,7 @@ export class CategoryService {
     }
     return this._api.get('/category/find', params)
       .map(categories => {
-        return categories as Category[]
+        return this.mapAsCategories(tier, categories, getEmpty);
       });
   }
 
@@ -31,10 +31,37 @@ export class CategoryService {
     if (getEmpty) {
       params['getEmpty'] = "True";
     }
-    return this._api.get('/category/GetChildCategories', params)
-      .map(categories => {
-        return categories as Category[]
+    let uniqueKey = this.getCategoryKey(selectedCategoryId, getEmpty);
+    let inMemoryCategories = this.allCategories[uniqueKey];
+    
+    if (inMemoryCategories)
+      return Observable.create(obs => {
+        console.log('GETTING IN MEMORY CATEGORIES');;
+        obs.next(inMemoryCategories as Category[])
       });
+    else {
+      return this._api.get('/category/GetChildCategories', params)
+        .map(categories => {
+          
+          return this.mapAsCategories(selectedCategoryId, categories, getEmpty);
+        });
+    }
+   
+  }
+
+  allCategories = {};
+  private getCategoryKey(key, getEmpty: boolean): string {
+    let uniqueKey = key;
+    if (getEmpty)
+      uniqueKey += ':empty';
+    return uniqueKey;
+  }
+  private mapAsCategories(key, categories: any, getEmpty?: boolean): Category[] {
+   // this.storeCategoriesInMemory(key, categories);
+    console.log('GETTING CATEGORIES FROM SERVER');
+    let uniqueKey = this.getCategoryKey(key, getEmpty);
+    this.allCategories[uniqueKey] = categories;
+    return categories as Category[];
   }
 
   public saveCategory(category: Category) {
