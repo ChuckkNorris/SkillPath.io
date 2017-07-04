@@ -1,51 +1,41 @@
-<div  class="category-search">
-  <div>
-  <md-input-container fxFlex="100">
-    <div *ngIf="!isFocused && selectedCategory?.id" class="category-tag" md-suffix>
-      <app-icomoon-icon md-list-icon *ngIf="selectedCategory.icon" [icon]="selectedCategory.icon"></app-icomoon-icon> {{selectedCategory.name}} 
+<!--md-icon-button-->
+
+
+<div class="category-search">
+  <div (click)="onFocused()" fxLayout="column">
+    <button #categoryBtn type="button" class="category-dropdown" fxFlex="100" [disabled]="readonly"
+      md-raised-button color="primary" (focus)="onFocused()" (blur)="waitForComplete()">
+      <md-icon style="padding-right: 5px;">style</md-icon>
+      Filter {{title}}
+    </button>
+    <div *ngIf="!isFocused && selectedCategory" class="category-tag" md-suffix>
+        <app-icomoon-icon md-list-icon *ngIf="selectedCategory.icon" [icon]="selectedCategory.icon"></app-icomoon-icon> {{selectedCategory.name}} 
     </div>
-    <input [disabled]="readonly" #categoryInput (focus)="onFocused()" mdInput type="text"
-    (keyup.arrowup)="selectCategoryArrow('up')"
-    (keyup.arrowdown)="selectCategoryArrow('down')"
-    (keyup.enter)="selectCategory('', selectedCategoryIndex); onBlur()"
-    (keydown.tab)="selectCategory('', selectedCategoryIndex); onBlur()"
-    (blur)="waitForComplete()"
-    
-    (input)
-    ="filterCategories($event.target.value)" [placeholder]="title" />
-  </md-input-container>
-</div>
-<!---->
-<md-card *ngIf="isFocused"  class="category-list scrollbar" (blur)="onBlur()" >
-  <div id="style-1">
-    <md-list>
-      <md-list-item *ngIf="categories.length == 0">
-          <h4 md-line>Loading Categories...</h4>
-          
-      </md-list-item>
-
-      <md-list-item
-       
-        [class.selected-item]="!selectedCategory?.id"
-        (click)="selectCategory(undefined, -1)" 
-        [title]="hello">
-        <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
-        <h4 md-line>All</h4>
-        <!--<p md-line class="giveMeEllipsis"> {{cat.description}}</p>-->
-      </md-list-item>
-
-      <md-list-item *ngFor="let cat of categories; let index=index" 
-         [class.first-item]="selectedCategoryIndex == index"
-        [class.selected-item]="cat.id == selectedCategory?.id"
-        (click)="selectCategory(cat.id, index)" 
-        [title]="cat.description">
-        <app-icomoon-icon md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
-        <h4 md-line>{{cat.name}}</h4>
-        <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
-      </md-list-item>
-
-    </md-list>
-   
   </div>
-  </md-card>
+  <md-card *ngIf="isFocused" class="category-list scrollbar">
+      <div id="style-1">
+        <md-list>
+          <md-list-item
+            [class.selected-item]="!selectedCategory?.id"
+            (click)="selectAllCategory()" 
+            [title]="hello">
+            <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
+            <h4 md-line>All</h4>
+            <p md-line class="giveMeEllipsis"> Show all Categories</p>
+          </md-list-item>
+            <!--[class.first-item]="selectedCategoryIndex == index"-->
+          <md-list-item *ngFor="let cat of categories; let index=index" 
+          
+            [class.selected-item]="cat.id == selectedCategory?.id"
+            (click)="selectCategory(cat.id, index)" 
+            [title]="cat.description">
+            <app-icomoon-icon md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
+            <h4 md-line>{{cat.name}}</h4>
+            <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
+          </md-list-item>
+
+        </md-list>
+      
+      </div>
+      </md-card>
   </div>

@@ -27,9 +27,9 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
 
-  <Target Name="Build Angular" BeforeTargets="Build">
+  <!--<Target Name="Build Angular" BeforeTargets="Build">
     <Message Text="* * * * * * Building Angular App * * * * * *" Importance="high" />
     <Exec Command="ng build -prod" />
-  </Target>
+  </Target>-->
 
 </Project>

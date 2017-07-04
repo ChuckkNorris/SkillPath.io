@@ -59,30 +59,45 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
   @Input() shouldGetEmptyCategories: boolean = false;
-  public getCategories(parentCategoryId?: string) {
+  public getCategories(parentCategoryId?: string) { // : Observable<any>
     let parentId = parentCategoryId || this.parentId;
-    if (parentId) {
-      if (this.shouldGetEmptyCategories) {
-        this._categoryService.getChildCategories(parentId, true).subscribe(categories => this.setCategories(categories));
+    // return Observable.create(obs => {
+      if (parentId) {
+        this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
+          this.setCategories(categories);
+         // obs.next();
+        });
       }
-      else {
-        this._categoryService.getChildCategories(parentId).subscribe(categories => this.setCategories(categories));
+      else if (this.tier == 1) {
+        this._categoryService.getCategories(this.tier, this.shouldGetEmptyCategories).subscribe(categories => {
+          this.setCategories(categories);
+         // obs.next();
+        });
       }
-    }
-    else if (this.tier == 1) {
-      if (this.shouldGetEmptyCategories) {
-        this._categoryService.getCategories(this.tier, true).subscribe(categories => this.setCategories(categories));
-      }
-      else {
-        this._categoryService.getCategories(this.tier).subscribe(categories => this.setCategories(categories));
-      }
-    }
+   // });
+
   }
 
+  selectAllCategory() {
+    this.selectedCategory = {
+      name: 'All',
+      icon: "books",
+      tier: parseInt(this.tier.toString())
+    };
+    this.selectedCategoryChange.emit(this.selectedCategory);
+    this.onBlur();
+    //this.selectCategory(undefined, -1);
+  }
+
+  isFirstInitialization: boolean =  true;
   setCategories(categories: Category[]) {
     this.categories = categories;
     if (this.autoSelect)
       this.selectCategoryByName(this.autoSelect);
+    else if (this.isFirstInitialization) {
+      this.selectAllCategory();
+      this.isFirstInitialization = false;
+    }
   }
 
   private filteredCategories: Category[];
@@ -131,10 +146,10 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   selectCategory(selectedCategoryId: string, index: number) {
     this.selectedCategoryIndex = index;
     let selectedCat = this.categories.find((cat, catIndex) => cat.id == selectedCategoryId || catIndex == index);
-    if (selectedCat) 
+    if (selectedCat)
       this.selectedCategory = selectedCat;
     else
-      this.selectedCategory = {tier: parseInt(this.tier.toString())};
+      this.selectedCategory = { tier: parseInt(this.tier.toString()) };
     this.selectedCategoryChange.emit(this.selectedCategory);
     this.onBlur();
   }
