@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Tutorial } from './../../models/tutorial';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeachPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _route: ActivatedRoute) { }
+  
 
   ngOnInit() {
+    this._route.params.subscribe(params => {
+      this.tutorial.id = params['id'];
+    })
   }
   tutorial: Tutorial = { tutorialCategories: [{},{},{},{}] }
 }

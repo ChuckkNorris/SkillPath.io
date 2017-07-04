@@ -17,6 +17,13 @@ export class TutorialService {
     return this._api.post('/Tutorial/save', tutorial);
   }
 
+  public getTutorial(id: string): Observable<Tutorial> {
+     var params = {
+      id: id
+    };
+    return this._api.get('/Tutorial/GetTutorial', params).map(x => x as Tutorial);
+  }
+
   public getTutorials(page: number, categoryId?: string): Observable<Tutorial[]> {
     var params = {
       page: page,

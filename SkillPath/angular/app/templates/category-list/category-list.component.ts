@@ -19,28 +19,26 @@ export class CategoryListComponent implements OnInit {
 
   ngAfterViewInit() {
     this.controls.forEach((control: NgModel) => {
-    
+
       this.tutorialForm.addControl(control);
     });
   }
 
-  validateDropdown(): ValidatorFn {
-    return (c: AbstractControl) => {
-      let err = {
-        rangeError: {
-          given: c.value,
-          max: 10,
-          min: 0
-        }
-      };
-      console.log('VALIDATING')
-      console.log(c.value);
-      if (c.value && c.value.id)
-        return null;
-      else
-        return err;
-    }
-  }
+  // validateDropdown(): ValidatorFn {
+  //   return (c: AbstractControl) => {
+  //     let err = {
+  //       rangeError: {
+  //         given: c.value,
+  //         max: 10,
+  //         min: 0
+  //       }
+  //     };
+  //     if (c.value && c.value.id)
+  //       return null;
+  //     else
+  //       return err;
+  //   }
+  // }
 
 
   @Input() nameControl;
@@ -48,16 +46,16 @@ export class CategoryListComponent implements OnInit {
   @Input() shouldHideEmpty: boolean;
 
   @Output() t1CategoryChange = new EventEmitter<Category>();
-  @Input() t1Category: Category= {};
+  @Input() t1Category: Category = {};
 
   @Output() t2CategoryChange = new EventEmitter<Category>();
-  @Input() t2Category: Category= {};
+  @Input() t2Category: Category = {};
 
   @Output() t3CategoryChange = new EventEmitter<Category>();
-  @Input() t3Category: Category= {};
+  @Input() t3Category: Category = {};
 
   @Output() t4CategoryChange = new EventEmitter<Category>();
-  @Input() t4Category: Category= {};
+  @Input() t4Category: Category = {};
 
   getXsFlex() {
     return "300px";
@@ -67,43 +65,42 @@ export class CategoryListComponent implements OnInit {
     return "300px";
   }
 
-   getMdFlex() {
+  getMdFlex() {
     return "300px";
   }
 
-   getLgFlex() {
+  getLgFlex() {
     return "300px";
   }
- 
+
   @ViewChildren('categoryTier') children: QueryList<CategorySearchComponent>;
   @Input() shouldGetEmptyCategories: boolean = false;
   getChildCategories(category: Category) {
-    let childSearch = this.children.find(catSearch => catSearch.tier == category.tier + 1);
-
-    if (childSearch) {
-      childSearch.getCategories(category.id);
-    }
+      let childSearch = this.children.find(catSearch => catSearch.tier == category.tier + 1);
+      if (childSearch) {
+        childSearch.getCategories(category.id);
+      }
   }
 
- 
-  
+
+
   selectCategory(category: Category) {
     this.deselectChildCategories(category.tier);
     switch (category.tier) {
       case 1:
-        this.t1CategoryChange.emit(category); 
+        this.t1CategoryChange.emit(category);
         this.getChildCategories(category);
         break;
       case 2:
-        this.t2CategoryChange.emit(category); 
+        this.t2CategoryChange.emit(category);
         this.getChildCategories(category);
         break;
       case 3:
-        this.t3CategoryChange.emit(category); 
+        this.t3CategoryChange.emit(category);
         this.getChildCategories(category);
         break;
       case 4:
-        this.t4CategoryChange.emit(category); 
+        this.t4CategoryChange.emit(category);
         break;
       // default:
       //   console.log('DEFAULT: ' + category.tier);
@@ -112,11 +109,11 @@ export class CategoryListComponent implements OnInit {
   }
 
   deselectChildCategories(tier: number) {
-    if (tier < 2) 
+    if (tier < 2)
       this.t2Category = {};
-    if (tier < 3) 
+    if (tier < 3)
       this.t3Category = {};
-    if (tier < 4) 
+    if (tier < 4)
       this.t4Category = {};
   }
 
