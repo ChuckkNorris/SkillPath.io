@@ -38,11 +38,18 @@ export class SubmitTutorialFormComponent implements OnInit {
   ngOnInit() {
     if (this.isEditing)
       this.submitButtonText = "Update";
+    if (this.tutorial.id) {
+      this._tutorialService.getTutorial(this.tutorial.id).subscribe(tut => {
+        console.log(tut);
+        this.tutorial = tut;
+      });
+    }
+
   }
 
-  setCategoryId(tier: number, category: Category) {
-    this.tutorial.tutorialCategories[0].categoryId=category.id;
-  }
+  // setCategoryId(tier: number, category: Category) {
+  //   this.tutorial.tutorialCategories[0].categoryId=category.id;
+  // }
   picked: any;
   selectImage(image) {
     this._imageService.getImageFromDataUrl(image._dataURL).subscribe(imageBlob => {

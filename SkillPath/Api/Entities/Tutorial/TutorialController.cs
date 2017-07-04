@@ -21,6 +21,14 @@ namespace SkillPath.Api.Entities
 		}
 
 		[HttpGet]
+		public async Task<Tutorial> GetTutorial(Guid id) {
+			Tutorial toReturn;
+			toReturn = await _tutorialService.GetTutorial(id);
+			return toReturn;
+		}
+
+
+		[HttpGet]
 		public async Task<IEnumerable<Tutorial>> Get(int page, Guid? parentCategoryId = null) {
 			IEnumerable<Tutorial> toReturn;
 			toReturn = await _tutorialService.GetTutorials(page, parentCategoryId);

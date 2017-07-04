@@ -19,6 +19,12 @@ namespace SkillPath.Api.Entities
 			_context.Tutorials.Add(tutorialToSave);
 			await _context.SaveChangesAsync();
 		}
+
+		public async Task<Tutorial> GetTutorial(Guid id) {
+			var toReturn = await Find(tut => tut.Id == id).FirstOrDefaultAsync();
+			return toReturn;
+		}
+
 		public async Task<IEnumerable<Tutorial>> GetTutorials(int page, Guid? categoryId) {
 			IEnumerable<Tutorial> toReturn = null;
 			IQueryable<Tutorial> tutorialQuery;

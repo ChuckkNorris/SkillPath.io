@@ -46,11 +46,12 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   @Output() onViewInitialized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnInit() {
-    this.getCategories();
+    
   }
 
   ngAfterViewInit() {
     this.onViewInitialized.emit(true);
+    this.getCategories();
   }
 
   @ViewChild('categoryInput') input: any;
@@ -59,22 +60,18 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
   @Input() shouldGetEmptyCategories: boolean = false;
-  public getCategories(parentCategoryId?: string) { // : Observable<any>
+  public getCategories(parentCategoryId?: string) {
     let parentId = parentCategoryId || this.parentId;
-    // return Observable.create(obs => {
     if (parentId) {
       this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
         this.setCategories(categories);
-        // obs.next();
       });
     }
     else if (this.tier == 1) {
       this._categoryService.getCategories(this.tier, this.shouldGetEmptyCategories).subscribe(categories => {
         this.setCategories(categories);
-        // obs.next();
       });
     }
-    // });
 
   }
 
@@ -92,9 +89,12 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   isFirstInitialization: boolean = true;
   setCategories(categories: Category[]) {
     this.categories = categories;
+    console.log(this.selectedCategory);
+    // if (this.selectCategory)
+    //   this.selectCategory(this.selectedCategory.id);
     if (this.autoSelect)
       this.selectCategoryByName(this.autoSelect);
-    else if (this.isFirstInitialization) {
+    else if (this.isFirstInitialization && !this.selectedCategory.id) {
       this.selectAllCategory();
       this.isFirstInitialization = false;
     }
@@ -143,7 +143,7 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  selectCategory(selectedCategoryId: string, index: number) {
+  selectCategory(selectedCategoryId: string, index?: number) {
     this.selectedCategoryIndex = index;
     let selectedCat = this.categories.find((cat, catIndex) => cat.id == selectedCategoryId || catIndex == index);
     if (selectedCat)
