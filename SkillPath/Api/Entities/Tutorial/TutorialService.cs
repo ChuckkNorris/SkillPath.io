@@ -56,6 +56,7 @@ namespace SkillPath.Api.Entities
 			foreach (var tutCat in tutorial.TutorialCategories)
 			{
 				var newTutCat = new TutorialCategory() {
+					Id = tutCat.Category?.Id ?? Guid.Empty,
 					CategoryId = tutCat.CategoryId,
 					TutorialId = tutCat.TutorialId,
 					Name = tutCat.Category?.Name,
