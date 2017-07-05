@@ -18,16 +18,19 @@ export class CategoryService {
     if (getEmpty) {
       params['getEmpty'] = "true";
     }
-    
+    // TODO: Figure out why in-memory doesn't work for first tier
     // let inMemoryCategories = this.getCategoriesFromMemory(tier, getEmpty);
+    // console.log('From First Tier CatService');
     // console.log(inMemoryCategories);
     // if (inMemoryCategories) {
+    //   console.log('From Memory TIER');
     //   return Observable.of(inMemoryCategories).map(cat => {return cat as Category[]});
+      
     // }
     //  else {
       return this._api.get('/category/find', params)
       .map(categories => {
-        return categories as Category[]; //  this.mapAsCategories(tier, categories, getEmpty);
+        return categories as Category[]; // this.mapAsCategories(tier, categories, getEmpty);
       });
     //}
   }
@@ -40,18 +43,17 @@ export class CategoryService {
       params['getEmpty'] = "True";
     }
 
-    // let inMemoryCategories = this.getCategoriesFromMemory(selectedCategoryId, getEmpty);
-    // if (inMemoryCategories) {
-    //   console.log(inMemoryCategories);
-    //   return Observable.of(inMemoryCategories as Category[]);
-    // }
-    // else {
+    let inMemoryCategories = this.getCategoriesFromMemory(selectedCategoryId, getEmpty);
+    if (inMemoryCategories) {
+      return Observable.of(inMemoryCategories as Category[]);
+    }
+    else {
       return this._api.get('/category/GetChildCategories', params)
         .map(categories => {
 
           return this.mapAsCategories(selectedCategoryId, categories, getEmpty);
         });
-    //}
+    }
 
   }
 
@@ -70,7 +72,7 @@ export class CategoryService {
   private getCategoryKey(key, getEmpty: boolean): string {
     let uniqueKey = key;
     if (getEmpty)
-      uniqueKey += ':empty';
+      uniqueKey += '-empty';
     return uniqueKey;
   }
   private mapAsCategories(key, categories: any, getEmpty?: boolean): Category[] {
