@@ -18,7 +18,7 @@ export class CategoryService {
     if (getEmpty) {
       params['getEmpty'] = "true";
     }
-
+    
     // let inMemoryCategories = this.getCategoriesFromMemory(tier, getEmpty);
     // console.log(inMemoryCategories);
     // if (inMemoryCategories) {

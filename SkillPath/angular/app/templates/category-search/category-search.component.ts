@@ -35,7 +35,13 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   constructor(private _categoryService: CategoryService) { }
   @Input() title: string;
   @Input() public tier: number;
-  @Input() parentId: string;
+
+  private _parentId: string;
+  @Input() set parentId(value) {
+    this._parentId = value;
+    this.getCategories(value);
+  }
+  get parentId() {return this._parentId;}
   @Input() autoSelect: string;
   @Input() readonly: boolean = false;
   @Input() _selectedCategory: Category = {};
@@ -45,12 +51,13 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   @Output() onViewInitialized: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnInit() {
-    
+    if (this.tier == 1)
+      this.getCategories();
   }
 
   ngAfterViewInit() {
     this.onViewInitialized.emit(true);
-    this.getCategories();
+   
   }
 
   @ViewChild('categoryInput') input: any;
@@ -59,24 +66,25 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
   @Input() shouldGetEmptyCategories: boolean = false;
-  public getCategories(parentCategoryId?: string) {
+  public getCategories(parentCategoryId?: string, wasParentCategorySelected?: boolean) {
     let parentId = parentCategoryId || this.parentId;
-    console.log('getting category' + parentId + ', with tier: ' + this.tier);
+   
     if (parentId) {
+       console.log('getting category ' + parentId + ', with tier: ' + this.tier);
       this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
-        this.initializeCategorySearch(categories);
+        this.trySelectCategories(categories);
       });
     }
     else if (this.tier == 1) {
       this._categoryService.getCategories(this.tier, this.shouldGetEmptyCategories).subscribe(categories => {
-        this.initializeCategorySearch(categories);
+        this.trySelectCategories(categories);
       });
     }
 
   }
 
   isFirstInitialization: boolean = true;
-  initializeCategorySearch(categories: Category[]) {
+  trySelectCategories(categories: Category[]) {
     this.categories = categories;
     // TODO: FIGURE OUT WHY CATEGORY parentId AND tier are undefined
     if (this.selectedCategory && this.selectedCategory.id) {
@@ -87,9 +95,10 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
         this.selectCategoryByName(this.autoSelect);
       else if (this.isFirstInitialization) {
         this.selectAllCategory();
-        this.isFirstInitialization = false;
+        
       }
     }
+    this.isFirstInitialization = false;
   }
 
   selectAllCategory() {
