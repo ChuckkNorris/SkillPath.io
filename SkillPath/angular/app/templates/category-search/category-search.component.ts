@@ -129,11 +129,17 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
   selectCategoryByName(categoryName: string) {
-    let selectedCat = this.categories.find(cat => cat.name == categoryName);;
+    console.log('Auto Select from CategorySearch:' + categoryName);
+    console.log(this.categories);
+    let selectedCat = this.categories.find(cat => cat.name == categoryName);
     if (selectedCat) {
+      console.log(selectedCat);
       this.selectedCategory = selectedCat;
+      console.log(this.selectedCategory);
       this.selectedCategoryChange.emit(this.selectedCategory);
+      this.propogateChange(this.selectedCategory);
       this.onBlur();
+      console.log(this.selectedCategory);
     }
   }
 
