@@ -25,16 +25,16 @@ export class CategoryListComponent implements OnInit {
   }
 
   @Output() t1CategoryChange = new EventEmitter<Category>();
-  @Input() t1Category: Category;// = {};
+  @Input() t1Category: Category = {};
 
   @Output() t2CategoryChange = new EventEmitter<Category>();
-  @Input() t2Category: Category;// = {};
+  @Input() t2Category: Category = {};
 
   @Output() t3CategoryChange = new EventEmitter<Category>();
-  @Input() t3Category: Category;// = {};
+  @Input() t3Category: Category = {};
 
   @Output() t4CategoryChange = new EventEmitter<Category>();
-  @Input() t4Category: Category;// = {};
+  @Input() t4Category: Category = {};
 
   getXsFlex() {
     return "300px";

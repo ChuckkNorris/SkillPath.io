@@ -40,18 +40,18 @@ export class CategoryService {
       params['getEmpty'] = "True";
     }
 
-    let inMemoryCategories = this.getCategoriesFromMemory(selectedCategoryId, getEmpty);
-    if (inMemoryCategories) {
-      console.log(inMemoryCategories);
-      return Observable.of(inMemoryCategories as Category[]);
-    }
-    else {
+    // let inMemoryCategories = this.getCategoriesFromMemory(selectedCategoryId, getEmpty);
+    // if (inMemoryCategories) {
+    //   console.log(inMemoryCategories);
+    //   return Observable.of(inMemoryCategories as Category[]);
+    // }
+    // else {
       return this._api.get('/category/GetChildCategories', params)
         .map(categories => {
 
           return this.mapAsCategories(selectedCategoryId, categories, getEmpty);
         });
-    }
+    //}
 
   }
 

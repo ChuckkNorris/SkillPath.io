@@ -54,10 +54,10 @@
       
       <div fxLayout="row" fxLayoutAlign="center">
         <app-category-list shouldGetEmptyCategories="true" 
-          [t1Category]="tutorial?.tutorialCategories[0]"
-          [t2Category]="tutorial?.tutorialCategories[1]"
-          [t3Category]="tutorial?.tutorialCategories[2]"
-          [t4Category]="tutorial?.tutorialCategories[3]"
+          [t1Category]="tutorial.tutorialCategories[0]"
+          [t2Category]="tutorial.tutorialCategories[1]"
+          [t3Category]="tutorial.tutorialCategories[2]"
+          [t4Category]="tutorial.tutorialCategories[3]"
           (t1CategoryChange)="onCategoryChange(1, $event.id)"
           (t2CategoryChange)="onCategoryChange(2, $event.id)" 
           (t3CategoryChange)="onCategoryChange(3, $event.id)"

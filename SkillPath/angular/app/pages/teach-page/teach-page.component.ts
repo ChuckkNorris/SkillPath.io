@@ -12,7 +12,7 @@ export class TeachPageComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute, private _tutorialService: TutorialService) { }
   
-  tutorial: Tutorial = { tutorialCategories: []};
+  tutorial: Tutorial = { tutorialCategories: [{},{},{},{}]};
   ngOnInit() {
     this._route.params.subscribe(params => {
       let tutorialId = params['id'];

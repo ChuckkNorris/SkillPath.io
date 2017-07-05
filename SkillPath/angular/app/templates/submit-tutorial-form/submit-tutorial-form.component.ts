@@ -66,10 +66,10 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
 
   onCategoryChange(tier: number, categoryId: string) {
-    if (this.tutorial && this.tutorial.tutorialCategories[tier]) {
-      this.tutorial.tutorialCategories[tier].categoryId=categoryId;
+    let index = +tier - 1;
+    if (this.tutorial && this.tutorial.tutorialCategories[index]) {
+      this.tutorial.tutorialCategories[index].categoryId=categoryId;
     }
-    
   }
 
   onImagePaste(event: ClipboardEvent) {

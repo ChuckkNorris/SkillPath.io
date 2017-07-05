@@ -61,6 +61,7 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   @Input() shouldGetEmptyCategories: boolean = false;
   public getCategories(parentCategoryId?: string) {
     let parentId = parentCategoryId || this.parentId;
+    console.log('getting category' + parentId + ', with tier: ' + this.tier);
     if (parentId) {
       this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
         this.initializeCategorySearch(categories);
