@@ -70,7 +70,6 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     let parentId = parentCategoryId || this.parentId;
    
     if (parentId) {
-       console.log('getting category ' + parentId + ', with tier: ' + this.tier);
       this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
         this.trySelectCategories(categories);
       });
@@ -86,7 +85,6 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   isFirstInitialization: boolean = true;
   trySelectCategories(categories: Category[]) {
     this.categories = categories;
-    // TODO: FIGURE OUT WHY CATEGORY parentId AND tier are undefined
     if (this.selectedCategory && this.selectedCategory.id) {
       // Logic is just simpler this way
     }
@@ -129,17 +127,13 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
   selectCategoryByName(categoryName: string) {
-    console.log('Auto Select from CategorySearch:' + categoryName);
-    console.log(this.categories);
+    
     let selectedCat = this.categories.find(cat => cat.name == categoryName);
     if (selectedCat) {
-      console.log(selectedCat);
       this.selectedCategory = selectedCat;
-      console.log(this.selectedCategory);
       this.selectedCategoryChange.emit(this.selectedCategory);
       this.propogateChange(this.selectedCategory);
       this.onBlur();
-      console.log(this.selectedCategory);
     }
   }
 
