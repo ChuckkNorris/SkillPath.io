@@ -2,6 +2,7 @@
 
 # secure files
 credentials.ts
+appsettings.json*
 
 # compiled output
 /dist
