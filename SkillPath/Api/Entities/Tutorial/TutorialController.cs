@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SkillPath.Api.Entities
 {
@@ -27,7 +28,7 @@ namespace SkillPath.Api.Entities
 			return toReturn;
 		}
 
-
+		[Authorize("Admin")]
 		[HttpGet]
 		public async Task<IEnumerable<Tutorial>> Get(int page, Guid? parentCategoryId = null) {
 			IEnumerable<Tutorial> toReturn;

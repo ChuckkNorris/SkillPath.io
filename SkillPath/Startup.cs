@@ -17,6 +17,7 @@ using SkillPath.Api.ErrorHandling;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using SkillPath.Middleware;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SkillPath
 {
@@ -53,6 +54,12 @@ namespace SkillPath
             services.AddScoped<CategoryService>();
             services.AddScoped<TutorialService>();
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddAuthorization(options => {
+               options.AddPolicy("Admin", policy => {
+                    policy.RequireClaim("is_admin");
+                   //policy.Build();
+                }); 
+            });
 
         }
 
@@ -60,6 +67,17 @@ namespace SkillPath
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
+            var cookieOptions = new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "MyCookieMiddlewareInstance",
+                LoginPath = new PathString("/Login"),
+                AccessDeniedPath = new PathString("/Learn"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            };
+            
+            app.UseCookieAuthentication(cookieOptions);
+
             app.Use(async (context, next) =>
             {
                 await next();
