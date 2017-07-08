@@ -1,4 +1,4 @@
-import { CREDENTIALS } from './models/credentials';
+import { CREDENTIALS } from '../../credentials/credentials';
 import { Http, Response, Headers, RequestOptionsArgs } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
