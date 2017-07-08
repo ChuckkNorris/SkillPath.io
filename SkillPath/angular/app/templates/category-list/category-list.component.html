@@ -4,7 +4,7 @@
     fxFlexAlign="center"
     name="t1Category"
     autoSelect="Frontend"
-   
+    readonly="true"
     fxFlexAlign="center"
     tier="1" class="category-search"  
     title="Stack"
@@ -21,7 +21,7 @@
    <!-- Tier 2   readonly="true"-->
   <app-category-search 
     autoSelect="Frameworks/Libraries"
-   
+    readonly="true"
     #categoryTier 
     [class.hidden]="!t1Category?.id"
     name="t2Category"

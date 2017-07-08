@@ -22,7 +22,6 @@
           </md-list-item>
             <!--[class.first-item]="selectedCategoryIndex == index"-->
           <md-list-item *ngFor="let cat of categories; let index=index" 
-          
             [class.selected-item]="cat.id == selectedCategory?.id"
             (click)="selectCategory(cat.id, index)" 
             [title]="cat.description">

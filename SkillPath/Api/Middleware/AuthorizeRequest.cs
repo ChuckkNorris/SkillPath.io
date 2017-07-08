@@ -6,14 +6,21 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace SkillPath.Middleware {
     public class AuthorizeRequest {
         private readonly RequestDelegate _next;
-
-         public AuthorizeRequest(RequestDelegate next)
-        {
+        private readonly IConfiguration _config;
+        private readonly string _username;
+        private readonly string _password;
+        
+        public AuthorizeRequest(RequestDelegate next, IConfiguration config) {
             _next = next;
+            _config = config;
+            _username = this._config["auth_username"];
+            _password = this._config["auth_password"];
+
         }
 
         public async Task Invoke(HttpContext context)
@@ -29,7 +36,9 @@ namespace SkillPath.Middleware {
                     int seperatorIndex = usernamePassword.IndexOf(':');
                     var username = usernamePassword.Substring(0, seperatorIndex);
                     var password = usernamePassword.Substring(seperatorIndex + 1);
-                    if(username == "test" && password == "test" )
+                    Console.WriteLine(username + password);
+                    Console.WriteLine(_username + _password);
+                    if(username == _username && password == _password )
                         await _next.Invoke(context);
                     else {
                         context.Response.StatusCode = 401; //Unauthorized
