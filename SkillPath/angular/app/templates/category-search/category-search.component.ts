@@ -41,7 +41,7 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     this._parentId = value;
     this.getCategories(value);
   }
-  get parentId() {return this._parentId;}
+  get parentId() { return this._parentId; }
   @Input() autoSelect: string;
   @Input() readonly: boolean = false;
   @Input() _selectedCategory: Category = {};
@@ -53,11 +53,12 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
     if (this.tier == 1)
       this.getCategories();
+    this.allCategory.tier = +this.tier;
   }
 
   ngAfterViewInit() {
     this.onViewInitialized.emit(true);
-   
+
   }
 
   @ViewChild('categoryInput') input: any;
@@ -68,7 +69,7 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   @Input() shouldGetEmptyCategories: boolean = false;
   public getCategories(parentCategoryId?: string, wasParentCategorySelected?: boolean) {
     let parentId = parentCategoryId || this.parentId;
-   
+
     if (parentId) {
       this._categoryService.getChildCategories(parentId, this.shouldGetEmptyCategories).subscribe(categories => {
         this.trySelectCategories(categories);
@@ -91,14 +92,17 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     else {
       if (this.autoSelect)
         this.selectCategoryByName(this.autoSelect);
-      else if (this.isFirstInitialization) {
-        this.selectAllCategory();
-        
-      }
+      // else if (this.isFirstInitialization) {
+      //   this.selectAllCategory();
+      // }
     }
     this.isFirstInitialization = false;
   }
-
+  allCategory = {
+    name: 'All',
+    icon: "books",
+    tier: +this.tier
+  };
   selectAllCategory() {
     this.selectedCategory = {
       name: 'All',
@@ -127,7 +131,6 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
   }
 
   selectCategoryByName(categoryName: string) {
-    
     let selectedCat = this.categories.find(cat => cat.name == categoryName);
     if (selectedCat) {
       this.selectedCategory = selectedCat;
@@ -146,9 +149,18 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     this.selectedCategoryChange.emit(this.selectedCategory);
     this.onBlur();
   }
-
+  isEmpty(o) {
+    for (var i in o) {
+      if (o.hasOwnProperty(i)) {
+        return false;
+      }
+    }
+    return true;
+  }
   set selectedCategory(val) {
-    this._selectedCategory = val;
+    console.log(this.tier + ': has a category of' + JSON.stringify(val));
+    console.log(this.isEmpty(val));
+    this._selectedCategory = this.isEmpty(val) ? this.allCategory : val;
     this.propogateChange(this.selectedCategory);
   }
 

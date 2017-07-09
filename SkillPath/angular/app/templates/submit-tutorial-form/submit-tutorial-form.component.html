@@ -1,3 +1,4 @@
+{{tutorial | json}}
 <form #tutorialForm="ngForm" (ngSubmit)="submitTutorial()">
 
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="20px" fxLayoutAlign.gt-xs="center center">
@@ -51,13 +52,13 @@
       <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
 
       </div>
-      
+      {{tutCat4 | json}}
       <div fxLayout="row" fxLayoutAlign="center">
         <app-category-list shouldGetEmptyCategories="true" 
-          [t1Category]="tutorial.tutorialCategories[0]"
-          [t2Category]="tutorial.tutorialCategories[1]"
-          [t3Category]="tutorial.tutorialCategories[2]"
-          [t4Category]="tutorial.tutorialCategories[3]"
+          [t1Category]="tutCat1"
+          [t2Category]="tutCat2"
+          [t3Category]="tutCat3"
+          [t4Category]="tutCat4"
           (t1CategoryChange)="onCategoryChange(1, $event.id)"
           (t2CategoryChange)="onCategoryChange(2, $event.id)" 
           (t3CategoryChange)="onCategoryChange(3, $event.id)"
