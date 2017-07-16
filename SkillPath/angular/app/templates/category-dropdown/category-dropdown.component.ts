@@ -28,6 +28,10 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   }
   registerOnTouched() { }
 
+  ngAfterViewInit() {
+    console.log('Category ngAfterViewInit()');
+  }
+
   // - - INPUTS - - //
 
   @Input() autoSelect: string;
@@ -46,8 +50,9 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   private _categories: Category[] = [];
   @Input('categories') set categories(categories) {
     this._categories = categories;
-    if (this.autoSelect)
-      this.selectCategoryByName(this.autoSelect);
+    let autoSelectCategory = this.getCategoryByName(this.autoSelect);
+    if (autoSelectCategory)
+      this.selectedCategory = autoSelectCategory;
 
   }
   get categories() {
@@ -55,14 +60,12 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   }
 
   // - - CONTROL METHODS - - //
-  selectCategoryByName(categoryName: string) {
-    if (this.categories) {
-      let selectedCat = this.categories.find(cat => cat.name == categoryName);
-      if (selectedCat) {
-        this.selectedCategory = selectedCat;
-        this.showCategoryOptions = false;
-      }
+  getCategoryByName(categoryName: string) {
+    let selectedCat;
+    if (this.categories && this.autoSelect) {
+      selectedCat = this.categories.find(cat => cat.name == categoryName);
     }
+    return selectedCat;
   }
 
   // - - CONTROL EVENTS - - //
