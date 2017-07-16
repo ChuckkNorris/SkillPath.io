@@ -2,11 +2,15 @@
 
 <!--fxLayout.xs="column" -->
 <!--<div fxLayout="row" fxLayoutAlign="center center">-->
-  <app-category-list
+  <app-category-dropdown-list
+    
+  >
+  </app-category-dropdown-list>
+  <!-- <app-category-list
     (t1CategoryChange)="getTutorials(1, $event.id, 1)"
     (t2CategoryChange)="getTutorials(1, $event.id, 2)"
     (t3CategoryChange)="getTutorials(1, $event.id, 3)"
     (t4CategoryChange)="getTutorials(1, $event.id, 4)"
-  ></app-category-list>
+  ></app-category-list> -->
 <!--</div>-->
 <app-tutorial-list [tutorials]="tutorials"></app-tutorial-list>

@@ -3,13 +3,13 @@
   
 <!--(ngSubmit)="login($event)"-->
 <form > 
-  <div fxLayout="column" fxLayoutAlign="center">
+  <div fxLayout="column" fxLayoutAlign="center center">
 
-    <md-input-container fxFlex="300px">
+    <md-input-container>
       <input mdInput name="username" placeholder="Username" [(ngModel)]="username" type="text">
     </md-input-container>
 
-    <md-input-container fxFlex="300px">
+    <md-input-container>
         <input mdInput (keyup.enter)="login(null)" name="password" placeholder="Password" [(ngModel)]="password" type="password">
     </md-input-container>
 

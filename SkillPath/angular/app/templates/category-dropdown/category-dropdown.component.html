@@ -1,29 +1,32 @@
-{{selectedCategory | json}}
+
 <div class="category-search">
   <div (click)="categoryBtn.focus()" fxLayout="column">
     <button #categoryBtn type="button" class="category-dropdown" fxFlex="100" [disabled]="readonly"
-      md-raised-button color="primary" (focus)="onFocused()" (blur)="waitForComplete()">
-      <md-icon style="padding-right: 5px;">style</md-icon>
+      md-raised-button color="primary" (focus)="showCategoryOptions = true" (blur)="showCategoryOptions = false">
+       <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
+      <!-- <md-icon style="padding-right: 5px;">style</md-icon> -->
       Filter {{title}}
     </button>
-    <div *ngIf="!isFocused && selectedCategory != undefined" [class.hand]="!readonly" class="category-tag" md-suffix>
-        <app-icomoon-icon md-list-icon *ngIf="selectedCategory.icon" [icon]="selectedCategory.icon"></app-icomoon-icon> {{selectedCategory.name}} 
+    <!--  *ngIf="!shouldShowCatgoryOptions && selectedCategory != undefined" -->
+    <div [class.hand]="!readonly" class="category-tag" md-suffix>
+        <app-icomoon-icon md-list-icon *ngIf="selectedCategory?.icon" [icon]="selectedCategory?.icon"></app-icomoon-icon> <span *ngIf="selectedCategory?.name">{{selectedCategory.name}} </span>
+
     </div>
   </div>
-  <md-card *ngIf="isFocused" class="category-list scrollbar">
+  <md-card [class.hidden]="!showCategoryOptions" class="category-list scrollbar">
       <div id="style-1">
         <md-list>
           <md-list-item
             [class.selected-item]="!selectedCategory?.id"
-            (click)="selectAllCategory()" 
+            (click)="selectedCategory = allCategory" 
             [title]="hello">
-            <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
-            <h4 md-line>All</h4>
-            <p md-line class="giveMeEllipsis"> Show all Categories</p>
+            <app-icomoon-icon md-list-icon [icon]="allCategory.icon"></app-icomoon-icon>
+            <h4 md-line>{{allCategory.name}}</h4>
+            <p md-line class="giveMeEllipsis">{{allCategory.description}} </p>
           </md-list-item>
           <md-list-item *ngFor="let cat of categories; let index=index" 
             [class.selected-item]="cat.id == selectedCategory?.id"
-            (click)="selectCategory(cat.id, index)" 
+            (click)="forceSelectCategory(cat)" 
             [title]="cat.description">
             <app-icomoon-icon md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
             <h4 md-line>{{cat.name}}</h4>

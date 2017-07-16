@@ -1,3 +1,4 @@
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -5,20 +6,14 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './icomoon-icon.component.html',
   styleUrls: ['./icomoon-icon.component.css']
 })
-export class IcomoonIconComponent implements OnInit {
+export class IcomoonIconComponent {
 
   constructor() { }
-  @Input() icon: string = "";
-  parsedIcon: string[] = [];
-  ngOnInit() {
-    this.parseIcon();
-  }
-
-  parseIcon() {
-    if (this.icon) {
-      this.parsedIcon = this.icon.split('.');
+  @Input() set icon(val: string) {
+     if (val) {
+      this.parsedIcon = val.split('.');
     }
   }
-
+  parsedIcon: string[] = [];
 
 }
