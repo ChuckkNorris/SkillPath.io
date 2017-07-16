@@ -7,42 +7,42 @@
     autoSelect="Frontend"
     fxFlex="300px"
     title="Stack"
-    [(ngModel)]="selectedT1Category"
+    [(ngModel)]="t1Category"
     [categories]="t1Categories"
     (ngModelChange)="getChildCategories('t2Categories', $event?.id)"
   ></app-category-dropdown>
 
   <app-category-dropdown 
     name="t2Category"
-    [class.hidden]="!selectedT1Category?.id"
+    [class.hidden]="!t1Category?.id"
     categorySearchRequired
     autoSelect="Frameworks/Libraries"
     fxFlex="300px"
     title="Context"
-    [(ngModel)]="selectedT2Category"
+    [(ngModel)]="t2Category"
     [categories]="t2Categories"
     (ngModelChange)="getChildCategories('t3Categories', $event?.id)"
   ></app-category-dropdown>
 
   <app-category-dropdown 
     name="t3Category"
-    [class.hidden]="!selectedT2Category?.id"
+    [class.hidden]="!t2Category?.id"
     categorySearchRequired
     autoSelect="Angular 2.x+"
     fxFlex="300px"
     title="Technology"
-    [(ngModel)]="selectedT3Category"
+    [(ngModel)]="t3Category"
     [categories]="t3Categories"
     (ngModelChange)="getChildCategories('t4Categories', $event?.id)"
   ></app-category-dropdown>
 
   <app-category-dropdown 
     name="t4Category"
-    [class.hidden]="!selectedT3Category?.id"
+    [class.hidden]="!t3Category?.id"
     categorySearchRequired
     fxFlex="300px"
     title="Area"
-    [(ngModel)]="selectedT4Category"
+    [(ngModel)]="t4Category"
     [categories]="t4Categories"
   ></app-category-dropdown>
 

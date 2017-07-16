@@ -56,14 +56,13 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
 
   // - - CONTROL METHODS - - //
   selectCategoryByName(categoryName: string) {
-    let selectedCat = this.categories.find(cat => cat.name == categoryName);
-    if (selectedCat) {
-      this.selectedCategory = selectedCat;
-      this.showCategoryOptions = false;
+    if (this.categories) {
+      let selectedCat = this.categories.find(cat => cat.name == categoryName);
+      if (selectedCat) {
+        this.selectedCategory = selectedCat;
+        this.showCategoryOptions = false;
+      }
     }
-    // else {
-    //    this.selectedCategory = undefined;
-    // }
   }
 
   // - - CONTROL EVENTS - - //

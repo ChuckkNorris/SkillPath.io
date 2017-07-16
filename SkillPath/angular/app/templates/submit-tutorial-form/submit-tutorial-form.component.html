@@ -54,7 +54,10 @@
       </div>
       {{tutCat4 | json}}
       <div fxLayout="row" fxLayoutAlign="center">
-        <app-category-list shouldGetEmptyCategories="true" 
+        <app-category-dropdown-list
+          showEmptyCategories="true"
+        ></app-category-dropdown-list>
+        <!-- <app-category-list shouldGetEmptyCategories="true" 
           [t1Category]="tutCat1"
           [t2Category]="tutCat2"
           [t3Category]="tutCat3"
@@ -63,7 +66,7 @@
           (t2CategoryChange)="onCategoryChange(2, $event.id)" 
           (t3CategoryChange)="onCategoryChange(3, $event.id)"
           (t4CategoryChange)="onCategoryChange(4, $event.id)">
-        </app-category-list>
+        </app-category-list> -->
       </div>
       <div fxLayout="row" fxLayoutAlign="center">
         <app-tutorial-card fxFlex.xs="100" fxFlex="500px" [tutorial]="tutorial"></app-tutorial-card>

@@ -38,7 +38,6 @@ export class SubmitTutorialFormComponent implements OnInit {
   @Input() set tutorial(val) {
     this._tutorial = val;
     for (var i = 0; i < val.tutorialCategories.length; i++) {
-      console.log(val.tutorialCategories[i]);
       this['tutCat' + (i+1)] = val.tutorialCategories[i];
     }
   }
@@ -66,12 +65,13 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
 
   submitTutorial() {
-    this._loaderService.show();
-    this._tutorialService.saveTutorial(this.tutorial).subscribe(() => {
+    console.log('Submitting Tutorial');
+    //this._loaderService.show();
+    // this._tutorialService.saveTutorial(this.tutorial).subscribe(() => {
       
-      this._loaderService.hide();
-      this._router.navigate(['learn']);
-    });
+    //   this._loaderService.hide();
+    //   this._router.navigate(['learn']);
+    // });
   }
 
   private uploadImage(blob: Blob) {

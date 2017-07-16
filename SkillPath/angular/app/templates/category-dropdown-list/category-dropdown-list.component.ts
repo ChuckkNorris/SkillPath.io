@@ -1,6 +1,7 @@
+import { NgForm, NgModel } from '@angular/forms';
 import { Category } from './../../models/category';
 import { CategoryService } from './../../services/category.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
 
 @Component({
   selector: 'app-category-dropdown-list',
@@ -9,17 +10,26 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CategoryDropdownListComponent implements OnInit {
 
-  constructor(private _categoryService: CategoryService) { }
+  constructor(private _categoryService: CategoryService, private tutorialForm: NgForm) { }
   
-  @Input() showEmptyCategories: boolean = true;
-  t1Categories: Category[] = [];
-  selectedT1Category: Category;
-  t2Categories: Category[] = [];
-  selectedT2Category: Category;
-  t3Categories: Category[] = [];
-  selectedT3Category: Category;
-  t4Categories: Category[] = [];
-  selectedT4Category: Category;
+  @Input() showEmptyCategories: boolean = false;
+  
+  t1Categories: Category[];
+  t1Category: Category;
+  t2Categories: Category[];
+  t2Category: Category;
+  t3Categories: Category[];
+  t3Category: Category;
+  t4Categories: Category[];
+  t4Category: Category;
+
+  @ViewChildren(NgModel) controls: QueryList<NgModel>;
+  ngAfterViewInit() {
+    this.controls.forEach((control: NgModel) => {
+      this.tutorialForm.addControl(control);
+    });
+  }
+
   ngOnInit() {
     this.getCategories(1);
   }
@@ -32,20 +42,22 @@ export class CategoryDropdownListComponent implements OnInit {
 
   getChildCategories(categoryListName: string, parentId: string) {
     this.deselectChildCategories(+categoryListName[1]);
-    this._categoryService.getChildCategories(parentId, this.showEmptyCategories).subscribe(cats => {
-      this[categoryListName] = cats;
-    });
+    if (parentId) {
+      this._categoryService.getChildCategories(parentId, this.showEmptyCategories).subscribe(cats => {
+        this[categoryListName] = cats;
+      });
+    }
   }
 
   deselectChildCategories(tier: number) {
     if (tier == 2) {
-      this.selectedT2Category = undefined;
+      this.t2Category = undefined;
     }
     if (tier == 3) {
-       this.selectedT3Category = undefined;  
+       this.t3Category = undefined;  
     }
     if (tier == 4) {
-       this.selectedT4Category = undefined;
+       this.t4Category = undefined;
     }
   }
 

@@ -24,7 +24,7 @@
             <h4 md-line>{{allCategory.name}}</h4>
             <p md-line class="giveMeEllipsis">{{allCategory.description}} </p>
           </md-list-item>
-          <md-list-item *ngFor="let cat of categories; let index=index" 
+          <md-list-item *ngFor="let cat of categories" 
             [class.selected-item]="cat.id == selectedCategory?.id"
             (click)="selectedCategory = cat" 
             [title]="cat.description">

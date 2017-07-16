@@ -19,7 +19,6 @@ export class CategoryListComponent implements OnInit {
 
   ngAfterViewInit() {
     this.controls.forEach((control: NgModel) => {
-
       this.tutorialForm.addControl(control);
     });
   }
