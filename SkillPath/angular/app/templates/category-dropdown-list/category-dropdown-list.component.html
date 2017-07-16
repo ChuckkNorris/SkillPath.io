@@ -1,22 +1,46 @@
-{{selectedT1Category | json}}
+
 <div fxLayout="row" fxLayoutAlign="center" fxLayoutWrap="wrap">
-<app-category-dropdown fxFlex="300px"
-  [(ngModel)]="selectedT1Category"
-  [categories]="t1Categories"
-  (ngModelChange)="getChildCategories('t2Categories', $event?.id)"
-></app-category-dropdown>
-<app-category-dropdown fxFlex="300px"
-  [(ngModel)]="selectedT2Category"
-  [categories]="t2Categories"
-  (ngModelChange)="getChildCategories('t3Categories', $event?.id)"
-></app-category-dropdown>
-<app-category-dropdown fxFlex="300px"
-  [(ngModel)]="selectedT3Category"
-  [categories]="t3Categories"
-  (ngModelChange)="getChildCategories('t4Categories', $event?.id)"
-></app-category-dropdown>
-<app-category-dropdown fxFlex="300px"
-  [(ngModel)]="selectedT4Category"
-  [categories]="t4Categories"
-></app-category-dropdown>
+
+  <app-category-dropdown 
+    name="t1Category"
+    categorySearchRequired
+    autoSelect="Frontend"
+    fxFlex="300px"
+    title="Stack"
+    [(ngModel)]="selectedT1Category"
+    [categories]="t1Categories"
+    (ngModelChange)="getChildCategories('t2Categories', $event?.id)"
+  ></app-category-dropdown>
+
+  <app-category-dropdown 
+    name="t2Category"
+    categorySearchRequired
+    autoSelect="Frameworks/Libraries"
+    fxFlex="300px"
+    title="Context"
+    [(ngModel)]="selectedT2Category"
+    [categories]="t2Categories"
+    (ngModelChange)="getChildCategories('t3Categories', $event?.id)"
+  ></app-category-dropdown>
+
+  <app-category-dropdown 
+    name="t3Category"
+    categorySearchRequired
+    autoSelect="Angular 2.x+"
+    fxFlex="300px"
+    title="Technology"
+    [(ngModel)]="selectedT3Category"
+    [categories]="t3Categories"
+    (ngModelChange)="getChildCategories('t4Categories', $event?.id)"
+  ></app-category-dropdown>
+
+  <app-category-dropdown 
+    name="t4Category"
+    categorySearchRequired
+    fxFlex="300px"
+    title="Area"
+    [(ngModel)]="selectedT4Category"
+    [categories]="t4Categories"
+  ></app-category-dropdown>
+
 </div>

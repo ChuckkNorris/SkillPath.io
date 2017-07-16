@@ -6,7 +6,7 @@ import { Component, OnInit, Input, forwardRef } from '@angular/core';
   selector: 'app-category-dropdown',
   templateUrl: './category-dropdown.component.html',
   styleUrls: ['./category-dropdown.component.scss'],
-   providers: [
+  providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       // useValue: validateCategorySearch,
@@ -34,7 +34,7 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   @Input() readonly: boolean = false;
   @Input() title: string;
 
-  private _selectedCategory:Category;
+  private _selectedCategory: Category;
   @Input() set selectedCategory(val) {
     this._selectedCategory = val;
     this.propogateChange(this.selectedCategory);
@@ -45,36 +45,46 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
 
   private _categories: Category[] = [];
   @Input('categories') set categories(categories) {
-    this._categories = categories;// [this.allCategory].concat(categories);
-   
+    this._categories = categories;
+    if (this.autoSelect)
+      this.selectCategoryByName(this.autoSelect);
+
   }
   get categories() {
     return this._categories;
   }
 
+  // - - CONTROL METHODS - - //
+  selectCategoryByName(categoryName: string) {
+    let selectedCat = this.categories.find(cat => cat.name == categoryName);
+    if (selectedCat) {
+      this.selectedCategory = selectedCat;
+      this.showCategoryOptions = false;
+    }
+    // else {
+    //    this.selectedCategory = undefined;
+    // }
+  }
+
   // - - CONTROL EVENTS - - //
 
   private _showCategoryOptions: boolean = false;
-  get showCategoryOptions() : boolean {
+  get showCategoryOptions(): boolean {
     return this._showCategoryOptions;
   }
   set showCategoryOptions(val: boolean) {
-      setTimeout(() => {
-        this._showCategoryOptions = val;
-      }, 100)
-  }
-
-  forceSelectCategory(category) {
-    console.log(category);
-    this.selectedCategory = category;
+    setTimeout(() => {
+      this._showCategoryOptions = val;
+    }, 150)
   }
 
   // - - CONTROL DATA - - //
-  
-  get allCategory() : Category {
-   return { name: 'All',
-    icon: "books",
-    description: "Show all tutorials in category"
+
+  get allCategory(): Category {
+    return {
+      name: 'All',
+      icon: "books",
+      description: "Show all tutorials in category"
     }
   };
 

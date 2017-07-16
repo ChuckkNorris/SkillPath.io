@@ -40,7 +40,6 @@ namespace SkillPath.Api.Entities
 		public async Task<bool> DoesTutorialExist(string tutorialLinkUrl) {
 			return await _tutorialService.DoesTutorialExist(tutorialLinkUrl);
 		} 
-
 	
     }
 

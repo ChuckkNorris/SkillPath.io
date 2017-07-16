@@ -10,17 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class CategoryDropdownListComponent implements OnInit {
 
   constructor(private _categoryService: CategoryService) { }
+  
+
   t1Categories: Category[] = [];
+  selectedT1Category: Category;
   t2Categories: Category[] = [];
+  selectedT2Category: Category;
   t3Categories: Category[] = [];
+  selectedT3Category: Category;
   t4Categories: Category[] = [];
+  selectedT4Category: Category;
   ngOnInit() {
     this.getCategories(1);
-  }
-
-  t1Updated(newCategory: Category) {
-    console.log(newCategory);
-    this.getChildCategories('t2Categories', newCategory.id);
   }
 
   getCategories(tier: number) {
@@ -30,10 +31,22 @@ export class CategoryDropdownListComponent implements OnInit {
   }
 
   getChildCategories(categoryListName: string, parentId: string) {
-     this._categoryService.getChildCategories(parentId).subscribe(cats => {
-       console.log(cats);
+    this.deselectChildCategories(+categoryListName[1]);
+    this._categoryService.getChildCategories(parentId).subscribe(cats => {
       this[categoryListName] = cats;
     });
+  }
+
+  deselectChildCategories(tier: number) {
+    if (tier == 2) {
+      this.selectedT2Category = undefined;
+    }
+    if (tier == 3) {
+       this.selectedT3Category = undefined;  
+    }
+    if (tier == 4) {
+       this.selectedT4Category = undefined;
+    }
   }
 
 }
