@@ -14,6 +14,7 @@
 
   <app-category-dropdown 
     name="t2Category"
+    [class.hidden]="!selectedT1Category?.id"
     categorySearchRequired
     autoSelect="Frameworks/Libraries"
     fxFlex="300px"
@@ -25,6 +26,7 @@
 
   <app-category-dropdown 
     name="t3Category"
+    [class.hidden]="!selectedT2Category?.id"
     categorySearchRequired
     autoSelect="Angular 2.x+"
     fxFlex="300px"
@@ -36,6 +38,7 @@
 
   <app-category-dropdown 
     name="t4Category"
+    [class.hidden]="!selectedT3Category?.id"
     categorySearchRequired
     fxFlex="300px"
     title="Area"
