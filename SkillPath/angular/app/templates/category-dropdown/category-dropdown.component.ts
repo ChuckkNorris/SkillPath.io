@@ -1,6 +1,6 @@
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Category } from './../../models/category';
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'app-category-dropdown',
@@ -19,8 +19,9 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
 
   // - - NG MODEL - - //
 
-  writeValue(value: any) {
-    this.selectedCategory = value;
+  writeValue(category: any) {
+    if (category != this._selectedCategory)
+      this._selectedCategory = category;
   }
   propogateChange = (_: any) => { };
   registerOnChange(fn) {
@@ -28,39 +29,40 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   }
   registerOnTouched() { }
 
-  ngAfterViewInit() {
-    console.log('Category ngAfterViewInit()');
-  }
-
   // - - INPUTS - - //
 
   @Input() autoSelect: string;
-  @Input() readonly: boolean = false;
+  @Input() disabled: boolean = false;
   @Input() title: string;
 
   private _selectedCategory: Category;
-  @Input() set selectedCategory(val) {
-    this._selectedCategory = val;
-    this.propogateChange(this.selectedCategory);
+  @Input() set selectedCategory(category) {
+    if (this._selectedCategory != category) {
+      this._selectedCategory = category;
+      this.propogateChange(this.selectedCategory);
+    }
   }
   get selectedCategory() {
     return this._selectedCategory || this.allCategory;
   }
 
-  private _categories: Category[] = [];
+  private _categories: Category[];
   @Input('categories') set categories(categories) {
+    console.log('Categories Received for ' + this.title);
     this._categories = categories;
     let autoSelectCategory = this.getCategoryByName(this.autoSelect);
-    if (autoSelectCategory)
-      this.selectedCategory = autoSelectCategory;
-
+    if (autoSelectCategory) {
+      this._selectedCategory = autoSelectCategory;
+      this.propogateChange(this._selectedCategory);
+    }
   }
+
   get categories() {
     return this._categories;
   }
 
   // - - CONTROL METHODS - - //
-  getCategoryByName(categoryName: string) {
+  getCategoryByName(categoryName: string) : Category {
     let selectedCat;
     if (this.categories && this.autoSelect) {
       selectedCat = this.categories.find(cat => cat.name == categoryName);

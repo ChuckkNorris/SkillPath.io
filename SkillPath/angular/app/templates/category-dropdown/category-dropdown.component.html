@@ -1,20 +1,20 @@
 
 <div class="category-search">
   <div (click)="categoryBtn.focus()" fxLayout="column">
-    <button #categoryBtn type="button" class="category-dropdown" fxFlex="100" [disabled]="readonly"
+    <button #categoryBtn type="button" class="category-dropdown" fxFlex="100" [disabled]="disabled"
       md-raised-button color="primary" (focus)="showCategoryOptions = true" (blur)="showCategoryOptions = false">
        <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
       <!-- <md-icon style="padding-right: 5px;">style</md-icon> -->
       Filter {{title}}
     </button>
-    <!--  *ngIf="!shouldShowCatgoryOptions && selectedCategory != undefined" -->
-    <div [class.hand]="!readonly" class="category-tag" md-suffix>
+    <!--   -->
+    <div *ngIf="!showCategoryOptions" [class.hand]="!disabled" class="category-tag" md-suffix>
         <app-icomoon-icon md-list-icon *ngIf="selectedCategory?.icon" [icon]="selectedCategory?.icon"></app-icomoon-icon> <span *ngIf="selectedCategory?.name">{{selectedCategory.name}} </span>
 
     </div>
   </div>
   <md-card [class.hidden]="!showCategoryOptions" class="category-list scrollbar">
-      <div id="style-1">
+      <div>
         <md-list>
           <md-list-item
             [class.selected-item]="!selectedCategory?.id"
@@ -27,7 +27,7 @@
           <md-list-item *ngFor="let cat of categories" 
             [class.selected-item]="cat.id == selectedCategory?.id"
             (click)="selectedCategory = cat" 
-            [title]="cat.description">
+            [title]="cat.name + ' - ' + cat.description">
             <app-icomoon-icon md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
             <h4 md-line>{{cat.name}}</h4>
             <p md-line class="giveMeEllipsis"> {{cat.description}}</p>

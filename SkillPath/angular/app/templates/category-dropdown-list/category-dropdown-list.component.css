@@ -2,3 +2,7 @@
     /*visibility: hidden;*/
     display: none;
 }
+
+app-category-dropdown {
+    padding-right: 10px;
+}

@@ -17,6 +17,8 @@ md-list-item {
     overflow:auto; 
     min-height:100px;
     z-index: 1;
+    max-height: 400px;
+    max-width: 300px;
 }
 
 .category-dropdown {

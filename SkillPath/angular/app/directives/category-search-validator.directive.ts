@@ -22,10 +22,8 @@ export class CategorySearchRequired implements Validator {
   validateDropdown(): ValidatorFn {
     return (c: AbstractControl) => {
       let err = {
-        rangeError: {
-          given: c.value,
-          max: 10,
-          min: 0
+        emptyError: {
+          message: 'Cannot be empty'
         }
       };
       if (c.value && c.value.id)
