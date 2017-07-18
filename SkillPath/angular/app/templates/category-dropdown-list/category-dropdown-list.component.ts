@@ -71,6 +71,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   }
 
   onCategoryChanged(tier: number, category: Category) {
+    this.deselectChildCategories(+tier);
     let newCategoriesList = this.selectedCategories != null ? this.selectedCategories.slice() : [];
     newCategoriesList[+tier - 1] = category;
     this.selectedCategories = newCategoriesList;
@@ -78,7 +79,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   }
 
   getChildCategories(tier: number, parentId: string) {
-    this.deselectChildCategories(+tier);
+   
     if (parentId) {
       this._categoryService.getChildCategories(parentId, this.showEmptyCategories).subscribe(cats => {
         // Bug here:
@@ -93,13 +94,13 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   
   deselectChildCategories(tier: number) {
     if (tier <= 2) {
-       this.selectedCategories[1] = undefined;
+       this._selectedCategories[1] = undefined;
     }
     if (tier <= 3) {
-        this.selectedCategories[2] = undefined;
+        this._selectedCategories[2] = undefined;
     }
     if (tier <= 4) {
-       this.selectedCategories[3] = undefined;
+       this._selectedCategories[3] = undefined;
     }
   }
 

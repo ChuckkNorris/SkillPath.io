@@ -16,37 +16,35 @@ export class LearnPageComponent implements OnInit {
 
   ngOnInit() {
     this.initializeInfiniteScroll();
+    this.getTutorials(1);
   }
   tutorials = [];
   currentPage: number = 1;
   lastCategoryId: string;
-  lastTier: number;
 
   onCategoriesChanged(categories: Category[]) {
-    console.log(categories);
-    let definedCategories = categories.filter(x => x && x.id != undefined);
-    console.log(definedCategories);
-    if (definedCategories) {
+    let definedCategories = categories.filter(x => x);
+    if (definedCategories.length > 0) {
+      
       let lastCategory = definedCategories[definedCategories.length - 1];
-      this.getTutorials(1, lastCategory.id, lastCategory.tier);
+      this.getTutorials(1, lastCategory.id);
     }
   }
 
-  getTutorials(page: number, categoryId?: string, tier?: number) {
+  getTutorials(page: number, categoryId?: string) {
     this.lastCategoryId = categoryId;
-    this.lastTier = tier;
     this.isLastPage = false;
     this.currentPage = page;
-   // if (tier > 2) {
-      this._tutorialService.getTutorials(page, categoryId).subscribe(tutorials => {
-        if (page > 1) {
-          this.tutorials = this.tutorials.concat(tutorials);
-        }
-        else {
-          this.tutorials = tutorials;
-        }
-      });
-   // }
+
+    this._tutorialService.getTutorials(page, categoryId).subscribe(tutorials => {
+      if (page > 1) {
+        this.tutorials = this.tutorials.concat(tutorials);
+      }
+      else {
+        this.tutorials = tutorials;
+      }
+    });
+   
   }
 
   isRetreivingTutorials: boolean = false;
@@ -62,7 +60,6 @@ export class LearnPageComponent implements OnInit {
         if (percentageScrolled > .8) {
           this.isRetreivingTutorials = true;
           this.currentPage++;
-          //this.getTutorials(this.currentPage, this.lastCategoryId, this.lastTier);
           this._tutorialService.getTutorials(this.currentPage + 1, this.lastCategoryId).subscribe(tutorials => {
             if (tutorials.length > 0) 
               this.tutorials = this.tutorials.concat(tutorials);

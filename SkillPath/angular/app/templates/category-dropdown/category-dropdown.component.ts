@@ -21,7 +21,7 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
 
   writeValue(category: any) {
     if (category != this._selectedCategory)
-      this.selectedCategory = category;
+      this._selectedCategory = category;
   }
   propogateChange = (_: any) => { };
   registerOnChange(fn) {
