@@ -1,25 +1,25 @@
 <md-card class="tutorial-card">
   <md-card-header>
-    <md-card-title>
-      <h3> {{tutorial.title}}</h3>
+    <md-card-title class="center-text">
+      <h3 [title]="tutorial.title"> {{tutorial.title}}</h3>
     </md-card-title>
     <md-card-subtitle>
      
        <div fxLayout="row" fxLayoutAlign="space-between center">
-         <app-icomoon-icon style="font-size: 25px;" md-list-icon *ngFor="let tutCat of tutorial?.tutorialCategories" [icon]="tutCat?.icon"></app-icomoon-icon>
+         <app-icomoon-icon style="font-size: 25px;" md-list-icon *ngFor="let tutCat of tutorial?.tutorialCategories" [title]="tutCat?.name" [icon]="tutCat?.icon"></app-icomoon-icon>
       </div> 
       
     </md-card-subtitle>
   </md-card-header>
   <img md-card-image [src]="tutorial.imageUrl || defaultImageUrl">
-  <md-card-content>
+  <md-card-content [title]="tutorial.description" class="center-text">
     <div class="description">
       {{tutorial.description}}
     </div>
   </md-card-content>
   <md-card-actions>
     <div fxLayout="column">
-        <button type="button" (click)="openTutorialInNewWindow()" md-button>START</button>
+        <button [title]="tutorial.linkUrl" type="button" (click)="openTutorialInNewWindow()" md-button>START</button>
          <button type="button" (click)="showDetailsModal()" md-button>EDIT</button>
     </div>
   
