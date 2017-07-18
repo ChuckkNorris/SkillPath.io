@@ -1,3 +1,4 @@
+import { Category } from './../../models/category';
 import { TutorialService } from './../../services/tutorial.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -21,12 +22,22 @@ export class LearnPageComponent implements OnInit {
   lastCategoryId: string;
   lastTier: number;
 
+  onCategoriesChanged(categories: Category[]) {
+    console.log(categories);
+    let definedCategories = categories.filter(x => x && x.id != undefined);
+    console.log(definedCategories);
+    if (definedCategories) {
+      let lastCategory = definedCategories[definedCategories.length - 1];
+      this.getTutorials(1, lastCategory.id, lastCategory.tier);
+    }
+  }
+
   getTutorials(page: number, categoryId?: string, tier?: number) {
     this.lastCategoryId = categoryId;
     this.lastTier = tier;
     this.isLastPage = false;
     this.currentPage = page;
-    if (tier > 2) {
+   // if (tier > 2) {
       this._tutorialService.getTutorials(page, categoryId).subscribe(tutorials => {
         if (page > 1) {
           this.tutorials = this.tutorials.concat(tutorials);
@@ -35,7 +46,7 @@ export class LearnPageComponent implements OnInit {
           this.tutorials = tutorials;
         }
       });
-    }
+   // }
   }
 
   isRetreivingTutorials: boolean = false;

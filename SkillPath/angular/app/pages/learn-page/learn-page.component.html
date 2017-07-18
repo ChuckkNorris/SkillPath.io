@@ -4,6 +4,7 @@
   <app-category-dropdown-list
   name="cool"
     [(ngModel)]="selectedCategories"
+    (ngModelChange)="onCategoriesChanged($event)"
   >
   </app-category-dropdown-list>
 </form>

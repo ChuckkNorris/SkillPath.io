@@ -158,8 +158,6 @@ export class CategorySearchComponent implements OnInit, ControlValueAccessor {
     return true;
   }
   set selectedCategory(val) {
-    console.log(this.tier + ': has a category of' + JSON.stringify(val));
-    console.log(this.isEmpty(val));
     this._selectedCategory = this.isEmpty(val) ? this.allCategory : val;
     this.propogateChange(this.selectedCategory);
   }
