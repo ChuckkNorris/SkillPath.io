@@ -1,52 +1,52 @@
-
 <div fxLayout="row" fxLayoutAlign="center" fxLayoutWrap="wrap" >
-
+     <!-- disabled="true" -->
   <app-category-dropdown 
     name="t1Category"
     categorySearchRequired
     autoSelect="Frontend"
-    disabled="true"
+ 
     fxFlex="300px"
     title="Stack"
-    [(ngModel)]="t1Category"
+    [(ngModel)]="selectedCategories[0]"
     [categories]="t1Categories"
-    (ngModelChange)="getChildCategories('t2Categories', $event?.id)"
+    (ngModelChange)="onCategoryChanged(1, $event)"
   ></app-category-dropdown>
 
   <app-category-dropdown 
     name="t2Category"
-    [class.hidden]="!t1Category?.id"
+    [class.hidden]="!selectedCategories[0]?.id"
     categorySearchRequired
     autoSelect="Frameworks/Libraries"
-    disabled="true"
+
     fxFlex="300px"
     title="Context"
-    [(ngModel)]="t2Category"
+    [(ngModel)]="selectedCategories[1]"
     [categories]="t2Categories"
-    (ngModelChange)="getChildCategories('t3Categories', $event?.id)"
+    (ngModelChange)="onCategoryChanged(2, $event)"
   ></app-category-dropdown>
 
   <app-category-dropdown 
     name="t3Category"
-    [class.hidden]="!t2Category?.id"
+    [class.hidden]="!selectedCategories[1]?.id"
     categorySearchRequired
     autoSelect="Angular 2.x+"
-    disabled="true"
+
     fxFlex="300px"
     title="Technology"
-    [(ngModel)]="t3Category"
+    [(ngModel)]="selectedCategories[2]"
     [categories]="t3Categories"
-    (ngModelChange)="getChildCategories('t4Categories', $event?.id)"
+    (ngModelChange)="onCategoryChanged(3, $event)"
   ></app-category-dropdown>
 
   <app-category-dropdown 
     name="t4Category"
-    [class.hidden]="!t3Category?.id"
+    [class.hidden]="!selectedCategories[2]?.id"
     categorySearchRequired
     fxFlex="300px"
     title="Area"
-    [(ngModel)]="t4Category"
+    [(ngModel)]="selectedCategories[3]"
     [categories]="t4Categories"
+    (ngModelChange)="onCategoryChanged(4, $event)"
   ></app-category-dropdown>
 
 </div>

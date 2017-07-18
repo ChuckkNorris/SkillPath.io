@@ -1,42 +1,58 @@
-import { NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Category } from './../../models/category';
 import { CategoryService } from './../../services/category.service';
-import { Component, OnInit, Input, ViewChildren, QueryList, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewChildren, QueryList, EventEmitter, Output, forwardRef } from '@angular/core';
 
 @Component({
   selector: 'app-category-dropdown-list',
   templateUrl: './category-dropdown-list.component.html',
-  styleUrls: ['./category-dropdown-list.component.css']
+  styleUrls: ['./category-dropdown-list.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      // useValue: validateCategorySearch,
+      useExisting: forwardRef(() => CategoryDropdownListComponent),
+      multi: true
+    }
+  ]
 })
-export class CategoryDropdownListComponent implements OnInit {
-
+export class CategoryDropdownListComponent implements OnInit, ControlValueAccessor {
+  
   constructor(private _categoryService: CategoryService, private tutorialForm: NgForm) { }
+
+   // - - NG MODEL - - //
+
+  writeValue(newCategories: any) {
+    if (newCategories && newCategories != this._selectedCategories)
+      this._selectedCategories = newCategories;
+  }
+  propogateChange = (_: any) => { };
+  registerOnChange(fn) {
+    this.propogateChange = fn;
+  }
+  registerOnTouched() { }
   
   @Input() showEmptyCategories: boolean = false;
   
-  private _selectedCategories: Category[];
+  private _selectedCategories: Category[] = [];
   @Input() set selectedCategories(newCategories) {
-    if (this._selectedCategories != newCategories)
+    if (this._selectedCategories != newCategories) {
       this._selectedCategories = newCategories;
+      this.propogateChange(this._selectedCategories);
+    }
   }
+  get selectedCategories() {
+    return this._selectedCategories;
+  }
+
+  // - - Categories - - //
   
   t1Categories: Category[];
-  
-  @Input() t1Category: Category;
-  @Output() t1CategoryChange = new EventEmitter<Category>();
-
   t2Categories: Category[];
-  @Input() t2Category: Category;
-  @Output() t2CategoryChange = new EventEmitter<Category>();
-
   t3Categories: Category[];
-  @Input() t3Category: Category;
-  @Output() t3CategoryChange = new EventEmitter<Category>();
-
   t4Categories: Category[];
-  @Input() t4Category: Category;
-  @Output() t4CategoryChange = new EventEmitter<Category>();
 
+  // - - Initialization
   @ViewChildren(NgModel) controls: QueryList<NgModel>;
   ngAfterViewInit() {
     this.controls.forEach((control: NgModel) => {
@@ -54,15 +70,22 @@ export class CategoryDropdownListComponent implements OnInit {
     });
   }
 
-  getChildCategories(categoriesPropertyName: string, parentId: string) {
-     let categoryTier = +categoriesPropertyName[1];
-     this.deselectChildCategories(categoryTier);
+  onCategoryChanged(tier: number, category: Category) {
+    let newCategoriesList = this.selectedCategories != null ? this.selectedCategories.slice() : [];
+    newCategoriesList[+tier - 1] = category;
+    this.selectedCategories = newCategoriesList;
+    this.getChildCategories(+tier + 1, category.id);
+  }
+
+  getChildCategories(tier: number, parentId: string) {
+    this.deselectChildCategories(+tier);
     if (parentId) {
       this._categoryService.getChildCategories(parentId, this.showEmptyCategories).subscribe(cats => {
         // Bug here:
         // After switching t1 categories, t3CategoryDropdown set categegories() isn't being
         // triggered - can't figure out why. $10 PayPal bounty?
-        this[categoriesPropertyName] = cats;
+        let categoryName = 't' + tier + 'Categories';
+        this[categoryName] = cats;
       });
     }
   }
@@ -70,13 +93,13 @@ export class CategoryDropdownListComponent implements OnInit {
   
   deselectChildCategories(tier: number) {
     if (tier <= 2) {
-       this.t2Category = undefined;
+       this.selectedCategories[1] = undefined;
     }
     if (tier <= 3) {
-        this.t3Category = undefined;
+        this.selectedCategories[2] = undefined;
     }
     if (tier <= 4) {
-       this.t4Category = undefined;
+       this.selectedCategories[3] = undefined;
     }
   }
 

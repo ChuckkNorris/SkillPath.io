@@ -48,20 +48,12 @@
           <button type="button" fxFlex.gt-xs="30" fxFlex="100" md-raised-button ngFilePicker color="primary" accept="image/*" (filePick)="selectImage($event)">Browse</button>
       </div>
 
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign.gt-xs="center center" fxLayoutWrap="wrap">
-
-      </div>
       <div class="padding-md-top" fxLayout="row" fxLayoutAlign="center">
         <app-category-dropdown-list
+          name="selectedCategories"
           showEmptyCategories="true"
-          [t1Category]="tutCat1"
-          [t2Category]="tutCat2"
-          [t3Category]="tutCat3"
-          [t4Category]="tutCat4"
-          (t1CategoryChange)="onCategoryChange(1, $event.id)"
-          (t2CategoryChange)="onCategoryChange(2, $event.id)" 
-          (t3CategoryChange)="onCategoryChange(3, $event.id)"
-          (t4CategoryChange)="onCategoryChange(4, $event.id)"
+          [(ngModel)]="tutorial.tutorialCategories"
+        
         ></app-category-dropdown-list>
         <!-- <app-category-list shouldGetEmptyCategories="true" 
           [t1Category]="tutCat1"

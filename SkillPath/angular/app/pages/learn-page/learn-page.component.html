@@ -1,16 +1,11 @@
 <h1 fxFlexAlign="center">Hone your skill</h1>
 
-<!--fxLayout.xs="column" -->
-<!--<div fxLayout="row" fxLayoutAlign="center center">-->
+  <form>
   <app-category-dropdown-list
-    
+  name="cool"
+    [(ngModel)]="selectedCategories"
   >
   </app-category-dropdown-list>
-  <!-- <app-category-list
-    (t1CategoryChange)="getTutorials(1, $event.id, 1)"
-    (t2CategoryChange)="getTutorials(1, $event.id, 2)"
-    (t3CategoryChange)="getTutorials(1, $event.id, 3)"
-    (t4CategoryChange)="getTutorials(1, $event.id, 4)"
-  ></app-category-list> -->
-<!--</div>-->
+</form>
+
 <app-tutorial-list [tutorials]="tutorials"></app-tutorial-list>

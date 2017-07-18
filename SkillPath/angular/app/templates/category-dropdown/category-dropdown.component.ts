@@ -21,7 +21,7 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
 
   writeValue(category: any) {
     if (category != this._selectedCategory)
-      this._selectedCategory = category;
+      this.selectedCategory = category;
   }
   propogateChange = (_: any) => { };
   registerOnChange(fn) {
@@ -43,18 +43,20 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
     }
   }
   get selectedCategory() {
-    return this._selectedCategory || this.allCategory;
+    if (this._selectedCategory && this._selectedCategory.id)
+      return this._selectedCategory
+    else return this.allCategory;
   }
 
   private _categories: Category[];
   @Input('categories') set categories(categories) {
-    console.log('Categories Received for ' + this.title);
+    
     this._categories = categories;
-    let autoSelectCategory = this.getCategoryByName(this.autoSelect);
-    if (autoSelectCategory) {
-      this._selectedCategory = autoSelectCategory;
-      this.propogateChange(this._selectedCategory);
-    }
+    // let autoSelectCategory = this.getCategoryByName(this.autoSelect);
+    // if (autoSelectCategory) {
+    //   this._selectedCategory = autoSelectCategory;
+    //   //this.propogateChange(this._selectedCategory);
+    // }
   }
 
   get categories() {

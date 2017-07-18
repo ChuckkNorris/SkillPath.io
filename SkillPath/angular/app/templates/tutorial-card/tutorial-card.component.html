@@ -4,7 +4,7 @@
       <h3> {{tutorial.title}}</h3>
     </md-card-title>
     <md-card-subtitle>
-      <app-icomoon-icon md-list-icon *ngFor="let tutCat of tutorial.tutorialCategories" [icon]="tutCat.icon"></app-icomoon-icon>
+      <app-icomoon-icon md-list-icon *ngFor="let tutCat of tutorial?.tutorialCategories" [icon]="tutCat?.icon"></app-icomoon-icon>
     </md-card-subtitle>
   </md-card-header>
   <img md-card-image [src]="tutorial.imageUrl || defaultImageUrl">

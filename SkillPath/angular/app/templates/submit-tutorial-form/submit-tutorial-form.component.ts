@@ -29,17 +29,17 @@ export class SubmitTutorialFormComponent implements OnInit {
     private _tutorialService: TutorialService) { }
 
  //tutorial: Tutorial = { tutorialCategories: [] }
-  tutCat1: Category;
-  tutCat2: Category;
-  tutCat3: Category;
-  tutCat4: Category;
+  // tutCat1: Category;
+  // tutCat2: Category;
+  // tutCat3: Category;
+  // tutCat4: Category;
 
-  private _tutorial: Tutorial;
+  private _tutorial: Tutorial = {};
   @Input() set tutorial(val) {
     this._tutorial = val;
-    for (var i = 0; i < val.tutorialCategories.length; i++) {
-      this['tutCat' + (i+1)] = val.tutorialCategories[i];
-    }
+    // for (var i = 0; i < val.tutorialCategories.length; i++) {
+    //   this['tutCat' + (i+1)] = val.tutorialCategories[i];
+    // }
   }
   get tutorial() {
     return this._tutorial;
@@ -65,13 +65,13 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
 
   submitTutorial() {
-    console.log('Submitting Tutorial');
-    //this._loaderService.show();
-    // this._tutorialService.saveTutorial(this.tutorial).subscribe(() => {
+    //console.log('Submitting Tutorial');
+    this._loaderService.show();
+    this._tutorialService.saveTutorial(this.tutorial).subscribe(() => {
       
-    //   this._loaderService.hide();
-    //   this._router.navigate(['learn']);
-    // });
+      this._loaderService.hide();
+      this._router.navigate(['learn']);
+    });
   }
 
   private uploadImage(blob: Blob) {
