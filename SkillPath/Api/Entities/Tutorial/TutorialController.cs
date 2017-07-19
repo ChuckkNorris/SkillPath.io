@@ -28,7 +28,6 @@ namespace SkillPath.Api.Entities
 			return toReturn;
 		}
 
-		[Authorize("Admin")]
 		[HttpGet]
 		public async Task<IEnumerable<Tutorial>> Get(int page, Guid? parentCategoryId = null) {
 			IEnumerable<Tutorial> toReturn;

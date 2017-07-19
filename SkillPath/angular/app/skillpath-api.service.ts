@@ -11,28 +11,44 @@ export class SkillpathApiService {
 
   public get(endpoint: string, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-
-    return this._http.get(fullUrl, this.getRequestOptions()).map(response => this.mapResponse(response));
+    console.log(fullUrl);
+    return this._http.get(fullUrl, this.getRequestOptions()).map(response => this.mapResponse(response))
+    .catch(err => this.handleError(err));
   }
 
   public post(endpoint: string, body: any, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    return this._http.post(fullUrl, body, this.getRequestOptions()).map(response => this.mapResponse(response));
+    return this._http.post(fullUrl, body, this.getRequestOptions()).map(response => this.mapResponse(response))
+    .catch(err => this.handleError(err));
   }
 
   public put(endpoint: string, body: any, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    return this._http.put(fullUrl, body, this.getRequestOptions()).map(response => this.mapResponse(response));
+    return this._http.put(fullUrl, body, this.getRequestOptions()).map(response => this.mapResponse(response))
+    .catch(err => this.handleError(err));
   }
 
   private mapResponse(response: Response) : any {
-    var contentType = response.headers.get("content-type");
-    if (contentType && contentType.startsWith("application/json")) {
-      return response.json();
+    if (response.status == 200) {
+      var contentType = response.headers.get("content-type");
+      if (contentType && contentType.startsWith("application/json")) {
+        return response.json();
+      }
+      else
+        return {};
     }
     else {
-      return response;
+      return {};
     }
+  }
+
+  handleError(error: Response) : Observable<any> {
+    let errorMessage = `${error.status} - `;
+    if (error.status > 500)
+      errorMessage += `Sorry, an error occurred on the server`;
+    else if (error.status == 401)
+      errorMessage += `You do not have permission to access this endpoint`;
+    return Observable.throw(errorMessage);
   }
 
   private getRequestOptions(): RequestOptionsArgs {

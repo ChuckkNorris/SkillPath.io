@@ -34,45 +34,45 @@ namespace SkillPath
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
-
-            //Console.WriteLine($"Environment Name -> {env.EnvironmentName}");
-            //Console.WriteLine($"{Configuration["connection_string"]}");
-
         }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<SkillPathContext>(options => options.UseSqlServer(Configuration["connection_string"]));
+            services.AddScoped<CategoryService>();
+            services.AddScoped<TutorialService>();
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            services.AddAuthorization(options => {
+               options.AddPolicy("Admin", policy => {
+                    policy.RequireClaim("is_admin");
+                   policy.Build();
+                }); 
+            });
+
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-
-            services.AddDbContext<SkillPathContext>(options => options.UseSqlServer(Configuration["connection_string"]));
-
-            services.AddScoped<CategoryService>();
-            services.AddScoped<TutorialService>();
-            services.AddSingleton<IConfiguration>(Configuration);
-            services.AddAuthorization(options => {
-               options.AddPolicy("Admin", policy => {
-                    policy.RequireClaim("is_admin");
-                   //policy.Build();
-                }); 
-            });
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
+            app.UseCors(options => {
+                options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
             var cookieOptions = new CookieAuthenticationOptions()
             {
                 AuthenticationScheme = "MyCookieMiddlewareInstance",
-                LoginPath = new PathString("/Login"),
-                AccessDeniedPath = new PathString("/Learn"),
-                AutomaticAuthenticate = true,
+                LoginPath = "",
+                Events = new CookieAuthenticationEvents {
+					OnRedirectToLogin = async (context) => { context.Response.StatusCode = 401; await Task.FromResult(0); },
+					OnRedirectToReturnUrl = async (context) => { context.Response.StatusCode = 401; await Task.FromResult(0); },
+					OnRedirectToAccessDenied = async (context) => { context.Response.StatusCode = 401; await Task.FromResult(0); }
+				},
+                //AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             };
             

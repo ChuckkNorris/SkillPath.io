@@ -6,15 +6,15 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
+
     constructor(private _authService: AuthenticationService, private router: Router) {}
+
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
         let toReturn = this._authService.isAuthenticated;
         if (!toReturn) {
             this.router.navigate(['login']);
         }
-        
         return toReturn;
     }
-
 
 }

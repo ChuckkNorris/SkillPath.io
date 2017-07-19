@@ -33,7 +33,7 @@ export class LearnPageComponent implements OnInit {
     this.lastCategoryId = categoryId;
     this.isLastPage = false;
     this.currentPage = page;
-
+    console.log('Getting tutorials');
     this._tutorialService.getTutorials(page, categoryId).subscribe(tutorials => {
       if (page > 1) {
         this.tutorials = this.tutorials.concat(tutorials);

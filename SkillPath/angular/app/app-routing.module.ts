@@ -8,13 +8,13 @@ import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { AuthenticationGuard } from "./services/authentication-guard.service";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'learn', pathMatch: 'full' },
   {
     path: 'learn', component: LearnPageComponent,
     //canActivate: [AuthenticationGuard]
   },
   { path: 'teach', component: TeachPageComponent, 
-    //canActivate: [AuthenticationGuard] 
+    canActivate: [AuthenticationGuard] 
   },
   {
     path: 'teach/:id', component: TeachPageComponent,
