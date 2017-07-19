@@ -11,7 +11,6 @@ export class SkillpathApiService {
 
   public get(endpoint: string, queryStringParams?: { [key: string]: any }): Observable<any> {
     let fullUrl = this.constructFullUrl(endpoint, queryStringParams);
-    console.log(fullUrl);
     return this._http.get(fullUrl, this.getRequestOptions()).map(response => this.mapResponse(response))
     .catch(err => this.handleError(err));
   }

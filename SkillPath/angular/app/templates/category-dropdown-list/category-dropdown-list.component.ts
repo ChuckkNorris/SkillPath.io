@@ -71,7 +71,6 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   }
 
   onCategoryChanged(tier: number, category: Category) {
-    console.log(`${tier} changed to ${category.name}`);
     this.deselectChildCategories(+tier);
     let newCategoriesList = this.selectedCategories != null ? this.selectedCategories.slice() : [];
     newCategoriesList[+tier - 1] = category;

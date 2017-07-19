@@ -31,12 +31,6 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   }
   registerOnTouched() { }
 
-  // - - INPUTS - - //
-
-  @Input() autoSelect: string;
-  @Input() disabled: boolean = false;
-  @Input() title: string;
-
   private _selectedCategory: Category;
   @Input() set selectedCategory(category) {
     if (this._selectedCategory != category) {
@@ -50,31 +44,20 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
     else return this.allCategory;
   }
 
+  // - - INPUTS - - //
+
+  @Input() autoSelect: string;
+  @Input() disabled: boolean = false;
+  @Input() title: string;
+
   private _categories: Category[];
   @Input('categories') set categories(categories) {
-    if (categories) {
-    console.log('Setting categories');
-    this._categories = categories;
-    }
-    // let autoSelectCategory = this.getCategoryByName(this.autoSelect);
-    // if (autoSelectCategory) {
-    //   this._selectedCategory = autoSelectCategory;
-    //   //this.propogateChange(this._selectedCategory);
-    // }
+    if (categories)
+      this._categories = categories;
   }
 
-  get categories() {
-    return this._categories;
-  }
+  get categories() { return this._categories; }
 
-  // - - CONTROL METHODS - - //
-  getCategoryByName(categoryName: string) : Category {
-    let selectedCat;
-    if (this.categories && this.autoSelect) {
-      selectedCat = this.categories.find(cat => cat.name == categoryName);
-    }
-    return selectedCat;
-  }
 
   // - - CONTROL EVENTS - - //
 
