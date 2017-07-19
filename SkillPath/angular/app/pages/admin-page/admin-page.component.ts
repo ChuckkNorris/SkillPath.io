@@ -24,12 +24,11 @@ export class AdminPageComponent implements OnInit {
     this.literally = `${test} world`;
   }
   
-  categoryToSave: Category = {};
+  categoryToSave: Category = {tier: 1};
   saveCategory() {
     this._categoryService.saveCategory(this.categoryToSave).subscribe((response) => {
       let message = response.message || "Category Saved Successfully!";
       this.showMessage(message);
-
     });
     this.getCategories();
   }
@@ -52,9 +51,16 @@ export class AdminPageComponent implements OnInit {
     console.log(category);
     this.categoryToUpdate = Object.assign({}, category);
     
-    this.categoryToSave.tier = category.tier < 4 ? category.tier + 1 : category.tier;
+    this.categoryToSave.tier = this.getNextTierSafely(category.tier);
     this.categoryToSave.parentId = category.id;
     this.getTutorials(category.id);
+  }
+
+  private getNextTierSafely(currentTier) {
+    let toReturn = 1;
+    toReturn = currentTier < 4 ? currentTier + 1 : toReturn;
+    return toReturn;
+    
   }
 
   categoryToUpdate: Category;

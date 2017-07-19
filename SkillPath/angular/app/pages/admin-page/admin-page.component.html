@@ -8,7 +8,7 @@
   showEmptyCategories="true"
   [(ngModel)]="updatingCategories"
 ></app-category-dropdown-list>
-
+{{categoryToSave | json}}
 <h3 fxLayoutAlign="center">Edit Category</h3>
 <form *ngIf="categoryToUpdate" (ngSubmit)="updateCategory()">
   <div fxLayoutAlign="center center" fxLayoutGap="10px">

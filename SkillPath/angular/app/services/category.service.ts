@@ -13,7 +13,7 @@ export class CategoryService {
 
   getUpdatedCategory(categories: Category[]) {
     let toReturn;
-    let definedCategories = categories.filter(x => x);
+    let definedCategories = categories.filter(x => x && x.id);
     if (definedCategories.length > 0) {
       toReturn = definedCategories[definedCategories.length - 1];
     }

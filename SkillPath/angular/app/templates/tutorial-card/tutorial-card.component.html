@@ -10,7 +10,7 @@
       </div> 
     </md-card-subtitle>
   </md-card-header>
-  <img [default]="defaultImageUrl" class="tutorial-image" md-card-image [src]="tutorial.imageUrl">
+  <img [default]="defaultImageUrl" class="tutorial-image" md-card-image [src]="tutorial.imageUrl || defaultImageUrl">
 
   <md-card-content [title]="tutorial.description" class="center-text">
     <div class="description">

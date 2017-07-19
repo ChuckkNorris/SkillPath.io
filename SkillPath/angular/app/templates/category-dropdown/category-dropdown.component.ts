@@ -20,7 +20,10 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   // - - NG MODEL - - //
 
   writeValue(category: any) {
+    if (category)
       this.selectedCategory = category;
+    else
+      this._selectedCategory = category;
   }
   propogateChange = (_: any) => { };
   registerOnChange(fn) {

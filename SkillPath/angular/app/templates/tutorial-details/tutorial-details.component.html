@@ -1,8 +1,7 @@
 <div fxLayout="column" fxLayoutGap="10px">
   <h1 fxFlex fxFlexAlign="center">{{tutorial.title}}</h1>
   <div class="header">
-    <!-- [default]="defaultImageUrl"  -->
-    <img class="header-image" [src]="tutorial?.imageUrl">
+    <img [default]="defaultImageUrl" class="header-image" [src]="tutorial?.imageUrl || defaultImageUrl">
   </div>
   
   
