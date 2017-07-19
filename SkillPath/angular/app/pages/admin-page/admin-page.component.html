@@ -1,17 +1,13 @@
 <h1 fxLayoutAlign="center">
-  Categories</h1>
-<!--
-<md-list>
-  <md-list-item *ngFor="let cat of t1Categories | async;">{{cat.name}}</md-list-item>
-</md-list>-->
+  Categories {{literally}}</h1>
+
 <h3 fxLayoutAlign="center">Parent Category</h3>
-<app-category-list
-  shouldGetEmptyCategories="true"
-  (t1CategoryChange)="updateParent($event)"
-  (t2CategoryChange)="updateParent($event)"
-  (t3CategoryChange)="updateParent($event)"
-  (t4CategoryChange)="updateParent($event)">
-</app-category-list>
+
+<app-category-dropdown-list
+  (ngModelChange)="updateParent($event)"
+  showEmptyCategories="true"
+  [(ngModel)]="updatingCategories"
+></app-category-dropdown-list>
 
 <h3 fxLayoutAlign="center">Edit Category</h3>
 <form *ngIf="categoryToUpdate" (ngSubmit)="updateCategory()">
@@ -34,10 +30,6 @@
 <h3  fxLayoutAlign="center">Add Child Category</h3>
 <form (ngSubmit)="saveCategory()">
   <div fxLayoutAlign="center center" fxLayoutGap="10px">
-     <!--<md-select required placeholder="Tier" [(ngModel)]="categoryToSave.tier" name="tier">
-      <md-option value="1">1</md-option>
-      <md-option value="2">2</md-option>
-    </md-select>-->
     <md-input-container>
       <input required name="name" [(ngModel)]="categoryToSave.name" mdInput placeholder="Name">
     </md-input-container>
@@ -47,14 +39,6 @@
     <md-input-container>
       <input required name="icon" [(ngModel)]="categoryToSave.icon" mdInput placeholder="Icon">
     </md-input-container>
-    <!--<md-select placeholder="Favorite food" [(ngModel)]="selectedValue" name="food">
-      <md-option *ngFor="let food of filteredStates | async" [value]="food">
-        {{food}}
-      </md-option>
-    </md-select>-->
-    
-
-
   </div>
   <div fxLayoutAlign="center">
   <button md-raised-button color="primary">Save Category</button>

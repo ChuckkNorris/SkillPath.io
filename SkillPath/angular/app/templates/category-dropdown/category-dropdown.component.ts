@@ -20,8 +20,7 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   // - - NG MODEL - - //
 
   writeValue(category: any) {
-    if (category != this._selectedCategory)
-      this._selectedCategory = category;
+      this.selectedCategory = category;
   }
   propogateChange = (_: any) => { };
   registerOnChange(fn) {
@@ -50,8 +49,10 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
 
   private _categories: Category[];
   @Input('categories') set categories(categories) {
-    
+    if (categories) {
+    console.log('Setting categories');
     this._categories = categories;
+    }
     // let autoSelectCategory = this.getCategoryByName(this.autoSelect);
     // if (autoSelectCategory) {
     //   this._selectedCategory = autoSelectCategory;

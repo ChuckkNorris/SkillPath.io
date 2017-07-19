@@ -11,6 +11,15 @@ export class CategoryService {
 
   }
 
+  getUpdatedCategory(categories: Category[]) {
+    let toReturn;
+    let definedCategories = categories.filter(x => x);
+    if (definedCategories.length > 0) {
+      toReturn = definedCategories[definedCategories.length - 1];
+    }
+    return toReturn;
+  }
+
   public getCategories(tier: number, getEmpty: boolean = false): Observable<Category[]> {
     let params = {
       'tier': tier

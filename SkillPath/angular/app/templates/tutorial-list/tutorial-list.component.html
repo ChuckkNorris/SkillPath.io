@@ -1,8 +1,6 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap="wrap" fxLayoutAlign="left" fxLayoutGap="20px" >
-  <!--  -->
+  <!-- [index]="i" appStaggerGap -->
   <app-tutorial-card *ngFor="let tutorial of tutorials; let i = index;" 
-  [index]="i"
-  appStaggerGap
   [tutorial]="tutorial" 
   fxFlex.xs="100" 
   fxFlex.sm="46" 

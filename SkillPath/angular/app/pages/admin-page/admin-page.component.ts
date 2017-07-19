@@ -16,10 +16,12 @@ export class AdminPageComponent implements OnInit {
   tutorials: Tutorial[] = [];
 
   constructor(private _categoryService: CategoryService, private _tutorialService:TutorialService, private toast: MdSnackBar) { }
-
+  literally: string;
   ngOnInit() {
     this.getCategories();
     this.getTutorials();
+    let test = 'hello';
+    this.literally = `${test} world`;
   }
   
   categoryToSave: Category = {};
@@ -45,7 +47,9 @@ export class AdminPageComponent implements OnInit {
     this.toast.open(message);
   }
 
-  updateParent(category?: Category) {
+  updateParent(categories?: Category[]) {
+    let category = this._categoryService.getUpdatedCategory(categories);
+    console.log(category);
     this.categoryToUpdate = Object.assign({}, category);
     
     this.categoryToSave.tier = category.tier < 4 ? category.tier + 1 : category.tier;

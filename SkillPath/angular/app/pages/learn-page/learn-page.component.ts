@@ -1,3 +1,4 @@
+import { CategoryService } from './../../services/category.service';
 import { Category } from './../../models/category';
 import { TutorialService } from './../../services/tutorial.service';
 
@@ -10,9 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LearnPageComponent implements OnInit {
 
-  constructor(private _tutorialService: TutorialService) {
-
-  }
+  constructor(
+    private _categoryService: CategoryService,
+    private _tutorialService: TutorialService) {}
 
   ngOnInit() {
     this.initializeInfiniteScroll();
@@ -23,12 +24,9 @@ export class LearnPageComponent implements OnInit {
   lastCategoryId: string;
 
   onCategoriesChanged(categories: Category[]) {
-    let definedCategories = categories.filter(x => x);
-    if (definedCategories.length > 0) {
-      
-      let lastCategory = definedCategories[definedCategories.length - 1];
-      this.getTutorials(1, lastCategory.id);
-    }
+    let updatedCategory = this._categoryService.getUpdatedCategory(categories);
+    if (updatedCategory)
+      this.getTutorials(1, updatedCategory.id);
   }
 
   getTutorials(page: number, categoryId?: string) {

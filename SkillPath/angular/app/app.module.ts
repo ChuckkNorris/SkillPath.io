@@ -45,6 +45,7 @@ import { CookieService } from "ngx-cookie-service";
 import { CategorySearchRequired } from './directives/category-search-validator.directive';
 import { CategoryDropdownComponent } from './templates/category-dropdown/category-dropdown.component';
 import { CategoryDropdownListComponent } from './templates/category-dropdown-list/category-dropdown-list.component';
+import { DefaultImageDirective } from './directives/default-image.directive';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { CategoryDropdownListComponent } from './templates/category-dropdown-lis
     CategorySearchRequired,
     TutorialLinkExists,
     CategoryDropdownComponent,
-    CategoryDropdownListComponent
+    CategoryDropdownListComponent,
+    DefaultImageDirective
     
   ],
   imports: [

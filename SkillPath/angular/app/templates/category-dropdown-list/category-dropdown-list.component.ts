@@ -23,8 +23,8 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
    // - - NG MODEL - - //
 
   writeValue(newCategories: any) {
-    if (newCategories && newCategories != this._selectedCategories)
-      this._selectedCategories = newCategories;
+    //if (newCategories && newCategories != this._selectedCategories)
+      this.selectedCategories = newCategories;
   }
   propogateChange = (_: any) => { };
   registerOnChange(fn) {
@@ -36,7 +36,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   
   private _selectedCategories: Category[] = [];
   @Input() set selectedCategories(newCategories) {
-    if (this._selectedCategories != newCategories) {
+    if (newCategories && this._selectedCategories != newCategories) {
       this._selectedCategories = newCategories;
       this.propogateChange(this._selectedCategories);
     }
@@ -71,6 +71,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   }
 
   onCategoryChanged(tier: number, category: Category) {
+    console.log(`${tier} changed to ${category.name}`);
     this.deselectChildCategories(+tier);
     let newCategoriesList = this.selectedCategories != null ? this.selectedCategories.slice() : [];
     newCategoriesList[+tier - 1] = category;

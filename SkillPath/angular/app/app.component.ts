@@ -1,5 +1,8 @@
 ﻿import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +16,10 @@ export class AppComponent {
         //     this.customers = x.json() as string[];
         // });
     }
-  title = 'app works!';
+
+    ngOnInit() {
+      
+    }
   
   isAuthenticated: boolean = false;
   allowAccess() {
