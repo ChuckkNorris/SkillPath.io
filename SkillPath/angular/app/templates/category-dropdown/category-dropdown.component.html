@@ -5,7 +5,7 @@
       md-raised-button color="primary" (focus)="showCategoryOptions = true" (blur)="showCategoryOptions = false">
        <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
       <!-- <md-icon style="padding-right: 5px;">style</md-icon> -->
-      Filter {{title}}
+      Change {{title}}
     </button>
     <!--   -->
     <div *ngIf="!showCategoryOptions" [class.hand]="!disabled" class="category-tag" md-suffix>
