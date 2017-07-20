@@ -16,14 +16,13 @@ export class AdminPageComponent implements OnInit {
   tutorials: Tutorial[] = [];
 
   constructor(private _categoryService: CategoryService, private _tutorialService:TutorialService, private toast: MdSnackBar) { }
-  literally: string;
+
   ngOnInit() {
     this.getCategories();
     this.getTutorials();
-    let test = 'hello';
-    this.literally = `${test} world`;
   }
-  
+
+  updatingCategories: Category[];
   categoryToSave: Category = {tier: 1};
   saveCategory() {
     this._categoryService.saveCategory(this.categoryToSave).subscribe((response) => {

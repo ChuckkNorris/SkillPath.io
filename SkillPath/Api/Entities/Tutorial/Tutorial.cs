@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReadSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,5 +19,12 @@ namespace SkillPath.Api.Entities
 		public int Tier { get; set; }
 		public IEnumerable<TutorialCategory> TutorialCategories { get; set; }
 		
+		public void Update(Article article) {
+			this.Title = article?.Title ?? this.Title;
+			this.Description = article?.Description ?? this.Description;
+			this.ImageUrl = article?.FrontImage.AbsoluteUri ?? this.ImageUrl;
+		}
+
+
 	}
 }

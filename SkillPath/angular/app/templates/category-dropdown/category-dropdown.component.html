@@ -19,7 +19,7 @@
           <md-list-item
             [class.selected-item]="!selectedCategory?.id"
             (click)="selectedCategory = allCategory" 
-            [title]="hello">
+            [title]="allCategory.description">
             <app-icomoon-icon md-list-icon [icon]="allCategory.icon"></app-icomoon-icon>
             <h4 md-line>{{allCategory.name}}</h4>
             <p md-line class="giveMeEllipsis">{{allCategory.description}} </p>

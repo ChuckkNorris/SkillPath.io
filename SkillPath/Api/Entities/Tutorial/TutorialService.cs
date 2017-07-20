@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using ReadSharp;
 
 namespace SkillPath.Api.Entities
 {
@@ -15,8 +16,12 @@ namespace SkillPath.Api.Entities
 			_context = context;
 		}
 
-		public async Task SaveTutorial(Tutorial tutorialToSave) {
-			_context.Tutorials.Add(tutorialToSave);
+		public async Task SaveTutorial(Tutorial tutorial) {
+			var article = GetArticleInfo(tutorial.LinkUrl);
+
+
+			
+			_context.Tutorials.Add(tutorial);
 			await _context.SaveChangesAsync();
 		}
 
@@ -40,6 +45,20 @@ namespace SkillPath.Api.Entities
 				.Take(countPerPage)
 				.ToListAsync();
 			return toReturn.Select(tut => MapTutorial(tut));
+		}
+
+		public async Task<Article> GetArticleInfo(string articleUrl)
+		{
+			
+			var reader = new Reader();
+			Article article = null;
+			try {
+				article = await reader.Read(new Uri(articleUrl));
+			}
+			catch (ReadException exc) {
+				// handle exception
+			}
+			return article;
 		}
 
 		public async Task<bool> DoesTutorialExist(string tutorialLinkUrl) {

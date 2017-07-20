@@ -39,6 +39,13 @@ namespace SkillPath.Api.Entities
 		public async Task<bool> DoesTutorialExist(string tutorialLinkUrl) {
 			return await _tutorialService.DoesTutorialExist(tutorialLinkUrl);
 		} 
+
+		[HttpGet]
+		public async void TutorialInfo()
+		{
+			var article = await this._tutorialService.GetArticleInfo("https://medium.com/@levifuller/building-an-angular-application-with-asp-net-core-in-visual-studio-2017-visualized-f4b163830eaa");
+			var desc = article.Description;
+		}
 	
     }
 

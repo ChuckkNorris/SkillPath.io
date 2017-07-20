@@ -22,6 +22,7 @@ export class LearnPageComponent implements OnInit {
   tutorials = [];
   currentPage: number = 1;
   lastCategoryId: string;
+  selectedCategories: Category[];
 
   onCategoriesChanged(categories: Category[]) {
     let updatedCategory = this._categoryService.getUpdatedCategory(categories);
