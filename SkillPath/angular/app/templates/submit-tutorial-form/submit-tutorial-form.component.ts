@@ -28,7 +28,7 @@ export class SubmitTutorialFormComponent implements OnInit {
     private _router: Router,
     private _tutorialService: TutorialService) { }
 
- //tutorial: Tutorial = { tutorialCategories: [] }
+  //tutorial: Tutorial = { tutorialCategories: [] }
   // tutCat1: Category;
   // tutCat2: Category;
   // tutCat3: Category;
@@ -68,10 +68,25 @@ export class SubmitTutorialFormComponent implements OnInit {
     //console.log('Submitting Tutorial');
     this._loaderService.show();
     this._tutorialService.saveTutorial(this.tutorial).subscribe(() => {
-      
+
       this._loaderService.hide();
-      this._router.navigate(['learn']);
+      // this._router.navigate(['learn']);
     });
+  }
+
+  tryPopulateTutorial(tutorialUrl: string) {
+    if (!this.tutorial.id) {
+      this._tutorialService.getTutorialWithArticleInfo(tutorialUrl).subscribe(newTut => {
+        if (newTut) {
+          if (!this.tutorial.title && newTut.title)
+            this.tutorial.title = newTut.title;
+          if (!this.tutorial.description && newTut.description)
+            this.tutorial.description = newTut.description;
+          if (!this.tutorial.imageUrl && newTut.imageUrl)
+            this.tutorial.imageUrl = newTut.imageUrl;
+        }
+      });
+    }
   }
 
   private uploadImage(blob: Blob) {
@@ -85,7 +100,7 @@ export class SubmitTutorialFormComponent implements OnInit {
   onCategoryChange(tier: number, categoryId: string) {
     let index = +tier - 1;
     if (this.tutorial && this.tutorial.tutorialCategories[index]) {
-      this.tutorial.tutorialCategories[index].categoryId=categoryId;
+      this.tutorial.tutorialCategories[index].categoryId = categoryId;
     }
   }
 
@@ -105,7 +120,7 @@ export class SubmitTutorialFormComponent implements OnInit {
             }
           });
         }
-        
+
       });
     }
   }

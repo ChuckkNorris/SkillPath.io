@@ -21,8 +21,7 @@ export class AdminPageComponent implements OnInit {
     this.getCategories();
     this.getTutorials();
   }
-
-  updatingCategories: Category[];
+  
   categoryToSave: Category = {tier: 1};
   saveCategory() {
     this._categoryService.saveCategory(this.categoryToSave).subscribe((response) => {
@@ -47,7 +46,6 @@ export class AdminPageComponent implements OnInit {
 
   updateParent(categories?: Category[]) {
     let category = this._categoryService.getUpdatedCategory(categories);
-    console.log(category);
     this.categoryToUpdate = Object.assign({}, category);
     
     this.categoryToSave.tier = this.getNextTierSafely(category.tier);
@@ -66,14 +64,12 @@ export class AdminPageComponent implements OnInit {
 
   updateCategory() {
     this._categoryService.updateCategory(this.categoryToUpdate).subscribe((response) => {
-      console.log(response);
       this.showMessage('Category updated');
     });
   }
 
   deleteCategory() {
     this._categoryService.deleteCategory(this.categoryToUpdate.id).subscribe((response) => {
-      console.log(response);
       this.showMessage('Category deleted');
     });
   }

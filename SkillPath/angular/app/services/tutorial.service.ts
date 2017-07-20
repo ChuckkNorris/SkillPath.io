@@ -13,12 +13,12 @@ export class TutorialService {
   public saveTutorial(tutorial: Tutorial) {
     // let copy: Tutorial;
     // copy = Object.assign(copy, tutorial);
-    
+
     return this._api.post('/Tutorial/save', tutorial);
   }
 
   public getTutorial(id: string): Observable<Tutorial> {
-     var params = {
+    var params = {
       id: id
     };
     return this._api.get('/Tutorial/GetTutorial', params).map(x => x as Tutorial);
@@ -37,6 +37,13 @@ export class TutorialService {
       tutorialLinkUrl: tutorialLinkUrl
     };
     return this._api.get('/Tutorial/DoesTutorialExist', params);
+  }
+
+  public getTutorialWithArticleInfo(tutorialLinkUrl: string): Observable<Tutorial> {
+    var params = {
+      tutorialLinkUrl: tutorialLinkUrl
+    };
+    return this._api.get('/Tutorial/GetTutorialWithArticleInfo', params).map(x => x as Tutorial);
   }
 
 }

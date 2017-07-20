@@ -19,10 +19,20 @@ namespace SkillPath.Api.Entities
 		public int Tier { get; set; }
 		public IEnumerable<TutorialCategory> TutorialCategories { get; set; }
 		
-		public void Update(Article article) {
+		public void UpdateCategories() {
+			
+			
+			var minifiedTutorialCategories = new List<TutorialCategory>();
+			foreach (var tutCat in this.TutorialCategories) {
+				minifiedTutorialCategories.Add(new TutorialCategory() {CategoryId = tutCat.Id});
+			}
+			this.TutorialCategories = minifiedTutorialCategories;
+		}
+
+		public void PopulateWithArticle(Article article) {
 			this.Title = article?.Title ?? this.Title;
 			this.Description = article?.Description ?? this.Description;
-			this.ImageUrl = article?.FrontImage.AbsoluteUri ?? this.ImageUrl;
+			this.ImageUrl = article?.FrontImage?.AbsoluteUri ?? this.ImageUrl;
 		}
 
 

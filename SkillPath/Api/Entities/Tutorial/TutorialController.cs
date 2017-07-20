@@ -18,7 +18,12 @@ namespace SkillPath.Api.Entities
        
 		[HttpPost]
 		public async Task Save([FromBody]Tutorial category) {
+			try {
 			await _tutorialService.SaveTutorial(category);
+			}
+			catch {
+				this.HttpContext.Response.StatusCode = 502;
+			}
 		}
 
 		[HttpGet]
@@ -41,10 +46,14 @@ namespace SkillPath.Api.Entities
 		} 
 
 		[HttpGet]
-		public async void TutorialInfo()
-		{
-			var article = await this._tutorialService.GetArticleInfo("https://medium.com/@levifuller/building-an-angular-application-with-asp-net-core-in-visual-studio-2017-visualized-f4b163830eaa");
-			var desc = article.Description;
+		public async Task<Tutorial> GetTutorialWithArticleInfo(string tutorialLinkUrl) {
+			Tutorial toReturn = null;
+			var article = await this._tutorialService.GetArticleInfo(tutorialLinkUrl);
+			if (article != null) {
+				toReturn = new Tutorial();
+				toReturn.PopulateWithArticle(article);
+			}
+			return toReturn;
 		}
 	
     }

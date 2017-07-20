@@ -17,10 +17,7 @@ namespace SkillPath.Api.Entities
 		}
 
 		public async Task SaveTutorial(Tutorial tutorial) {
-			var article = GetArticleInfo(tutorial.LinkUrl);
-
-
-			
+			tutorial.UpdateCategories();
 			_context.Tutorials.Add(tutorial);
 			await _context.SaveChangesAsync();
 		}
@@ -49,15 +46,12 @@ namespace SkillPath.Api.Entities
 
 		public async Task<Article> GetArticleInfo(string articleUrl)
 		{
-			
 			var reader = new Reader();
 			Article article = null;
 			try {
 				article = await reader.Read(new Uri(articleUrl));
 			}
-			catch (ReadException exc) {
-				// handle exception
-			}
+			catch (ReadException exc) { }
 			return article;
 		}
 
