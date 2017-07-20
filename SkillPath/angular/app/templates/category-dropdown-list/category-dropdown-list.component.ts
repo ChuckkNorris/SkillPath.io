@@ -75,7 +75,8 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
     let newCategoriesList = this.selectedCategories != null ? this.selectedCategories.slice() : [];
     newCategoriesList[+tier - 1] = category;
     this.selectedCategories = newCategoriesList;
-    this.getChildCategories(+tier + 1, category.id);
+    if (tier && category.tier)
+      this.getChildCategories(+tier + 1, category.id);
   }
 
   getChildCategories(tier: number, parentId: string) {
@@ -93,6 +94,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
 
   
   deselectChildCategories(tier: number) {
+    console.log(`delecting tier ${tier} and above`);
     if (tier <= 2) {
        this._selectedCategories[1] = undefined;
     }

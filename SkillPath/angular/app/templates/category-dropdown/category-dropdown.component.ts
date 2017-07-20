@@ -20,8 +20,11 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   // - - NG MODEL - - //
 
   writeValue(category: any) {
-    if (category)
+    
+    if (category) {
+      console.log(`category ${category.name}`)
       this.selectedCategory = category;
+    }
     else
       this._selectedCategory = category;
   }
@@ -33,9 +36,15 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
 
   private _selectedCategory: Category;
   @Input() set selectedCategory(category) {
-    if (this._selectedCategory != category) {
+    let catId = category != undefined ? category.id : undefined;
+    let selectId = this._selectedCategory != undefined ? this._selectedCategory : undefined;
+    if (selectId != catId) {
+      console.log(`category ${category.name}`)
       this._selectedCategory = category;
       this.propogateChange(this.selectedCategory);
+    }
+    else {
+      console.log(`undefined category set`);
     }
   }
   get selectedCategory() {
@@ -75,6 +84,7 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
 
   get allCategory(): Category {
     return {
+      id: "0",
       name: 'All',
       icon: "books",
       description: "Show all tutorials in category"
