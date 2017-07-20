@@ -21,7 +21,7 @@ export class AdminPageComponent implements OnInit {
     this.getCategories();
     this.getTutorials();
   }
-  
+  updatingCategories: Category[];
   categoryToSave: Category = {tier: 1};
   saveCategory() {
     this._categoryService.saveCategory(this.categoryToSave).subscribe((response) => {
