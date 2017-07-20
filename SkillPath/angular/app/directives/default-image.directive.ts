@@ -12,7 +12,6 @@ export class DefaultImageDirective {
   @Input() default:string;
 
   updateUrl(event) {
-    //console.log(event);
     this.src = this.default;
     event.preventDefault();
   }

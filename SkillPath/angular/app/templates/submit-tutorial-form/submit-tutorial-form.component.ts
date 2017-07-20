@@ -65,12 +65,11 @@ export class SubmitTutorialFormComponent implements OnInit {
   }
 
   submitTutorial() {
-    //console.log('Submitting Tutorial');
     this._loaderService.show();
     this._tutorialService.saveTutorial(this.tutorial).subscribe(() => {
 
       this._loaderService.hide();
-      // this._router.navigate(['learn']);
+      this._router.navigate(['learn']);
     });
   }
 

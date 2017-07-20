@@ -1,3 +1,4 @@
+import { LoaderService } from './../../services/loader.service';
 import { CategoryService } from './../../services/category.service';
 import { Category } from './../../models/category';
 import { TutorialService } from './../../services/tutorial.service';
@@ -13,11 +14,12 @@ export class LearnPageComponent implements OnInit {
 
   constructor(
     private _categoryService: CategoryService,
-    private _tutorialService: TutorialService) {}
+    private _loaderService: LoaderService,
+    private _tutorialService: TutorialService) { }
 
   ngOnInit() {
     this.initializeInfiniteScroll();
-    this.getTutorials(1);
+    this.getTutorials(1, null, true);
   }
   tutorials = [];
   currentPage: number = 1;
@@ -25,26 +27,31 @@ export class LearnPageComponent implements OnInit {
   selectedCategories: Category[];
 
   onCategoriesChanged(categories: Category[]) {
-    console.log(`LearnPage -> ${categories[0].name}`)
     let updatedCategory = this._categoryService.getUpdatedCategory(categories);
-    if (updatedCategory)
-      this.getTutorials(1, updatedCategory.id);
+    if (updatedCategory) {
+
+      this.getTutorials(1, updatedCategory.id, true);
+    }
+
   }
 
-  getTutorials(page: number, categoryId?: string) {
+  getTutorials(page: number, categoryId?: string, showLoader?: boolean) {
     this.lastCategoryId = categoryId;
     this.isLastPage = false;
     this.currentPage = page;
-    console.log('Getting tutorials');
+
+    if (showLoader)
+      this._loaderService.show();
+
     this._tutorialService.getTutorials(page, categoryId).subscribe(tutorials => {
-      if (page > 1) {
+      if (page > 1)
         this.tutorials = this.tutorials.concat(tutorials);
-      }
-      else {
+      else
         this.tutorials = tutorials;
-      }
+      if (showLoader)
+        this._loaderService.hide();
     });
-   
+
   }
 
   isRetreivingTutorials: boolean = false;
@@ -61,7 +68,7 @@ export class LearnPageComponent implements OnInit {
           this.isRetreivingTutorials = true;
           this.currentPage++;
           this._tutorialService.getTutorials(this.currentPage + 1, this.lastCategoryId).subscribe(tutorials => {
-            if (tutorials.length > 0) 
+            if (tutorials.length > 0)
               this.tutorials = this.tutorials.concat(tutorials);
             else
               this.isLastPage = true;

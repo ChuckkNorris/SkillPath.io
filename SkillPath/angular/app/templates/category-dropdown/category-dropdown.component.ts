@@ -22,7 +22,6 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
   writeValue(category: any) {
     
     if (category) {
-      console.log(`category ${category.name}`)
       this.selectedCategory = category;
     }
     else
@@ -39,12 +38,8 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
     let catId = category != undefined ? category.id : undefined;
     let selectId = this._selectedCategory != undefined ? this._selectedCategory : undefined;
     if (selectId != catId) {
-      console.log(`category ${category.name}`)
       this._selectedCategory = category;
       this.propogateChange(this.selectedCategory);
-    }
-    else {
-      console.log(`undefined category set`);
     }
   }
   get selectedCategory() {

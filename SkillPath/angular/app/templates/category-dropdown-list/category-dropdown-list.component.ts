@@ -94,7 +94,6 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
 
   
   deselectChildCategories(tier: number) {
-    console.log(`delecting tier ${tier} and above`);
     if (tier <= 2) {
        this._selectedCategories[1] = undefined;
     }
