@@ -14,7 +14,7 @@ const routes: Routes = [
     //canActivate: [AuthenticationGuard]
   },
   { path: 'teach', component: TeachPageComponent, 
-    canActivate: [AuthenticationGuard] 
+    //canActivate: [AuthenticationGuard] 
   },
   {
     path: 'teach/:id', component: TeachPageComponent,
