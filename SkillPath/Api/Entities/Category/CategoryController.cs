@@ -41,9 +41,7 @@ namespace SkillPath.Api.Entities
 		[Authorize("Admin")]
 		[HttpPost]
 		public async Task Delete([FromBody]dynamic category) {
-			Console.WriteLine(JsonConvert.SerializeObject(category));
 			Guid categoryId = category.categoryId;
-			Console.WriteLine($"Category to Delete: {categoryId}");
 			await _categoryService.Delete(categoryId);
 		}
 

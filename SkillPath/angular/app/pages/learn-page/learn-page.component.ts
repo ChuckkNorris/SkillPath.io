@@ -1,3 +1,5 @@
+import { TutorialLinkExists } from './../../directives/tutorial-link-exists.directive';
+import { Tutorial } from './../../models/tutorial';
 import { LoaderService } from './../../services/loader.service';
 import { CategoryService } from './../../services/category.service';
 import { Category } from './../../models/category';
@@ -21,11 +23,31 @@ export class LearnPageComponent implements OnInit {
     this.initializeInfiniteScroll();
     this.getTutorials(1, null, true);
   }
-  tutorials = [];
-  currentPage: number = 1;
+
+  filteredTutorials: Tutorial[];
+  searchText: string;
+  searchTutorials(searchText: string) {
+    let safeSearchText = searchText.toLowerCase();
+    let filteredTuts = this.tutorials.filter(tut => {
+      // console.log(`${safeSearchText} == ${tut.title}`);
+      // console.log(`${safeSearchText} == ${tut.description}`);
+      let toReturn = this.doesSafeContain(safeSearchText, tut.title)
+        || this.doesSafeContain(safeSearchText, tut.description);
+      console.log(toReturn);
+      return toReturn;
+    });
+    this.filteredTutorials = filteredTuts;
+    console.log(filteredTuts);
+  }
+
+  private doesSafeContain(searchText: string, strToCheck: string): boolean {
+    let index = strToCheck.toLowerCase().indexOf(searchText);
+    console.log(`Index: ${index}`);
+    return index > -1;
+  }
+
   lastCategoryId: string;
   selectedCategories: Category[];
-
   onCategoriesChanged(categories: Category[]) {
     let updatedCategory = this._categoryService.getUpdatedCategory(categories);
     if (updatedCategory) {
@@ -35,6 +57,16 @@ export class LearnPageComponent implements OnInit {
 
   }
 
+  _tutorials: Tutorial[];
+  set tutorials(tutorials: Tutorial[]) {
+    this._tutorials = tutorials;
+    this.filteredTutorials = this._tutorials;
+  }
+  get tutorials(): Tutorial[] {
+    return this._tutorials;
+  }
+
+  currentPage: number = 1;
   getTutorials(page: number, categoryId?: string, showLoader?: boolean) {
     this.lastCategoryId = categoryId;
     this.isLastPage = false;
@@ -50,6 +82,8 @@ export class LearnPageComponent implements OnInit {
         this.tutorials = tutorials;
       if (showLoader)
         this._loaderService.hide();
+      if (this.searchText)
+        this.searchTutorials(this.searchText);
     });
 
   }

@@ -7,6 +7,13 @@
     (ngModelChange)="onCategoriesChanged($event)"
   >
   </app-category-dropdown-list>
-</form>
 
-<app-tutorial-list [tutorials]="tutorials"></app-tutorial-list>
+</form>
+<div fxLayout="row" fxLayoutAlign="center">
+  <md-input-container fxFlex="300px" fxAlign="center">
+  <input name="search" mdInput placeholder="Search within" [(ngModel)]="searchText" (input)="searchTutorials(searchText)" />
+</md-input-container>
+</div>
+
+
+<app-tutorial-list [tutorials]="filteredTutorials"></app-tutorial-list>
