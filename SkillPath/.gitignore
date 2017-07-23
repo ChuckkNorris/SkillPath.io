@@ -3,12 +3,14 @@
 # secure files
 credentials.ts
 appsettings.json
+/Properties
 
 # compiled output
 /dist
 /tmp
 /out-tsc
 /wwwroot
+
 
 # dependencies
 /node_modules
