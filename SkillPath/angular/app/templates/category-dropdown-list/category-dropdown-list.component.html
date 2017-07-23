@@ -1,9 +1,9 @@
 <div fxLayout="row" fxLayoutAlign="center" fxLayoutWrap="wrap" >
-     <!-- disabled="true" -->
+     <!--  -->
   <app-category-dropdown 
     name="t1Category"
     categorySearchRequired
-    autoSelect="Frontend"
+    disabled="true"
     showEmpty="true"
     fxFlex="300px"
     title="Stack"
@@ -14,7 +14,8 @@
 
   <app-category-dropdown 
     name="t2Category"
-    [class.hidden]="!selectedCategories[0]?.tier"
+    disabled="true"
+    [class.hidden]="!selectedCategories[0]?.id"
     categorySearchRequired
     autoSelect="Frameworks/Libraries"
 
@@ -27,7 +28,8 @@
 
   <app-category-dropdown 
     name="t3Category"
-    [class.hidden]="!selectedCategories[1]?.tier"
+    disabled="true"
+    [class.hidden]="!selectedCategories[1]?.id"
     categorySearchRequired
     autoSelect="Angular 2.x+"
 
@@ -40,7 +42,7 @@
 
   <app-category-dropdown 
     name="t4Category"
-    [class.hidden]="!selectedCategories[2]?.tier"
+    [class.hidden]="!selectedCategories[2]?.id"
     categorySearchRequired
     fxFlex="300px"
     title="Area"

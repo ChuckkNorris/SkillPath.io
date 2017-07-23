@@ -17,23 +17,23 @@ import { Component, OnInit, Input, ViewChildren, QueryList, EventEmitter, Output
   ]
 })
 export class CategoryDropdownListComponent implements OnInit, ControlValueAccessor {
-  
+
   constructor(private _categoryService: CategoryService, private tutorialForm: NgForm) { }
 
-   // - - NG MODEL - - //
+  // - - NG MODEL - - //
 
   writeValue(newCategories: any) {
     //if (newCategories && newCategories != this._selectedCategories)
-      this.selectedCategories = newCategories;
+    this.selectedCategories = newCategories;
   }
   propogateChange = (_: any) => { };
   registerOnChange(fn) {
     this.propogateChange = fn;
   }
   registerOnTouched() { }
-  
+
   @Input() showEmptyCategories: boolean = false;
-  
+
   private _selectedCategories: Category[] = [];
   @Input() set selectedCategories(newCategories) {
     if (newCategories && this._selectedCategories != newCategories) {
@@ -46,7 +46,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   }
 
   // - - Categories - - //
-  
+
   t1Categories: Category[];
   t2Categories: Category[];
   t3Categories: Category[];
@@ -67,6 +67,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   getCategories(tier: number) {
     this._categoryService.getCategories(tier, this.showEmptyCategories).subscribe(cats => {
       this.t1Categories = cats;
+      this.autoSelectCategory(tier)
     });
   }
 
@@ -80,28 +81,42 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   }
 
   getChildCategories(tier: number, parentId: string) {
-   
-    if (parentId) {
+    if (parentId && tier < 5) {
       this._categoryService.getChildCategories(parentId, this.showEmptyCategories).subscribe(cats => {
         // Bug here:
         // After switching t1 categories, t3CategoryDropdown set categegories() isn't being
         // triggered - can't figure out why. $10 PayPal bounty?
         let categoryName = 't' + tier + 'Categories';
         this[categoryName] = cats;
+        this.autoSelectCategory(tier);
       });
     }
   }
 
-  
+  autoSelectCategory(tier: number) {
+    if (this._selectedCategories.filter(cat => cat).length != 4) {
+      let index = +tier - 1;
+      let autoSelectCategoryNames = ['Frontend', 'Web Frameworks', 'Angular 2.x+'];
+
+      let catName = autoSelectCategoryNames[index];
+      let matchCat = this[`t${tier}Categories`].filter(cat => cat.name == catName);
+      if (matchCat.length > 0) {
+        this.selectedCategories[index] = matchCat[0];
+
+      }
+    }
+  }
+
+
   deselectChildCategories(tier: number) {
     if (tier <= 2) {
-       this._selectedCategories[1] = undefined;
+      this._selectedCategories[1] = undefined;
     }
     if (tier <= 3) {
-        this._selectedCategories[2] = undefined;
+      this._selectedCategories[2] = undefined;
     }
     if (tier <= 4) {
-       this._selectedCategories[3] = undefined;
+      this._selectedCategories[3] = undefined;
     }
   }
 

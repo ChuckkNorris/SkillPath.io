@@ -79,14 +79,10 @@ export class SubmitTutorialFormComponent implements OnInit {
     let text = clipboardData.getData('Text');
     if (text)
       this.tryPopulateTutorial(text, true);
-    console.log(text);
   }
 
   tryPopulateTutorial(tutorialUrl: any, isPasteEvent: boolean = false) {
-    
-    console.log(tutorialUrl);
     if (tutorialUrl.target) {
-      console.log(tutorialUrl.target);
       tutorialUrl = tutorialUrl.target.value;
     }
 

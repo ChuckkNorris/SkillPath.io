@@ -29,20 +29,15 @@ export class LearnPageComponent implements OnInit {
   searchTutorials(searchText: string) {
     let safeSearchText = searchText.toLowerCase();
     let filteredTuts = this.tutorials.filter(tut => {
-      // console.log(`${safeSearchText} == ${tut.title}`);
-      // console.log(`${safeSearchText} == ${tut.description}`);
       let toReturn = this.doesSafeContain(safeSearchText, tut.title)
         || this.doesSafeContain(safeSearchText, tut.description);
-      console.log(toReturn);
       return toReturn;
     });
     this.filteredTutorials = filteredTuts;
-    console.log(filteredTuts);
   }
 
   private doesSafeContain(searchText: string, strToCheck: string): boolean {
     let index = strToCheck.toLowerCase().indexOf(searchText);
-    console.log(`Index: ${index}`);
     return index > -1;
   }
 

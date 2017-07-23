@@ -43,9 +43,12 @@ export class CategoryDropdownComponent implements ControlValueAccessor {
     }
   }
   get selectedCategory() {
+    let toReturn;
     if (this._selectedCategory && this._selectedCategory.id)
-      return this._selectedCategory
-    else return this.allCategory;
+      toReturn = this._selectedCategory
+    if (!toReturn)
+      toReturn = this.allCategory;
+    return toReturn;
   }
 
   // - - INPUTS - - //
