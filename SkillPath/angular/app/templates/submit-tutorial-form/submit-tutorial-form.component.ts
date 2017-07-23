@@ -73,18 +73,40 @@ export class SubmitTutorialFormComponent implements OnInit {
     });
   }
 
-  tryPopulateTutorial(tutorialUrl: string) {
+  justPastedUrl: boolean = false;
+  pastePopulateTutorial(pasteEvent) {
+    let clipboardData = pasteEvent.clipboardData;
+    let text = clipboardData.getData('Text');
+    if (text)
+      this.tryPopulateTutorial(text, true);
+    console.log(text);
+  }
+
+  tryPopulateTutorial(tutorialUrl: any, isPasteEvent: boolean = false) {
+    
+    console.log(tutorialUrl);
+    if (tutorialUrl.target) {
+      console.log(tutorialUrl.target);
+      tutorialUrl = tutorialUrl.target.value;
+    }
+
     if (!this.tutorial.id) {
-      this._tutorialService.getTutorialWithArticleInfo(tutorialUrl).subscribe(newTut => {
-        if (newTut) {
-          if (!this.tutorial.title && newTut.title)
-            this.tutorial.title = newTut.title;
-          if (!this.tutorial.description && newTut.description)
-            this.tutorial.description = newTut.description;
-          if (!this.tutorial.imageUrl && newTut.imageUrl)
-            this.tutorial.imageUrl = newTut.imageUrl;
-        }
-      });
+      // If they paste, don't get info on following blur
+      if (!this.justPastedUrl || isPasteEvent)
+        this._tutorialService.getTutorialWithArticleInfo(tutorialUrl).subscribe(newTut => {
+          if (newTut) {
+            if (!this.tutorial.title && newTut.title)
+              this.tutorial.title = newTut.title;
+            if (!this.tutorial.description && newTut.description)
+              this.tutorial.description = newTut.description;
+            if (!this.tutorial.imageUrl && newTut.imageUrl)
+              this.tutorial.imageUrl = newTut.imageUrl;
+          }
+        });
+      
+      this.justPastedUrl = isPasteEvent;
+      
+
     }
   }
 

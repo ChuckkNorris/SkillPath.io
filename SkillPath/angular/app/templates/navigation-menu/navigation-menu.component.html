@@ -1,5 +1,5 @@
 <md-toolbar color="primary">
-  <img class="logo" src="../../../assets/SkillPath-Logo-V2.png">
+  <img class="logo" style="cursor: pointer;" [title]="githubUrl" (click)="openGitHub()" src="../../../assets/SkillPath-Logo-V2.png">
   <span class="app-toolbar-filler"></span>
   <button #home md-button routerLink="/learn" [routerLinkActive]="navigationActiveStyle">Learn</button>
   <button md-button routerLink="/teach" [routerLinkActive]="navigationActiveStyle">Teach</button>

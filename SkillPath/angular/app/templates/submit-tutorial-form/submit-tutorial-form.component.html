@@ -8,7 +8,9 @@
           Paste a link to an article and we'll try to populate the details for you
         </p>
         <md-input-container fxFlex="100">
-          <input required name="linkUrl" [(ngModel)]="tutorial.linkUrl" (blur)="tryPopulateTutorial(tutorial.linkUrl)" tutorialLinkExists
+          <input required name="linkUrl" [(ngModel)]="tutorial.linkUrl" 
+            (paste)="pastePopulateTutorial($event)"
+          (blur)="tryPopulateTutorial(tutorial.linkUrl)" tutorialLinkExists
           placeholder="Tutorial Link" mdInput type="url" pattern="https?://.+">
            <md-error>
              <div *ngIf="tutorialForm.hasError('tutorialExists', ['linkUrl']); then tutorialExistsError else otherTutLinkError"></div>

@@ -12,4 +12,9 @@ export class NavigationMenuComponent implements OnInit {
   ngOnInit() {
   }
 
+    githubUrl = "https://github.com/ChuckkNorris/SkillPath.io/tree/master/SkillPath";
+    openGitHub() {
+      window.open(this.githubUrl, "_blank");
+    }
+
 }

@@ -1,19 +1,17 @@
-<h1 class="center-text">Select a Tutorial</h1>
+<h2 class="center-text">These are the tutorials you're looking for...</h2>
 
-  <form>
-  <app-category-dropdown-list
-    name="cool"
-    [(ngModel)]="selectedCategories"
-    (ngModelChange)="onCategoriesChanged($event)"
-  >
-  </app-category-dropdown-list>
-
-</form>
 <div fxLayout="row" fxLayoutAlign="center">
   <md-input-container fxFlex="300px" fxAlign="center">
-  <input name="search" mdInput placeholder="Search within" [(ngModel)]="searchText" (input)="searchTutorials(searchText)" />
-</md-input-container>
+    <input name="search" mdInput placeholder="Search within" [(ngModel)]="searchText" 
+      (input)="searchTutorials(searchText)" />
+  </md-input-container>
 </div>
 
+<form>
+  <app-category-dropdown-list name="cool" 
+    [(ngModel)]="selectedCategories" 
+    (ngModelChange)="onCategoriesChanged($event)">
+  </app-category-dropdown-list>
+</form>
 
 <app-tutorial-list [tutorials]="filteredTutorials"></app-tutorial-list>
