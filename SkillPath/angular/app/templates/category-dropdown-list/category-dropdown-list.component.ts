@@ -67,7 +67,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   getCategories(tier: number) {
     this._categoryService.getCategories(tier, this.showEmptyCategories).subscribe(cats => {
       this.t1Categories = cats;
-      this.autoSelectCategory(tier)
+      //this.autoSelectCategory(tier)
     });
   }
 
@@ -88,7 +88,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
         // triggered - can't figure out why. $10 PayPal bounty?
         let categoryName = 't' + tier + 'Categories';
         this[categoryName] = cats;
-        this.autoSelectCategory(tier);
+        //this.autoSelectCategory(tier);
       });
     }
   }

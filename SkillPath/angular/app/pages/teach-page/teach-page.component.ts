@@ -1,3 +1,4 @@
+import { CategoryService } from './../../services/category.service';
 import { TutorialService } from './../../services/tutorial.service';
 import { ActivatedRoute } from '@angular/router';
 import { Tutorial } from './../../models/tutorial';
@@ -10,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeachPageComponent implements OnInit {
 
-  constructor(private _route: ActivatedRoute, private _tutorialService: TutorialService) { }
+  constructor(
+    private _route: ActivatedRoute, 
+    private _categoryService: CategoryService,
+    private _tutorialService: TutorialService) { }
   
-  tutorial: Tutorial = { tutorialCategories: [{},{},{},{}]};
+  tutorial: Tutorial = { tutorialCategories: this._categoryService.getAngularCategories()};
   ngOnInit() {
     this._route.params.subscribe(params => {
       let tutorialId = params['id'];

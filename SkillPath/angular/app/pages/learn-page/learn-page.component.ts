@@ -42,7 +42,7 @@ export class LearnPageComponent implements OnInit {
   }
 
   lastCategoryId: string;
-  selectedCategories: Category[];
+  selectedCategories: Category[] = this._categoryService.getAngularCategories();
   onCategoriesChanged(categories: Category[]) {
     let updatedCategory = this._categoryService.getUpdatedCategory(categories);
     if (updatedCategory) {

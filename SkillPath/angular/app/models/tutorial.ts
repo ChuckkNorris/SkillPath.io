@@ -3,10 +3,20 @@ export interface Tutorial {
     title?: string;
     description?: string;
     linkUrl?: string;
-    tutorialCategories?: TutorialCategory[];
+    tutorialCategories?: any[];
     imageUrl?: any;
 }
 
 export interface TutorialCategory {
     categoryId?: string;
+    name?: string;
+    description?: string;
+    icon?: string;
+    tier?: number;
+    parent?: any;
+    parentId?: string;
+    tutorialCategories?: any;
+    tutorialCount?: number;
+    id?: string;
+    dateCreated?: string;
 }

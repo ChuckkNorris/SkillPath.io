@@ -1,3 +1,4 @@
+import { CategoryService } from './../../services/category.service';
 import { TUTORIALS } from './../../models/test-data';
 import { LoaderService } from './../../services/loader.service';
 import { ImgurService } from './../../services/imgur.service';
@@ -28,18 +29,9 @@ export class SubmitTutorialFormComponent implements OnInit {
     private _router: Router,
     private _tutorialService: TutorialService) { }
 
-  //tutorial: Tutorial = { tutorialCategories: [] }
-  // tutCat1: Category;
-  // tutCat2: Category;
-  // tutCat3: Category;
-  // tutCat4: Category;
-
-  private _tutorial: Tutorial = {};
+  private _tutorial: Tutorial = { };
   @Input() set tutorial(val) {
     this._tutorial = val;
-    // for (var i = 0; i < val.tutorialCategories.length; i++) {
-    //   this['tutCat' + (i+1)] = val.tutorialCategories[i];
-    // }
   }
   get tutorial() {
     return this._tutorial;
