@@ -4,6 +4,10 @@ md-list-item {
     cursor: pointer;
 }
 
+.list-item-icon {
+    color: mat-color($primary);
+}
+
 .category-search {
     max-width: 300px;
     margin-bottom: 25px;

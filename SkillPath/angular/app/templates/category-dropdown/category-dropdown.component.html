@@ -20,7 +20,7 @@
             [class.selected-item]="!selectedCategory?.id"
             (click)="selectedCategory = allCategory" 
             [title]="allCategory.description">
-            <app-icomoon-icon md-list-icon [icon]="allCategory.icon"></app-icomoon-icon>
+            <app-icomoon-icon class="list-item-icon" md-list-icon [icon]="allCategory.icon"></app-icomoon-icon>
             <h4 md-line>{{allCategory.name}}</h4>
             <p md-line class="giveMeEllipsis">{{allCategory.description}} </p>
           </md-list-item>
@@ -28,7 +28,7 @@
             [class.selected-item]="cat.id == selectedCategory?.id"
             (click)="selectedCategory = cat" 
             [title]="cat.name + ' - ' + cat.description">
-            <app-icomoon-icon md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
+            <app-icomoon-icon class="list-item-icon" md-list-icon *ngIf="cat.icon" [icon]="cat.icon"></app-icomoon-icon>
             <h4 md-line>{{cat.name}}</h4>
             <p md-line class="giveMeEllipsis"> {{cat.description}}</p>
           </md-list-item>
