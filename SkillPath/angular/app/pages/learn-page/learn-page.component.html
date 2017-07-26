@@ -2,13 +2,14 @@
 
 <div fxLayout="row" fxLayoutAlign="center">
   <md-input-container fxFlex="300px" fxAlign="center">
-    <input name="search" mdInput placeholder="Search within" [(ngModel)]="searchText" 
+    <input name="search" mdInput placeholder="Search within..." [(ngModel)]="searchText" 
       (input)="searchTutorials(searchText)" />
   </md-input-container>
 </div>
 
 <form>
   <app-category-dropdown-list name="cool" 
+    disabled="true"
     [(ngModel)]="selectedCategories" 
     (ngModelChange)="onCategoriesChanged($event)">
   </app-category-dropdown-list>

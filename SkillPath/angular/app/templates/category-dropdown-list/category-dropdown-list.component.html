@@ -1,9 +1,9 @@
 <div fxLayout="row" fxLayoutAlign="center" fxLayoutWrap="wrap" >
-     <!--  -->
+
   <app-category-dropdown 
     name="t1Category"
     categorySearchRequired
-    disabled="true"
+    [disabled]="disabled"
     showEmpty="true"
     fxFlex="300px"
     title="Stack"
@@ -14,7 +14,7 @@
 
   <app-category-dropdown 
     name="t2Category"
-    disabled="true"
+    [disabled]="disabled"
     [class.hidden]="!selectedCategories[0]?.id"
     categorySearchRequired
     autoSelect="Frameworks/Libraries"
@@ -28,11 +28,10 @@
 
   <app-category-dropdown 
     name="t3Category"
-    disabled="true"
+    [disabled]="disabled"
     [class.hidden]="!selectedCategories[1]?.id"
     categorySearchRequired
     autoSelect="Angular 2.x+"
-
     fxFlex="300px"
     title="Technology"
     [(ngModel)]="selectedCategories[2]"

@@ -49,25 +49,29 @@
               </md-error>
           </md-input-container>
 
-          <button type="button" fxFlex.gt-xs="30" fxFlex="100" md-raised-button ngFilePicker color="primary" accept="image/*" (filePick)="selectImage($event)">Browse</button>
+          <button type="button" fxFlex.gt-xs="30" fxFlex="100" md-raised-button ngFilePicker color="accent" accept="image/*" (filePick)="selectImage($event)">Browse</button>
       </div> 
 
       <div class="padding-md-top" fxLayout="row" fxLayoutAlign="center">
         
         <app-category-dropdown-list
           name="selectedCategories"
+          disabled="true"
           showEmptyCategories="true"
           [(ngModel)]="tutorial.tutorialCategories"
         ></app-category-dropdown-list>
 
       </div>
       <div fxLayout="row" fxLayoutAlign="center">
-        <app-tutorial-card fxFlex.xs="100" fxFlex="500px" [tutorial]="tutorial"></app-tutorial-card>
+        <app-tutorial-card 
+          fxFlex.xs="100" 
+          fxFlex="500px" 
+          [tutorial]="tutorial"></app-tutorial-card>
       </div>
 
 
       <div fxLayout="row" fxLayoutAlign="center">
-        <button [disabled]="!tutorialForm.valid" fxFlex.xs="100" fxFlex="400px" md-raised-button color="accent" type="submit">{{submitButtonText}}</button>
+        <button [disabled]="!tutorialForm.valid" fxFlex.xs="100" fxFlex="400px" md-raised-button color="primary" type="submit">{{submitButtonText}}</button>
         
       </div>
     </div>

@@ -1,3 +1,5 @@
+@import '../../../styles/theme';
+
 md-list-item {
     cursor: pointer;
 }
@@ -26,11 +28,16 @@ md-list-item {
 }
 
 .category-tag {
-    background: #ff4081;
+    background: mat-color($accent);
     color: white;
     border-radius: 0px 0px 10px 10px;
     padding: 5px;
     text-align: center;
+}
+
+.category-tag-disabled {
+    background: mat-color($light-grey);
+    color: $background;
 }
 
 .hand {

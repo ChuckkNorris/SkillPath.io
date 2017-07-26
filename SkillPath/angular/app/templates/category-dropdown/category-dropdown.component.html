@@ -8,7 +8,7 @@
       Change {{title}}
     </button>
     <!--   -->
-    <div *ngIf="!showCategoryOptions" [class.hand]="!disabled" class="category-tag" md-suffix>
+    <div *ngIf="!showCategoryOptions" [class.hand]="!disabled" [class.category-tag-disabled]="disabled" class="category-tag" md-suffix>
         <app-icomoon-icon md-list-icon *ngIf="selectedCategory?.icon" [icon]="selectedCategory?.icon"></app-icomoon-icon> <span *ngIf="selectedCategory?.name">{{selectedCategory.name}} </span>
 
     </div>

@@ -1,10 +1,15 @@
+@import "theme";
 body {
-    font-family: roboto, sans-serif;
+	font-family: roboto, sans-serif;
 }
 
 // * * * HEADERS * * * //
 h1, h2, h3, h4, h5 {
-    color: #3f51b5;
+    color: mat-color($primary);
+}
+
+p {
+	color: white;
 }
 
 // * * * SCROLLBAR * * * //
@@ -25,6 +30,9 @@ h1, h2, h3, h4, h5 {
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #3f51b5;
+	background-color: mat-color($accent);
 }
 
+input, textarea {
+	color: white !important;
+}

@@ -6,7 +6,7 @@ import { Component, OnInit, Input, ViewChildren, QueryList, EventEmitter, Output
 @Component({
   selector: 'app-category-dropdown-list',
   templateUrl: './category-dropdown-list.component.html',
-  styleUrls: ['./category-dropdown-list.component.css'],
+  styleUrls: ['./category-dropdown-list.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -33,6 +33,7 @@ export class CategoryDropdownListComponent implements OnInit, ControlValueAccess
   registerOnTouched() { }
 
   @Input() showEmptyCategories: boolean = false;
+  @Input() disabled: boolean = false;
 
   private _selectedCategories: Category[] = [];
   @Input() set selectedCategories(newCategories) {
