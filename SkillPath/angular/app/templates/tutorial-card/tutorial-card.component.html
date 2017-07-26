@@ -1,7 +1,7 @@
 <md-card style="cursor: pointer;" (click)="openTutorialInNewWindow()" [title]="tutorial.linkUrl" class="tutorial-card">
 
   <md-card-header>
-    <md-card-title class="center-text">
+    <md-card-title class="center-text title">
       <h3 [title]="tutorial.title"> {{tutorial.title}}</h3>
     </md-card-title>
     <md-card-subtitle>
@@ -10,9 +10,11 @@
       </div> 
     </md-card-subtitle>
   </md-card-header>
+  <div class="image-parent">
   <img [default]="defaultImageUrl" class="tutorial-image" md-card-image [src]="tutorial.imageUrl || defaultImageUrl">
+  </div>
 
-  <md-card-content [title]="tutorial.description" class="center-text">
+  <md-card-content [title]="tutorial.description" class="center-text padding-sm-top">
     <div class="description">
       {{tutorial.description}}
     </div>
