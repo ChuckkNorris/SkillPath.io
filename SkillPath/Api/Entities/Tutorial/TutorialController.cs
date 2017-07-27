@@ -17,9 +17,20 @@ namespace SkillPath.Api.Entities
 		}
        
 		[HttpPost]
-		public async Task Save([FromBody]Tutorial category) {
+		public async Task Save([FromBody]Tutorial tutorial) {
 			try {
-			await _tutorialService.SaveTutorial(category);
+				await _tutorialService.SaveTutorial(tutorial);
+			}
+			catch {
+				this.HttpContext.Response.StatusCode = 502;
+			}
+		}
+
+		// UpdateTutorial
+		[HttpPut]
+		public async Task Update([FromBody]Tutorial tutorial) {
+			try {
+				await _tutorialService.UpdateTutorial(tutorial);
 			}
 			catch {
 				this.HttpContext.Response.StatusCode = 502;

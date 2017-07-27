@@ -1,4 +1,5 @@
-<md-card style="cursor: pointer;" (click)="openTutorialInNewWindow()" [title]="tutorial.linkUrl" class="tutorial-card">
+<!-- (click)="openTutorialInNewWindow()" -->
+<md-card (click)="openTutorialInNewWindow()" style="cursor: pointer;" [title]="tutorial.linkUrl" class="tutorial-card">
 
   <md-card-header>
     <md-card-title class="center-text title">
@@ -23,6 +24,7 @@
   <md-card-actions>
     <div fxLayout="column">
       <a (click)="openTutorialInNewWindow()" md-raised-button color="accent">BEGIN</a>
+       <!-- <a (click)="showDetailsModal()" md-raised-button color="warn">EDIT</a> -->
     </div>
   </md-card-actions>
 

@@ -20,7 +20,7 @@ namespace SkillPath.Api.Entities
 		public IEnumerable<TutorialCategory> TutorialCategories { get; set; }
 		
 		public void UpdateCategories() {
-			
+			// TODO: Need to rewrite this
 			
 			var minifiedTutorialCategories = new List<TutorialCategory>();
 			foreach (var tutCat in this.TutorialCategories) {
@@ -35,6 +35,13 @@ namespace SkillPath.Api.Entities
 			this.ImageUrl = article?.FrontImage?.AbsoluteUri ?? this.ImageUrl;
 		}
 
+		public void Update(Tutorial tutorial) {
+			this.Title = tutorial.Title;
+			this.Description = tutorial.Description;
+			this.ImageUrl = tutorial.ImageUrl;
+			this.LinkUrl = tutorial.LinkUrl;
+			//tutorial.UpdateCategories();
+		} 
 
 	}
 }

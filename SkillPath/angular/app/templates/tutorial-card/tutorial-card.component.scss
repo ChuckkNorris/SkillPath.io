@@ -30,7 +30,7 @@
 
     height: 250px;
     width: auto;
-    margin: 0 -24px 0px -24px;
+    margin: 0 -24px;
 }
 .tutorial-image {
     height: 100%;
@@ -39,20 +39,26 @@
     margin: 0 auto;
 }
 
-.img-container {
-    max-height: 250px;
-    overflow: hidden;
-    margin: 0 -24px 16px -24px;
-    width: calc(100% + 48px);
-    text-align: center;
-}
-
-@media (max-width: 600px) {
-    .img-container {
-        margin: 16px -16px;
-        width: calc(100% + 32px);
+@media screen and (max-width: 599px) {
+    .image-parent {
+        margin: 0 -16px;
     }
 }
+
+// .img-container {
+//     max-height: 250px;
+//     overflow: hidden;
+//     margin: 0 -24px 16px -24px;
+//     width: calc(100% + 48px);
+//     text-align: center;
+// }
+
+// @media (max-width: 600px) {
+//     .img-container {
+//         margin: 16px -16px;
+//         width: calc(100% + 32px);
+//     }
+// }
 
 
 

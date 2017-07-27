@@ -65,6 +65,13 @@ export class SubmitTutorialFormComponent implements OnInit {
     });
   }
 
+  updateTutorial() {
+    this._loaderService.show();
+    this._tutorialService.updateTutorial(this.tutorial).subscribe(() => {
+       this._loaderService.hide();
+    });
+  }
+
   justPastedUrl: boolean = false;
   pastePopulateTutorial(pasteEvent) {
     let clipboardData = pasteEvent.clipboardData;

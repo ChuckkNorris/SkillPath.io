@@ -17,6 +17,13 @@ export class TutorialService {
     return this._api.post('/Tutorial/save', tutorial);
   }
 
+  public updateTutorial(tutorial: Tutorial) {
+    // let copy: Tutorial;
+    // copy = Object.assign(copy, tutorial);
+
+    return this._api.put('/Tutorial/update', tutorial);
+  }
+
   public getTutorial(id: string): Observable<Tutorial> {
     var params = {
       id: id

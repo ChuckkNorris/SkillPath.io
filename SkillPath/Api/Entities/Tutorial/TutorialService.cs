@@ -22,6 +22,14 @@ namespace SkillPath.Api.Entities
 			await _context.SaveChangesAsync();
 		}
 
+		public async Task UpdateTutorial(Tutorial tutorial) {
+			var matchingTutorial = await Find(tut => tut.Id == tutorial.Id).FirstOrDefaultAsync();
+			if (matchingTutorial != null) {
+				matchingTutorial.Update(tutorial);
+			}
+			await _context.SaveChangesAsync();
+		}
+
 		public async Task<Tutorial> GetTutorial(Guid id) {
 			var toReturn = await Find(tut => tut.Id == id).FirstOrDefaultAsync();
 			return MapTutorial(toReturn);

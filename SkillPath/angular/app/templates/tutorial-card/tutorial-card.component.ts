@@ -21,6 +21,8 @@ export class TutorialCardComponent implements OnInit {
   @Input() tutorial: Tutorial = {};
 
   openTutorialInNewWindow() {
+    console.log('okay')
+    let cook = 'Jeffrey';
     window.open(this.tutorial.linkUrl, "_blank");
   }
 
