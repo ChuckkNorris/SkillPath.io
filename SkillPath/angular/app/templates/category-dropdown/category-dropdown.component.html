@@ -1,18 +1,24 @@
 
 <div class="category-search">
   <div (click)="categoryBtn.focus()" fxLayout="column">
+    <!-- Category Dropdown  -->
     <button #categoryBtn type="button" class="category-dropdown" fxFlex="100" [disabled]="disabled"
       md-raised-button color="primary" (focus)="showCategoryOptions = true" (blur)="showCategoryOptions = false">
-       <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
-      <!-- <md-icon style="padding-right: 5px;">style</md-icon> -->
-      Change {{title}}
+      <div fxLayout="row" >
+       
+        <span fxFlex="100" fxFlexAlign="center">
+           <app-icomoon-icon md-list-icon icon="books"></app-icomoon-icon>
+          Select {{title}}
+        </span>
+        <span *ngIf="!disabled" fxFlex fxFlexAlign="end">V</span>
+      </div>
     </button>
-    <!--   -->
+    <!-- Selected Category  -->
     <div *ngIf="!showCategoryOptions" [class.hand]="!disabled" [class.category-tag-disabled]="disabled" class="category-tag" md-suffix>
         <app-icomoon-icon md-list-icon *ngIf="selectedCategory?.icon" [icon]="selectedCategory?.icon"></app-icomoon-icon> <span *ngIf="selectedCategory?.name">{{selectedCategory.name}} </span>
-
     </div>
   </div>
+
   <md-card [class.hidden]="!showCategoryOptions" class="category-list scrollbar">
       <div>
         <md-list>

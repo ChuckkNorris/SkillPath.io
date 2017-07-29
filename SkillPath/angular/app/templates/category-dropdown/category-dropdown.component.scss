@@ -28,20 +28,35 @@ md-list-item {
 }
 
 .category-dropdown {
-    border-radius: 10px 10px 0px 0px;
+    //border-radius: 10px 10px 0px 0px;
+}
+
+.category-dropdown:hover {
+    background: mat-color($primary-light);
 }
 
 .category-tag {
-    background: mat-color($accent);
+    //background: mat-color($accent);
     color: white;
+    border: 2px;
+    border-style: solid;
+     border-color: mat-color($primary);
+    
+    //border-top-style: none;
+    border-top: none;
     border-radius: 0px 0px 10px 10px;
-    padding: 5px;
+    padding: 5px 0px;
     text-align: center;
+    //width: 280px;
+    //margin: 0 auto;
 }
+
+
 
 .category-tag-disabled {
     background: mat-color($light-grey);
     color: $background;
+    border-style: none;
 }
 
 .hand {
