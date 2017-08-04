@@ -88,6 +88,7 @@ export class SubmitTutorialFormComponent implements OnInit {
     if (!this.tutorial.id) {
       // If they paste, don't get info on following blur
       if (!this.justPastedUrl || isPasteEvent)
+        this._loaderService.show();
         this._tutorialService.getTutorialWithArticleInfo(tutorialUrl).subscribe(newTut => {
           if (newTut) {
             if (!this.tutorial.title && newTut.title)
@@ -97,6 +98,7 @@ export class SubmitTutorialFormComponent implements OnInit {
             if (!this.tutorial.imageUrl && newTut.imageUrl)
               this.tutorial.imageUrl = newTut.imageUrl;
           }
+          this._loaderService.hide();
         });
       
       this.justPastedUrl = isPasteEvent;

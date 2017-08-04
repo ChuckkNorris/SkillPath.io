@@ -96,7 +96,7 @@ export class LearnPageComponent implements OnInit {
         if (percentageScrolled > .8) {
           this.isRetreivingTutorials = true;
           this.currentPage++;
-          this._tutorialService.getTutorials(this.currentPage + 1, this.lastCategoryId).subscribe(tutorials => {
+          this._tutorialService.getTutorials(this.currentPage, this.lastCategoryId).subscribe(tutorials => {
             if (tutorials.length > 0)
               this.tutorials = this.tutorials.concat(tutorials);
             else
